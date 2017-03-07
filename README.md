@@ -55,7 +55,10 @@ $ react-native run-ios
 *	Run the following command in your terminal.
 
 ```sh
-$ react-native run-android
+$ react-native run-android  
+
+#on a different terminal  
+$ react-native start 
 ```
 
 ## Quick Links to NativeBase
