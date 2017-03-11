@@ -6,7 +6,7 @@ import { Container, Button, H3, Text } from 'native-base';
 import { openDrawer } from '../../actions/drawer';
 import styles from './styles';
 
-const launchscreenBg = require('../../../img/launchscreen-bg.png');
+const launchscreenBg = require('../../../img/background.jpg');
 const launchscreenLogo = require('../../../img/logo-kitchen-sink.png');
 
 class Home extends Component { // eslint-disable-line
@@ -23,14 +23,14 @@ class Home extends Component { // eslint-disable-line
           <View style={styles.logoContainer}>
             <Image source={launchscreenLogo} style={styles.logo} />
           </View>
-          <View style={{ alignItems: 'center', marginBottom: 50, backgroundColor: 'transparent' }}>
-            <H3 style={styles.text}>App to showcase</H3>
+          <View style={{ alignItems: 'center', marginBottom: 50, backgroundColor: 'transparent'}}>
+            <H3 style={styles.text}>Welcome to</H3>
             <View style={{ marginTop: 8 }} />
-            <H3 style={styles.text}>NativeBase components</H3>
+            <H3 style={styles.text}>VMAG</H3>
           </View>
           <View style={{ marginBottom: 80 }}>
             <Button
-              style={{ backgroundColor: '#6FAF98', alignSelf: 'center' }}
+              style={{ backgroundColor: '#000099', alignSelf: 'center' }}
               onPress={this.props.openDrawer}
             >
               <Text>Lets Go!</Text>
