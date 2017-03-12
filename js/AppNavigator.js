@@ -10,6 +10,7 @@ import material from '../native-base-theme/variables/material';
 import { closeDrawer } from './actions/drawer';
 
 import Home from './components/home/';
+// import Welcome from './components/welcome/';
 import Header from './components/Header/';
 import Header1 from './components/Header/1';
 import Header2 from './components/Header/2';
@@ -171,6 +172,8 @@ class AppNavigator extends Component {
           <RouterWithRedux>
             <Scene key="root">
               <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
+              {/*<Scene key="home" component={Home}/>*/}
+              <Scene key="welcome" component={Welcome} />
               <Scene key="header" component={Header} />
               <Scene key="header1" component={Header1} />
               <Scene key="header2" component={Header2} />
