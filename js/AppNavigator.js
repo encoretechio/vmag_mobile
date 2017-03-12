@@ -93,6 +93,9 @@ import SplashPage from './components/splashscreen/';
 import SideBar from './components/sidebar';
 import statusBarColor from './themes/variables';
 
+// Imports
+import MainTabs from './components/app_components/main'
+
 const {
   popRoute,
 } = actions;
@@ -177,7 +180,7 @@ class AppNavigator extends Component {
               <Scene key="header6" component={Header6} />
               <Scene key="header7" component={Header7} />
               <Scene key="header8" component={Header8} />
-              <Scene key="anatomy" component={Anatomy} />
+              <Scene key="anatomy" component={MainTabs} />
               <Scene key="footer" component={Footer} />
               <Scene key="basicFooter" component={BasicFooter} />
               <Scene key="iconFooter" component={IconFooter} />
