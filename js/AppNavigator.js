@@ -173,7 +173,7 @@ class AppNavigator extends Component {
             <Scene key="root">
               <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
               {/*<Scene key="home" component={Home}/>*/}
-              <Scene key="welcome" component={Welcome} />
+              {/*<Scene key="welcome" component={Welcome} />*/}
               <Scene key="header" component={Header} />
               <Scene key="header1" component={Header1} />
               <Scene key="header2" component={Header2} />
