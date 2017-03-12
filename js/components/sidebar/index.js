@@ -16,6 +16,12 @@ const drawerImage = require('../../../img/logo-kitchen-sink.png');
 
 const datas = [
   {
+      name: 'Home',
+      route: 'home',
+      icon: 'home',
+      bg: '#C5F442',
+  },
+  {
     name: 'Anatomy',
     route: 'anatomy',
     icon: 'phone-portrait',
@@ -26,7 +32,7 @@ const datas = [
     route: 'header',
     icon: 'phone-portrait',
     bg: '#477EEA',
-    types: '8',
+    types: '7',
   },
   {
     name: 'Footer',

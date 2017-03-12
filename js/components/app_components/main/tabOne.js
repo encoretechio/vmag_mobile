@@ -1,53 +1,116 @@
 
 import React, { Component } from 'react';
-
-import { Container, Content, Card, CardItem, Text, View, Body } from 'native-base';
+import { connect } from 'react-redux';
+import { actions } from 'react-native-navigation-redux-helpers';
+import {Image, View} from 'react-native';
+import { Container, Header, Title, Button, Left, Right, Body, Icon, List, ListItem, Content, Text , Card, CardItem, Thumbnail} from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
+import { openDrawer, closeDrawer } from '../../../actions/drawer';
 
-export default class TabOne extends Component { // eslint-disable-line
 
-  render() { // eslint-disable-line
-    return (
-      <Content padder>
-        <Card>
-          <CardItem>
-            <Body>
-              <Text>
-                NativeBase is open source and free.
-              </Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                Platform specific codebase for components
-              </Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                Any native third-party libraries can be included along with NativeBase.
-              </Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                Single file to theme your app and NativeBase components.
-              </Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                Gives an ease to include different font types in your app.
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
-      </Content>
-    );
-  }
+
+const logo = require('../../../../img/logo.png');
+const cardImage = require('../../../../img/drawer-cover.png');
+
+const {
+    pushRoute,
+} = actions;
+const datas = [
+    {
+        route: 'basicFab',
+        text: 'Basic FAB',
+    },
+    {
+        route: 'multipleFab',
+        text: 'Multiple FABs',
+    },
+];
+class Home extends Component {
+
+    static propTypes = {
+        openDrawer: React.PropTypes.func,
+        pushRoute: React.PropTypes.func,
+        navigation: React.PropTypes.shape({
+            key: React.PropTypes.string,
+        }),
+    }
+
+    pushRoute(route) {
+        this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
+    }
+
+
+    render() {
+        return (
+            <Container style={styles.container}>
+
+              <Content>
+
+                <Card style={styles.mb}>
+                  {/*<CardItem>*/}
+                    {/*<Left>*/}
+                      {/*<Thumbnail source={logo} />*/}
+                      {/*<Body>*/}
+                      {/*<Text>NativeBase</Text>*/}
+                      {/*<Text note>GeekyAnts</Text>*/}
+                      {/*</Body>*/}
+                    {/*</Left>*/}
+                  {/*</CardItem>*/}
+
+                  <CardItem cardBody>
+                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
+                  </CardItem>
+
+                  <CardItem style={{ paddingVertical: 0 }}>
+                    <Left>
+                      <Button iconLeft transparent>
+                        <Icon active name="thumbs-up" />
+                        <Text>12 Likes</Text>
+                      </Button>
+                    </Left>
+                    <Body>
+                    <Button iconLeft transparent>
+                      <Icon active name="chatbubbles" />
+                      <Text>4 Comments</Text>
+                    </Button>
+                    </Body>
+                    <Right>
+                      <Text>11h ago</Text>
+                    </Right>
+                  </CardItem>
+                </Card>
+
+                <List
+                    dataArray={datas} renderRow={data =>
+              <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
+                <Text>{data.text}</Text>
+                <Right>
+                  <Icon name="arrow-forward" style={{ color: '#999' }} />
+                </Right>
+              </ListItem>
+          }
+                />
+              </Content>
+
+
+            </Container>
+        );
+    }
 }
+
+function bindAction(dispatch) {
+    return {
+        openDrawer: () => dispatch(openDrawer()),
+        closeDrawer: () => dispatch(closeDrawer()),
+        pushRoute: (route, key) => dispatch(pushRoute(route, key)),
+    };
+}
+
+const mapStateToProps = state => ({
+    navigation: state.cardNavigation,
+    themeState: state.drawer.themeState,
+});
+
+export default connect(mapStateToProps, bindAction)(Home);

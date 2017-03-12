@@ -31,7 +31,7 @@ class MainTabs extends Component {  // eslint-disable-line
   render() {
     return (
       <Container>
-      <Header hasTabs>
+      <Header  style={{ backgroundColor: '#ffeb38' }} androidStatusBarColor="#ffeb38" iosBarStyle="light-content" hasTabs>
         <Left>
           <Button transparent onPress={this.props.openDrawer}>
             <Icon name="menu" />
@@ -42,14 +42,14 @@ class MainTabs extends Component {  // eslint-disable-line
         </Body>
         <Right />
       </Header>
-        <Tabs style={{ elevation: 3 }}>
-          <Tab heading={<TabHeading><Icon name="camera" /><Text>Camera</Text></TabHeading>}>
+        <Tabs>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c'}}><Icon name="home" style={{ color: '#ffe896', textDecorationColor:"#fff" }} /></TabHeading>}>
             <TabOne />
           </Tab>
-          <Tab heading={<TabHeading><Text>No Icon</Text></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="ios-book" style={{ color: '#ffe896' }}  /></TabHeading>}>
             <TabTwo />
           </Tab>
-          <Tab heading={<TabHeading><Icon name="apps" /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="person" style={{ color: '#ffe896' }} /></TabHeading>}>
             <TabThree />
           </Tab>
         </Tabs>

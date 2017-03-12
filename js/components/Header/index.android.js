@@ -55,7 +55,7 @@ class HeaderNB extends Component {  // eslint-disable-line
   }
 
   pushRoute(route) {
-    this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
+    this.props.pushRoute({ key: route, index: 1 }, this.x.navigation.key);
   }
   render() {
     return (

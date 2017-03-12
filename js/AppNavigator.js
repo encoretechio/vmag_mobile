@@ -170,7 +170,7 @@ class AppNavigator extends Component {
           />
           <RouterWithRedux>
             <Scene key="root">
-              <Scene key="home" component={Home} hideNavBar initial={true} />
+              <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
               <Scene key="header" component={Header} />
               <Scene key="header1" component={Header1} />
               <Scene key="header2" component={Header2} />
@@ -180,7 +180,7 @@ class AppNavigator extends Component {
               <Scene key="header6" component={Header6} />
               <Scene key="header7" component={Header7} />
               <Scene key="header8" component={Header8} />
-              <Scene key="anatomy" component={MainTabs} />
+              <Scene key="anatomy" component={Anatomy} />
               <Scene key="footer" component={Footer} />
               <Scene key="basicFooter" component={BasicFooter} />
               <Scene key="iconFooter" component={IconFooter} />
