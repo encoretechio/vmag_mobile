@@ -40,6 +40,7 @@ buck-out/
 android/app/libs
 *.keystore
 
+android/gradle.properties
 # FASTLANE
 *.cer
 *.mobileprovision
