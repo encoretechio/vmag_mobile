@@ -1,3 +1,5 @@
+import {Actions} from 'react-native-router-flux';
+
 export const GET_POSTS = 'GET_POSTS';
 export const GET_PHOTOS = 'GET_PHOTOS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -59,8 +61,8 @@ export function getPhotos() {
   };
 }
 
-export const login = () => {
-  console.log("lol")
+export const login = (username, password) => {
+  console.log("Login "+username+" "+ password)
   return (dispatch) => {
     return fetch(
       base_url + "login",
@@ -71,8 +73,10 @@ export const login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'wathsalaruberu@gmail.com',
-          password: '123456'
+          // email: 'wathsalaruberu@gmail.com',
+          // password: '123456'
+          email: username,
+          password: password
         })
       }
     ).then(res => res.json())
@@ -81,6 +85,8 @@ export const login = () => {
           console.log("login success");
           dispatch(loginSuccess(data))
           dispatch(loadUserData())
+          // dispatch(navigateTo('button', 'home'))
+          Actions['home']();
         }
       );
   }

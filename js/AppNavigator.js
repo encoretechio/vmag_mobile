@@ -174,8 +174,8 @@ class AppNavigator extends Component {
           />
           <RouterWithRedux>
             <Scene key="root">
-              <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
-              <Scene key="login" component={Login} hideNavBar />
+              <Scene key="home" component={MainTabs} hideNavBar />
+              <Scene key="login" component={Login} hideNavBar  initial={true} />
               <Scene key="video" component={Video}  />
               <Scene key="videolist" component={VideoList}  />
               {/*<Scene key="home" component={Home}/>*/}
