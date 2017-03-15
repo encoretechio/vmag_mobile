@@ -5,12 +5,12 @@ import { Container, Header, Title, Button, Icon, Tabs, Tab, Text, Right, Left, B
 import { Actions } from 'react-native-router-flux';
 
 import { actions } from 'react-native-navigation-redux-helpers';
-import myTheme from '../../../themes/base-theme';
-import { openDrawer, closeDrawer } from '../../../actions/drawer';
+import myTheme from '../../themes/base-theme';
+import { openDrawer, closeDrawer } from '../../actions/drawer';
 
-import TabOne from './tabOne';
-import TabTwo from './tabTwo';
-import TabThree from './tabThree';
+import Issue from './issue';
+import CompanyProfile from './companyprofile';
+import Profile from './profile';
 
 const {
   popRoute,
@@ -44,13 +44,13 @@ class MainTabs extends Component {  // eslint-disable-line
       </Header>
         <Tabs>
           <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c'}}><Icon name="home" style={{ color: '#ffe896', textDecorationColor:"#fff" }} /></TabHeading>}>
-            <TabOne />
+            <Issue />
           </Tab>
           <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="ios-book" style={{ color: '#ffe896' }}  /></TabHeading>}>
-            <TabTwo />
+            <CompanyProfile />
           </Tab>
           <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="person" style={{ color: '#ffe896' }} /></TabHeading>}>
-            <TabThree />
+            <Profile />
           </Tab>
         </Tabs>
       </Container>

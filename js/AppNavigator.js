@@ -95,8 +95,10 @@ import SideBar from './components/sidebar';
 import statusBarColor from './themes/variables';
 
 // Imports
-import MainTabs from './components/app_components/main'
-import Login from './components/app_components/login'
+import MainTabs from './components/tabs'
+import Login from './components/login'
+import Video from './components/video'
+import VideoList from './components/videolist'
 
 const {
   popRoute,
@@ -174,6 +176,8 @@ class AppNavigator extends Component {
             <Scene key="root">
               <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
               <Scene key="login" component={Login} hideNavBar />
+              <Scene key="video" component={Video}  />
+              <Scene key="videolist" component={VideoList}  />
               {/*<Scene key="home" component={Home}/>*/}
               {/*<Scene key="welcome" component={Welcome} />*/}
               <Scene key="header" component={Header} />

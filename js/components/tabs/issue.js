@@ -7,12 +7,12 @@ import { Container, Header, Title, Button, Left, Right, Body, Icon, List, ListIt
 import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
-import { openDrawer, closeDrawer } from '../../../actions/drawer';
+import { openDrawer, closeDrawer } from '../../actions/drawer';
 
 
 
-const logo = require('../../../../img/logo.png');
-const cardImage = require('../../../../img/drawer-cover.png');
+const logo = require('../../../img/logo.png');
+const cardImage = require('../../../img/drawer-cover.png');
 
 const {
     pushRoute,
