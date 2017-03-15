@@ -7,6 +7,8 @@ import { persistStore } from 'redux-persist';
 import reducer from './reducers';
 import promise from './promise';
 
+import { getPosts, getPhotos} from './actions/api'
+
 export default function configureStore(onCompletion:()=>void):any {
   // const enhancer = compose(
   //   applyMiddleware(thunk, promise),
@@ -15,8 +17,26 @@ export default function configureStore(onCompletion:()=>void):any {
   //   }),
   // );
 
-  const store = createStore(reducer);
+  const store = createStore(reducer,  applyMiddleware(thunk));
   // persistStore(store, { storage: AsyncStorage }, onCompletion);
 
+  store.dispatch(getPosts())
+  .then(() => {
+    console.log('Posts Fetching Done!');
+    //console.log(store.getState().data.posts[0]);
+    //console.log(store.getState().data.posts.length);
+  });
+
+  store.dispatch(getPhotos())
+  .then(() => {
+    console.log('Photos Fetching Done!');
+  });
+
+  /*
+  store.dispatch(selectSubreddit('reactjs'))
+  store.dispatch(fetchPosts('reactjs')).then(() =>
+    console.log(store.getState())
+  )
+  */
   return store;
 }
