@@ -36,6 +36,12 @@ const datas = [
         bg: '#C5F442',
     },
     {
+        name: 'Login',
+        route: 'login',
+        icon: 'home',
+        bg: '#C5F442',
+    },
+    {
         name: 'All Videos',
         route: 'searchbar',
         icon: 'search',

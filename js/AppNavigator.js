@@ -96,6 +96,7 @@ import statusBarColor from './themes/variables';
 
 // Imports
 import MainTabs from './components/app_components/main'
+import Login from './components/app_components/login'
 
 const {
   popRoute,
@@ -172,6 +173,7 @@ class AppNavigator extends Component {
           <RouterWithRedux>
             <Scene key="root">
               <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
+              <Scene key="login" component={Login} hideNavBar />
               {/*<Scene key="home" component={Home}/>*/}
               {/*<Scene key="welcome" component={Welcome} />*/}
               <Scene key="header" component={Header} />
