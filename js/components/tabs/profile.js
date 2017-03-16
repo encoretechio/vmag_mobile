@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
 
+import {connect} from 'react-redux';
 import { Container, Content, Card, CardItem, Text, Body, Button, Icon, IconNB, Left, Right, H1, List, ListItem } from 'native-base';
  
 import {Image, View} from 'react-native';
+import {openDrawer} from '../../actions/drawer';
 
 import styles from './styles';
 
@@ -28,13 +30,14 @@ const datas = [
   },
 ];
 
-export default class TabThree extends Component { // eslint-disable-line
+class Profile extends Component { // eslint-disable-line
 
   render() { // eslint-disable-line
+    const user_props = this.props.user;
     return (
       <Content padder style={{ marginTop: 0 }}>
         
-        <Title name={props.name}/>
+        <Title name={user_props.firstName+" "+user_props.lastName}/>
         <View style={styles.centerContent}>
           <Image 
             style={styles.profileImage} 
@@ -50,19 +53,19 @@ export default class TabThree extends Component { // eslint-disable-line
           <CardItem>
             <Text>Username</Text>
             <Right>
-              <Text>Wathsala</Text>
+              <Text>{user_props.username}</Text>
             </Right>
           </CardItem>
           <CardItem>
             <Text>Employee ID</Text>
             <Right>
-              <Text>0001</Text>
+              <Text>{user_props.id}</Text>
             </Right>
           </CardItem>
           <CardItem>
             <Text>Email</Text>
             <Right>
-              <Text>wathsalaruberu@gmail.com</Text>
+              <Text>{user_props.email}</Text>
             </Right>
           </CardItem>
         </Card>
@@ -85,9 +88,14 @@ export default class TabThree extends Component { // eslint-disable-line
   }
 }
 
-const props = {
-  name: "Wathsala Ruberu",
-  username: "Wathsala",
-  id: "0001",
-  email: "wathsalaruberu@gmail.com",
+function bindActions(dispatch) {
+  return {
+    openDrawer: () => dispatch(openDrawer()),
+  };
 }
+
+const mapStateToProps = state => ({
+  user: state.data.user,
+});
+
+export default connect(mapStateToProps, bindActions)(Profile);
