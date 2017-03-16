@@ -1,29 +1,43 @@
-import { GET_POSTS, GET_PHOTOS } from '../actions/api';
+import {GET_POSTS, GET_PHOTOS, LOGIN_SUCCESS, SET_USER_DATA} from '../actions/api';
 
 export type State = {
-    posts: array,
-    photos: array
+  posts: array,
+  photos: array
 }
 
 const initialState = {
   posts: [],
-  photos:[]
+  photos: []
 };
 
-export default function apiReducer(state:State = initialState , action) {
+export default function apiReducer(state: State = initialState, action) {
 
   if (action.type === GET_POSTS) {
-          return {
-            ...state,
-            posts: action.data,
-          };
+    return {
+      ...state,
+      posts: action.data,
+    };
   }
 
   if (action.type === GET_PHOTOS) {
-          return {
-            ...state,
-            photos: action.data,
-          };
+    return {
+      ...state,
+      photos: action.data,
+    };
+  }
+  if (action.type === LOGIN_SUCCESS) {
+    console.log(action.data.token)
+    return {
+      ...state,
+      user: action.data.user,
+      token: action.data.token
+    }
+  }
+  if(action.type === SET_USER_DATA) {
+    return {
+      ...state,
+      userData:action.data
+    }
   }
 
   return state;
