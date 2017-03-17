@@ -15,7 +15,7 @@ export default {
   },
   profileImage: {
   	// TODO: change this to adjust to device
-    width: 100, 
+    width: 80, 
     height: 100,
   },
 
