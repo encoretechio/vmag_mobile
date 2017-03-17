@@ -2,11 +2,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input } from 'native-base';
+import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import {Image, View} from 'react-native';
+import {openDrawer} from '../../actions/drawer';
 
 import styles from './styles';
 
+const cardImage = require('../../../img/drawer-cover.png');
 const sankhadeep = require('../../../img/contacts/sankhadeep.png');
 const supriya = require('../../../img/contacts/supriya.png');
 const himanshu = require('../../../img/contacts/himanshu.png');
@@ -19,27 +22,10 @@ const datas = [
         text: 'Sankhadeep',
         note: 'Its time to build a difference . .',
     },
-    {
-        img: supriya,
-        text: 'Supriya',
-        note: 'One needs courage to be happy and smiling all time . . ',
-    },
-    {
-        img: himanshu,
-        text: 'Himanshu',
-        note: 'Live a life style that matchs your vision',
-    },
-    {
-        img: shweta,
-        text: 'Shweta',
-        note: 'Failure is temporary, giving up makes it permanent',
-    },
-    {
-        img: shruti,
-        text: 'Shruti',
-        note: 'The biggest risk is a missed opportunity !!',
-    },
 ];
+
+
+
 
 const {
     popRoute,
@@ -85,24 +71,29 @@ class NHListThumbnail extends Component {
                 </Header>
 
                 <Content>
-                    <List
-                        dataArray={datas} renderRow={data =>
-              <ListItem thumbnail>
-                <Left>
-                  <Thumbnail square size={55} source={data.img} />
-                </Left>
-                <Body>
-                  <Text>{data.text}</Text>
-                  <Text numberOfLines={1} note>{data.note}</Text>
-                </Body>
-                <Right>
-                  <Button transparent>
-                    <Text>View</Text>
-                  </Button>
-                </Right>
-              </ListItem>
-          }
-                    />
+                <Card style={styles.mb}>
+                  <CardItem cardBody>
+                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
+                  </CardItem>
+
+                  <CardItem>
+                    <Body>
+                    <Text>Story of My Life</Text>
+                    <Text note>This is the story of my life</Text>
+                    </Body>
+                  </CardItem>
+
+                  <CardItem style={{ paddingVertical: 3 }}>
+
+                    <Left>
+                      <Thumbnail circular size={55} source={sankhadeep} />
+                      <Text>Category Type</Text>
+                    </Left>
+                    <Right>
+                      <Text note>12.5k views</Text>
+                    </Right>
+                  </CardItem>
+                </Card>
                 </Content>
             </Container>
         );
@@ -112,8 +103,10 @@ class NHListThumbnail extends Component {
 function bindAction(dispatch) {
     return {
         popRoute: key => dispatch(popRoute(key)),
+        openDrawer: () => dispatch(openDrawer()),
     };
 }
+
 
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
@@ -121,3 +114,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, bindAction)(NHListThumbnail);
+
+

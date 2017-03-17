@@ -20,8 +20,8 @@ const shruti = require('../../../img/contacts/shruti.png');
 
 const Title = ({name}) => {
   return (
-    <List>
-    <ListItem>
+    
+    <Content>
       <Left>
         <Thumbnail square size={55} source={companyLogo} style={styles.mb10}/>
       </Left>
@@ -31,8 +31,7 @@ const Title = ({name}) => {
       <Right>
         <Thumbnail square size={55} source={companyLogo} style={styles.mb10}/>
       </Right>
-      </ListItem>
-    </List>
+    </Content>
   );
 }
 
