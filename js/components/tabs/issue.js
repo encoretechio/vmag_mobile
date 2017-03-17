@@ -13,6 +13,7 @@ import { openDrawer, closeDrawer } from '../../actions/drawer';
 
 const logo = require('../../../img/logo.png');
 const cardImage = require('../../../img/drawer-cover.png');
+const coverStory = require('../../../img/swiper-3.png');
 
 const {
     pushRoute,
@@ -47,6 +48,17 @@ class Home extends Component {
             <Container style={styles.container}>
 
               <Content>
+                <Card>
+                  <CardItem>
+                    <Left>
+                      <Thumbnail source={coverStory} />
+                      <Body>
+                        <Text>Cover</Text>
+                        <Text>Story</Text>
+                      </Body>
+                    </Left>
+                  </CardItem>
+                </Card>
 
                 <Card style={styles.mb}>
                   {/*<CardItem>*/}
