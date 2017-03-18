@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 import {connect} from 'react-redux';
-import { Container, Content, Card, CardItem, Text, Body, Button, Icon, IconNB, Left, Right, H1, List, ListItem } from 'native-base';
+import { Container, Content, Card, CardItem, Text, Body, Button, Icon, IconNB, Left, Right, H1, H2, List, ListItem } from 'native-base';
  
 import {Image, View} from 'react-native';
 import {openDrawer} from '../../actions/drawer';
@@ -14,7 +14,7 @@ const profilePic = require('../../../img/profilepic.jpg');
 const Title = ({name}) => {
   return (
     <View style={styles.centerContent}>
-      <H1 style={styles.mb10}>{name}</H1>
+      <H2 style={styles.mb10}>{name}</H2>
     </View>
   );
 }
