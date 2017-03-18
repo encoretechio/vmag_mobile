@@ -21,6 +21,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+android/gradle.properties
+android/app/build.gradle
 
 # Android/IJ
 #
@@ -40,6 +42,7 @@ buck-out/
 android/app/libs
 *.keystore
 
+android/gradle.properties
 # FASTLANE
 *.cer
 *.mobileprovision

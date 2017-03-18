@@ -5,6 +5,8 @@ import { actions } from 'react-native-navigation-redux-helpers';
 import {Image, View} from 'react-native';
 import { Container, Header, Title, Button, Left, Right, Body, Icon, List, ListItem, Content, Text , Card, CardItem, Thumbnail} from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
@@ -27,7 +29,7 @@ const datas = [
         text: 'Multiple FABs',
     },
 ];
-class Home extends Component {
+class VideoView extends Component {
 
     static propTypes = {
         openDrawer: React.PropTypes.func,
@@ -59,10 +61,21 @@ class Home extends Component {
                 </Header>
                 <Content>
 
-                    <Card style={styles.mb}>
+                  <Card style={styles.mb}>
+                        <CardItem cardBody style={{
+                          flex: 1,
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        <VideoPlayer
+                            source={require("./sample.mp4")}
+                            navigator={ this.props.navigator }
+                            style={styles.backgroundVideo}
+                            resizeMode={ 'contain' }
+                            seekColor={ '#FFF' }
+                        />
 
-                        <CardItem cardBody>
-                            <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
                         </CardItem>
 
                         <CardItem style={{ paddingVertical: 0 }}>
@@ -115,4 +128,4 @@ const mapStateToProps = state => ({
     themeState: state.drawer.themeState,
 });
 
-export default connect(mapStateToProps, bindAction)(Home);
+export default connect(mapStateToProps, bindAction)(VideoView);

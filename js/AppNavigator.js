@@ -97,7 +97,7 @@ import statusBarColor from './themes/variables';
 // Imports
 import MainTabs from './components/tabs'
 import Login from './components/login'
-import Video from './components/video'
+import VideoView from './components/video'
 import VideoList from './components/videolist'
 
 const {
@@ -174,9 +174,9 @@ class AppNavigator extends Component {
           />
           <RouterWithRedux>
             <Scene key="root">
-              <Scene key="home" component={MainTabs} hideNavBar  initial={true} />
-              <Scene key="login" component={Login} hideNavBar />
-              <Scene key="video" component={Video}  />
+              <Scene key="home" component={MainTabs} hideNavBar />
+              <Scene key="login" component={Login} hideNavBar  initial={true} />
+              <Scene key="video" component={VideoView}  />
               <Scene key="videolist" component={VideoList}  />
               {/*<Scene key="home" component={Home}/>*/}
               {/*<Scene key="welcome" component={Welcome} />*/}

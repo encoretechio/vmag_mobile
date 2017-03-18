@@ -38,11 +38,11 @@ class NHThumbnail extends Component { // eslint-disable-line
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={styles.mb10}>Square Thumbnail</Text>
             <Thumbnail square source={logo} style={styles.mb10} />
-            <Thumbnail square size={80} source={logo} style={styles.mb35} />
+            <Thumbnail square size={100} source={logo} style={styles.mb35} />
 
             <Text style={styles.mb10}>Circular Thumbnail</Text>
             <Thumbnail source={cover} style={{ marginBottom: 8 }} />
-            <Thumbnail size={80} source={cover} />
+            <Thumbnail size={500} source={cover} />
           </View>
         </Content>
       </Container>
