@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 
-
+import VideoPlayerElement from '../video/player';
 
 const logo = require('../../../img/logo.png');
 const cardImage = require('../../../img/drawer-cover.png');
@@ -20,12 +20,16 @@ const {
 } = actions;
 const datas = [
     {
-        route: 'basicFab',
-        text: 'Basic FAB',
+        route: 'videolist',
+        text: 'Eat Healthly',
     },
     {
         route: 'multipleFab',
-        text: 'Multiple FABs',
+        text: 'Be Active',
+    },
+    {
+        route: 'basicFab',
+        text: 'Eat Healthly',
     },
 ];
 class Home extends Component {
@@ -58,51 +62,21 @@ class Home extends Component {
                       </Body>
                     </Left>
                   </CardItem>
-                </Card>
-
-                <Card style={styles.mb}>
-                  {/*<CardItem>*/}
-                    {/*<Left>*/}
-                      {/*<Thumbnail source={logo} />*/}
-                      {/*<Body>*/}
-                      {/*<Text>NativeBase</Text>*/}
-                      {/*<Text note>GeekyAnts</Text>*/}
-                      {/*</Body>*/}
-                    {/*</Left>*/}
-                  {/*</CardItem>*/}
-
-                  <CardItem cardBody>
-                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
-                  </CardItem>
-
-                  <CardItem style={{ paddingVertical: 0 }}>
-                    <Left>
-                      <Button iconLeft transparent>
-                        <Icon active name="thumbs-up" />
-                        <Text>12 Likes</Text>
-                      </Button>
-                    </Left>
-                    <Body>
-                    <Button iconLeft transparent>
-                      <Icon active name="chatbubbles" />
-                      <Text>4 Comments</Text>
-                    </Button>
-                    </Body>
-                    <Right>
-                      <Text>11h ago</Text>
-                    </Right>
-                  </CardItem>
+                  <VideoPlayerElement />
                 </Card>
 
                 <List
                     dataArray={datas} renderRow={data =>
-              <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
-                <Text>{data.text}</Text>
-                <Right>
-                  <Icon name="arrow-forward" style={{ color: '#999' }} />
-                </Right>
-              </ListItem>
-          }
+                    <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
+                        <Left>
+                          <Thumbnail circular size={30} source={coverStory} />
+                          <Text>{data.text}</Text>
+                        </Left>
+                      <Right>
+                        <Icon name="arrow-forward" style={{ color: '#999' }} />
+                      </Right>
+                    </ListItem>
+                    }
                 />
               </Content>
 

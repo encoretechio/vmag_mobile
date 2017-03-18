@@ -12,20 +12,21 @@ import styles from './styles';
 const cardImage = require('../../../img/drawer-cover.png');
 const sankhadeep = require('../../../img/contacts/sankhadeep.png');
 const supriya = require('../../../img/contacts/supriya.png');
-const himanshu = require('../../../img/contacts/himanshu.png');
-const shweta = require('../../../img/contacts/shweta.png');
-const shruti = require('../../../img/contacts/shruti.png');
 
-const datas = [
+import VideoListElement from './element'
+
+const videos = [
     {
         img: sankhadeep,
         text: 'Sankhadeep',
         note: 'Its time to build a difference . .',
     },
+    {
+        img: supriya,
+        text: 'Supriya',
+        note: 'Its time to build...',
+    },
 ];
-
-
-
 
 const {
     popRoute,
@@ -71,29 +72,11 @@ class NHListThumbnail extends Component {
                 </Header>
 
                 <Content>
-                <Card style={styles.mb}>
-                  <CardItem cardBody>
-                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
-                  </CardItem>
-
-                  <CardItem>
-                    <Body>
-                    <Text>Story of My Life</Text>
-                    <Text note>This is the story of my life</Text>
-                    </Body>
-                  </CardItem>
-
-                  <CardItem style={{ paddingVertical: 3 }}>
-
-                    <Left>
-                      <Thumbnail circular size={55} source={sankhadeep} />
-                      <Text>Category Type</Text>
-                    </Left>
-                    <Right>
-                      <Text note>12.5k views</Text>
-                    </Right>
-                  </CardItem>
-                </Card>
+                  {videos.map(video =>{
+                    return (
+                      <VideoListElement video={video} />
+                    );
+                  })}
                 </Content>
             </Container>
         );
@@ -107,12 +90,9 @@ function bindAction(dispatch) {
     };
 }
 
-
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
 });
 
 export default connect(mapStateToProps, bindAction)(NHListThumbnail);
-
-
