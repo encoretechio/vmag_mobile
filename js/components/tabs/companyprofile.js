@@ -15,6 +15,13 @@ import VideoListElement from '../videolist/element';
 const companyLogo = require('../../../img/zero_gravity_logo.png');
 const cardImage = require('../../../img/drawer-cover.png');
 
+const company_video = {
+  src: "http://techslides.com/demos/sample-videos/small.mp4",
+  likes: 152,
+  comments: 10,
+  hours: 23
+};
+
 const Title = ({company}) => {
   return (
 
@@ -58,7 +65,7 @@ class CompanyProfile extends Component { // eslint-disable-line
       <Content padder style={{ marginTop: 0 }}>
 
         <Title company={company_props} />
-        <VideoPlayerElement />
+        <VideoPlayerElement video={company_video} />
 
         <VideoListElement />
         <VideoListElement />

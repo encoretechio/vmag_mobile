@@ -32,6 +32,14 @@ const datas = [
         text: 'Eat Healthly',
     },
 ];
+
+const cover_video = {
+  src: "http://techslides.com/demos/sample-videos/small.mp4",
+  likes: 30,
+  comments: 2,
+  hours: 1
+};
+
 class Home extends Component {
 
     static propTypes = {
@@ -55,14 +63,15 @@ class Home extends Component {
                 <Card>
                   <CardItem>
                     <Left>
-                      <Thumbnail source={coverStory} />
+                      <Thumbnail source={{uri: 'https://www.jjquilling.co.uk/wp-content/uploads/2013/10/Salmon-Single-Colour-Quilling-Strips.png'}} />
                       <Body>
                         <Text>Cover</Text>
                         <Text>Story</Text>
                       </Body>
                     </Left>
                   </CardItem>
-                  <VideoPlayerElement />
+
+                  <VideoPlayerElement video={cover_video}/>
                 </Card>
 
                 <List

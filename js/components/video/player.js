@@ -23,7 +23,7 @@ export default class VideoPlayerElement extends Component {
                   alignItems: 'center',
                 }}>
                 <VideoPlayer
-                    source={{ uri: 'https://s3-us-west-2.amazonaws.com/playlist-angular/3.mp4' }}
+                    source={{uri:this.props.video.src }}
                     navigator={ this.props.navigator }
                     style={styles.backgroundVideo}
                     resizeMode={ 'contain' }
@@ -35,17 +35,17 @@ export default class VideoPlayerElement extends Component {
                     <Left>
                         <Button iconLeft transparent>
                             <Icon active name="thumbs-up" />
-                            <Text>12 Likes</Text>
+                            <Text> {this.props.video.likes} Likes</Text>
                         </Button>
                     </Left>
                     <Body>
                     <Button iconLeft transparent>
                         <Icon active name="chatbubbles" />
-                        <Text>4 Comments</Text>
+                        <Text> {this.props.video.comments} Comments</Text>
                     </Button>
                     </Body>
                     <Right>
-                        <Text>11h ago</Text>
+                        <Text> {this.props.video.hours}h ago</Text>
                     </Right>
                 </CardItem>
             </Card>
