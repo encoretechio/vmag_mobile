@@ -28,6 +28,7 @@ export default class VideoPlayerElement extends Component {
                     style={styles.backgroundVideo}
                     resizeMode={ 'contain' }
                     seekColor={ '#FFF' }
+                    paused={ true }
                 />
                 </CardItem>
 
