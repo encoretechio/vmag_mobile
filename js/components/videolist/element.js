@@ -26,13 +26,6 @@ export default class VideoListElement extends Component {
                 <Text>{this.props.video.title}</Text>
                 <Text note>{this.props.video.description}</Text>
                 </Body>
-              </CardItem>
-
-              <CardItem style={{ paddingVertical: 3 }}>
-                <Left>
-                  <Thumbnail circular size={55} source={sankhadeep} />
-                  <Text>Category Type</Text>
-                </Left>
                 <Right>
                   <Text note>12.5k views</Text>
                 </Right>
