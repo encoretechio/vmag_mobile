@@ -74,9 +74,9 @@ class NHListThumbnail extends Component {
                 </Header>
 
                 <Content>
-                  {this.props.playlist.videos.map(video =>{
+                  {this.props.playlist.videos.map( (video,i) =>{
                     return (
-                      <VideoListElement video={video} />
+                      <VideoListElement video={video} key={i} />
                     );
                   })}
                 </Content>
@@ -95,7 +95,7 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
-    playlist: state.data.playlists[0] //Sample Playlist
+    //playlist: state.data.playlists[0] //Sample Playlist
 });
 
 export default connect(mapStateToProps, bindAction)(NHListThumbnail);

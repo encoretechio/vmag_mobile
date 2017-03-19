@@ -32,6 +32,17 @@ export default class VideoPlayerElement extends Component {
                 />
                 </CardItem>
 
+                <CardItem>
+                  <Body>
+                  <Text>{this.props.video.title}</Text>
+                  <Text note>{this.props.video.description}</Text>
+                  </Body>
+                  <Right>
+                    <Text note>12.5k views</Text>
+                  </Right>
+                </CardItem>
+
+
                 <CardItem style={{ paddingVertical: 0 }}>
                     <Left>
                         <Button iconLeft transparent>

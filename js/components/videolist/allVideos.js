@@ -72,34 +72,30 @@ class AllVideosComponent extends Component {
 
                 <Content>
 
-                {this.props.playlists.map(playlist =>{
+                {this.props.playlists.map( (playlist,i) =>{
                     return (
-                        <Card style={styles.mb}>
+                        <Card style={styles.mb} key={i}>
                             <CardItem style={{ paddingVertical: 3 }}>
                                 <Left>
                                     <Thumbnail circular size={55} source={{uri:playlist.thumbnail}} />
                                     <Text>{playlist.title}</Text>
                                 </Left>
                             </CardItem>
-                            
+
                             <List
-                                dataArray={playlist.videos} renderRow={data =>
-                                  <ListItem thumbnail style={{height:120}}>
+                                dataArray={playlist.videos} renderRow={video =>
+                                  <ListItem thumbnail style={{height:120}} button onPress={() => { Actions.video({video:video});}}>
                                     <Left>
-                                      <Image style={{width:150, height: 80}} source={{uri : data.thumbnail}} />
+                                      <Image style={{width:150, height: 80}} source={{uri : video.thumbnail}} />
                                     </Left>
                                     <Body>
-                                      <Text>{data.title}</Text>
-                                      <Text numberOfLines={1} note>{data.description}</Text>
+                                      <Text>{video.title}</Text>
+                                      <Text numberOfLines={1} note>{video.description}</Text>
                                     </Body>
                                   </ListItem>
                               }
                               />
-
-
                         </Card>
-
-
                     );
                   })}
 
