@@ -77,7 +77,7 @@ class AllVideosComponent extends Component {
                         <Card style={styles.mb}>
                             <CardItem style={{ paddingVertical: 3 }}>
                                 <Left>
-                                    <Thumbnail circular size={55} source={sankhadeep} />
+                                    <Thumbnail circular size={55} source={{uri:playlist.thumbnail}} />
                                     <Text>{playlist.title}</Text>
                                 </Left>
                             </CardItem>
