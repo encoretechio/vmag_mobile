@@ -95,6 +95,7 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
+    playlist: state.data.playlists[0] //Sample Playlist
 });
 
 export default connect(mapStateToProps, bindAction)(NHListThumbnail);
