@@ -40,7 +40,7 @@ class Home extends Component {
                   <VideoPlayerElement video={this.props.cover.video}/>
                 </Card>
 
-                <List
+                <List style ={{marginBottom: 100}}
                     dataArray={this.props.playlists} renderRow={playlist =>
                     <ListItem button onPress={() => { Actions.videolist({playlist:playlist}); this.props.closeDrawer() }} >
                         <Left>
