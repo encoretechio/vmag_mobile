@@ -1,0 +1,13 @@
+{     "company" : {
+          "name" : "Zero Gravity Creatives",
+          "website" : "www.zerogravitycreatives.com",
+          "contact": "+94777333098",
+          "email": "info@zerogravitycreatives.com",
+          "video":  {
+                      "src": "http://techslides.com/demos/sample-videos/small.mp4",
+                      "likes": 152,
+                      "comments": 10,
+                      "hours": 23
+                    }
+      }
+}

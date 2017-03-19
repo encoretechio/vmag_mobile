@@ -1,5 +1,7 @@
 import {GET_POSTS, GET_PHOTOS, LOGIN_SUCCESS, SET_USER_DATA} from '../actions/api';
 
+import sampleData from './sampleData.json';
+
 export type State = {
   posts: array,
   photos: array
@@ -16,6 +18,7 @@ export default function apiReducer(state: State = initialState, action) {
     return {
       ...state,
       posts: action.data,
+      company: sampleData.company
     };
   }
 
