@@ -8,25 +8,8 @@ import { Image, View } from 'react-native';
 import { openDrawer } from '../../actions/drawer';
 
 import styles from './styles';
-
-const cardImage = require('../../../img/drawer-cover.png');
-const sankhadeep = require('../../../img/contacts/sankhadeep.png');
-const supriya = require('../../../img/contacts/supriya.png');
-
-import VideoListElement from './element'
-
-const videos = [
-    {
-        img: sankhadeep,
-        text: 'Sankhadeep',
-        note: 'Its time to build a difference . .',
-    },
-    {
-        img: supriya,
-        text: 'Supriya',
-        note: 'Its time to build...',
-    },
-];
+//import VideoListElement from './element'
+import VideoElementList from './elementList'
 
 const {
     popRoute,
@@ -72,13 +55,8 @@ class NHListThumbnail extends Component {
                         <Text>Search</Text>
                     </Button>
                 </Header>
-
                 <Content>
-                  {this.props.playlist.videos.map( (video,i) =>{
-                    return (
-                      <VideoListElement video={video} key={i} />
-                    );
-                  })}
+                    <VideoElementList playlist={this.props.playlist} />
                 </Content>
             </Container>
         );
@@ -99,3 +77,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, bindAction)(NHListThumbnail);
+
+// <Content>
+//    {this.props.playlist.videos.map( (video,i) =>{
+//      return (
+//        <VideoListElement video={video} key={i} />
+//      );
+//    })}
+// </Content>

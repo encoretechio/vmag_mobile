@@ -8,15 +8,11 @@ import {openDrawer} from '../../actions/drawer';
 
 import styles from './styles';
 
-const cardImage = require('../../../img/drawer-cover.png');
-const sankhadeep = require('../../../img/contacts/sankhadeep.png');
-const supriya = require('../../../img/contacts/supriya.png');
-
 export default class VideoListElement extends Component {
 
     render(){
         return (
-            <Card style={styles.mb}>
+            <Card style={styles.mb} onPress={() => { Actions.video({video:this.props.video})}}>
               <CardItem cardBody>
                 <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={{uri : this.props.video.thumbnail}} />
               </CardItem>

@@ -4,29 +4,11 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Image, View } from 'react-native';
+import { Image} from 'react-native';
 import { openDrawer } from '../../actions/drawer';
 
 import styles from './styles';
-
-const cardImage = require('../../../img/drawer-cover.png');
-const sankhadeep = require('../../../img/contacts/sankhadeep.png');
-const supriya = require('../../../img/contacts/supriya.png');
-
-import VideoListElement from './element'
-
-const videos = [
-    {
-        img: sankhadeep,
-        text: 'Sankhadeep',
-        note: 'Its time to build a difference . .',
-    },
-    {
-        img: supriya,
-        text: 'Supriya',
-        note: 'Its time to build...',
-    },
-];
+import VideoElementList from './elementList'
 
 const {
     popRoute,
@@ -82,19 +64,7 @@ class AllVideosComponent extends Component {
                                 </Left>
                             </CardItem>
 
-                            <List
-                                dataArray={playlist.videos} renderRow={video =>
-                                  <ListItem thumbnail style={{height:120}} button onPress={() => { Actions.video({video:video});}}>
-                                    <Left>
-                                      <Image style={{width:150, height: 80}} source={{uri : video.thumbnail}} />
-                                    </Left>
-                                    <Body>
-                                      <Text>{video.title}</Text>
-                                      <Text numberOfLines={1} note>{video.description}</Text>
-                                    </Body>
-                                  </ListItem>
-                              }
-                              />
+                            <VideoElementList playlist={playlist} />
                         </Card>
                     );
                   })}
