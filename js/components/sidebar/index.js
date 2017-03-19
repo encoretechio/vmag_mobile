@@ -36,49 +36,51 @@ const datas = [
         bg: '#C5F442',
     },
     {
-        name: 'Login',
-        route: 'login',
-        icon: 'home',
-        bg: '#C5F442',
-    },
-        {
-        name: 'Video',
-        route: 'video',
-        icon: 'search',
-        bg: '#C5F442',
-    },
-        {
-        name: 'Video List',
-        route: 'videolist',
-        icon: 'search',
-        bg: '#C5F442',
-    },
-    {
         name: 'All Videos',
         route: 'allVideosList',
-        icon: 'search',
+        icon: 'videocam',
         bg: '#29783B',
     },
     {
         name: 'Unwatched',
         route: 'videolist',
-        icon: 'search',
-        bg: '#29783B',
+        icon: 'film',
+        bg: '#DA4437',
+        types: '7',
     },
     {
         name: 'Watched',
         route: 'videolist',
-        icon: 'search',
+        icon: 'film',
         bg: '#29783B',
+        types: '5',
     },
     {
-        name: 'Welcome',
+        name: '--> Login',
+        route: 'login',
+        icon: 'home',
+        bg: '#C5F442',
+    },
+    {
+        name: '--> Video',
+        route: 'video',
+        icon: 'search',
+        bg: '#C5F442',
+    },
+        {
+        name: '--> Video List',
+        route: 'videolist',
+        icon: 'search',
+        bg: '#C5F442',
+    },
+    {
+        name: '-->Welcome',
         route: 'welcome',
         icon: 'phone-portrait',
         bg: '#EB6B23',
     },
     {
-        name: 'Anatomy',
+        name: '-->Anatomy',
         route: 'anatomy',
         icon: 'phone-portrait',
         bg: '#C5F442',
@@ -261,7 +263,7 @@ class SideBar extends Component {
                         dataArray={datas} renderRow={data =>
               <ListItem button noBorder onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
                 <Left>
-                  <Icon active name={data.icon} style={{ color: '#777', fontSize: 26, width: 30 }} />
+                  <Icon active name={data.icon} style={{ color: '#777' , fontSize: 26, width: 30 }} />
                   <Text style={styles.text}>{data.name}</Text>
                 </Left>
                 {(data.types) &&
@@ -269,7 +271,7 @@ class SideBar extends Component {
                   <Badge
                     style={{ borderRadius: 3, height: 25, width: 72, backgroundColor: data.bg }}
                   >
-                    <Text style={styles.badgeText}>{`${data.types} Types`}</Text>
+                    <Text style={styles.badgeText}>{`${data.types} Videos`}</Text>
                   </Badge>
                 </Right>
                 }
