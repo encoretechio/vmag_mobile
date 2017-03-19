@@ -5,11 +5,11 @@
           "contact": "+94777333098",
           "email": "info@zerogravitycreatives.com",
           "video":  {
-                      "title":"Company Video", "description":"Loop Here", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg", "likes": 1000, "comments": 10, "hours": 23
+                      "title":"Company Video", "description":"Loop Here", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Apricot.png", "likes": 1000, "comments": 10, "hours": 23
                     }
             },
   "cover" : {
-                "thumbnail" : "https://www.w3schools.com/images/w3schools_green.jpg",
+                "thumbnail" : "https://s3-us-west-2.amazonaws.com/vmag-images/Bright-Yellow.png",
                 "video":  {
                             "src": "http://techslides.com/demos/sample-videos/small.mp4",
                             "likes": 30,
@@ -19,17 +19,17 @@
             },
 
   "playlists" : [
-        { "title":"AngularJS", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg",
+        { "title":"AngularJS", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Forest-Green.png",
             "videos":[
-                        {"title":"Angular 1", "description":"Part 1", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg", "likes": 10, "comments": 1, "hours": 2},
-                        {"title":"Angular 2", "description":"Part 2", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg", "likes": 22, "comments": 4, "hours": 2},
-                        {"title":"Angular 3", "description":"Part 3", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg", "likes": 33, "comments": 5, "hours": 2}
+                        {"title":"Angular 1", "description":"Part 1", "src": "https://s3-us-west-2.amazonaws.com/playlist-angular/1.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Oxford-Blue.png", "likes": 10, "comments": 1, "hours": 2},
+                        {"title":"Angular 2", "description":"Part 2", "src": "https://s3-us-west-2.amazonaws.com/playlist-angular/2.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Salmon.png", "likes": 22, "comments": 4, "hours": 2},
+                        {"title":"Angular 3", "description":"Part 3", "src": "https://s3-us-west-2.amazonaws.com/playlist-angular/3.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Scarlet.png", "likes": 33, "comments": 5, "hours": 2}
                      ]
         },
-        { "title":"ReactJS", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg",
+        { "title":"ReactJS", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Jade-Green.png",
             "videos":[
-                        {"title":"React 1", "description":"Part 1", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg", "likes": 31, "comments": 12, "hours": 2},
-                        {"title":"React 2", "description":"Part 2", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://www.w3schools.com/images/w3schools_green.jpg", "likes": 34, "comments": 22, "hours": 2}
+                        {"title":"React 1", "description":"Part 1", "src": "https://s3-us-west-2.amazonaws.com/playlist-react/1.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Oxford-Blue.png", "likes": 31, "comments": 12, "hours": 2},
+                        {"title":"React 2", "description":"Part 2", "src": "https://s3-us-west-2.amazonaws.com/playlist-react/2.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Apricot.png", "likes": 34, "comments": 22, "hours": 2}
                      ]
         }
     ]
