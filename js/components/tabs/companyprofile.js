@@ -54,8 +54,7 @@ class CompanyProfile extends Component { // eslint-disable-line
         <Title company={this.props.company} />
         <VideoPlayerElement video={this.props.company.video} />
 
-        <VideoListElement />
-        <VideoListElement />
+        <VideoListElement video={this.props.company.video}/>
       </Content>
     );
   }

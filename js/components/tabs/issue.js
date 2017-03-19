@@ -11,49 +11,15 @@ import { openDrawer, closeDrawer } from '../../actions/drawer';
 
 import VideoPlayerElement from '../video/player';
 
-const logo = require('../../../img/logo.png');
-const cardImage = require('../../../img/drawer-cover.png');
-const coverStory = require('../../../img/swiper-3.png');
-
-const {
-    pushRoute,
-} = actions;
-const datas = [
-    {
-        route: 'videolist',
-        text: 'Eat Healthly',
-    },
-    {
-        route: 'multipleFab',
-        text: 'Be Active',
-    },
-    {
-        route: 'basicFab',
-        text: 'Eat Healthly',
-    },
-];
-
-const cover_video = {
-  src: "http://techslides.com/demos/sample-videos/small.mp4",
-  likes: 30,
-  comments: 2,
-  hours: 1
-};
-
 class Home extends Component {
 
     static propTypes = {
         openDrawer: React.PropTypes.func,
-        pushRoute: React.PropTypes.func,
         navigation: React.PropTypes.shape({
             key: React.PropTypes.string,
         }),
+        cover: React.PropTypes.object,
     }
-
-    pushRoute(route) {
-        this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
-    }
-
 
     render() {
         return (
@@ -63,7 +29,7 @@ class Home extends Component {
                 <Card>
                   <CardItem>
                     <Left>
-                      <Thumbnail source={{uri: 'https://www.jjquilling.co.uk/wp-content/uploads/2013/10/Salmon-Single-Colour-Quilling-Strips.png'}} />
+                      <Thumbnail source={{uri: this.props.cover.thumbnail}} />
                       <Body>
                         <Text>Cover</Text>
                         <Text>Story</Text>
@@ -71,15 +37,15 @@ class Home extends Component {
                     </Left>
                   </CardItem>
 
-                  <VideoPlayerElement video={cover_video}/>
+                  <VideoPlayerElement video={this.props.cover.video}/>
                 </Card>
 
                 <List
-                    dataArray={datas} renderRow={data =>
-                    <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
+                    dataArray={this.props.playlists} renderRow={playlist =>
+                    <ListItem button onPress={() => { Actions.videolist({playlist:playlist}); this.props.closeDrawer() }} >
                         <Left>
-                          <Thumbnail circular size={30} source={coverStory} />
-                          <Text>{data.text}</Text>
+                          <Thumbnail circular size={30} source={{ uri: playlist.thumbnail}} />
+                          <Text>{playlist.title}</Text>
                         </Left>
                       <Right>
                         <Icon name="arrow-forward" style={{ color: '#999' }} />
@@ -89,7 +55,6 @@ class Home extends Component {
                 />
               </Content>
 
-
             </Container>
         );
     }
@@ -98,14 +63,15 @@ class Home extends Component {
 function bindAction(dispatch) {
     return {
         openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: () => dispatch(closeDrawer()),
-        pushRoute: (route, key) => dispatch(pushRoute(route, key)),
+        closeDrawer: () => dispatch(closeDrawer())
     };
 }
 
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
+    cover: state.data.cover,
+    playlists: state.data.playlists,
 });
 
 export default connect(mapStateToProps, bindAction)(Home);

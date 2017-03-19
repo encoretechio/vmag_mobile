@@ -18,7 +18,9 @@ export default function apiReducer(state: State = initialState, action) {
     return {
       ...state,
       posts: action.data,
-      company: sampleData.company
+      company: sampleData.company,
+      cover: sampleData.cover,
+      playlists: sampleData.playlists
     };
   }
 

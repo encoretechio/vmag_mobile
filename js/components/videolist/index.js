@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import {Image, View} from 'react-native';
-import {openDrawer} from '../../actions/drawer';
+import { Image, View } from 'react-native';
+import { openDrawer } from '../../actions/drawer';
 
 import styles from './styles';
 
@@ -39,6 +39,7 @@ class NHListThumbnail extends Component {
         navigation: React.PropTypes.shape({
             key: React.PropTypes.string,
         }),
+        playlist: React.PropTypes.object,
     }
 
     popRoute() {
@@ -54,11 +55,12 @@ class NHListThumbnail extends Component {
                             <Icon name="arrow-back" />
                         </Button>
                     </Left>
-
                     <Body>
-                    <Title>List of Video</Title>
+                            <Title>{this.props.playlist.title}</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                            <Thumbnail circular size={30} source={{ uri: this.props.playlist.thumbnail}} />
+                    </Right>
                 </Header>
                 <Header searchBar rounded>
                     <Item>
@@ -72,7 +74,7 @@ class NHListThumbnail extends Component {
                 </Header>
 
                 <Content>
-                  {videos.map(video =>{
+                  {this.props.playlist.videos.map(video =>{
                     return (
                       <VideoListElement video={video} />
                     );
@@ -86,7 +88,7 @@ class NHListThumbnail extends Component {
 function bindAction(dispatch) {
     return {
         popRoute: key => dispatch(popRoute(key)),
-        openDrawer: () => dispatch(openDrawer()),
+        openDrawer: () => dispatch(openDrawer())
     };
 }
 

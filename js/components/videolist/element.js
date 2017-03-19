@@ -18,13 +18,13 @@ export default class VideoListElement extends Component {
         return (
             <Card style={styles.mb}>
               <CardItem cardBody>
-                <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
+                <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={{uri : this.props.video.thumbnail}} />
               </CardItem>
 
               <CardItem>
                 <Body>
-                <Text>Story of My Life</Text>
-                <Text note>This is the story of my life</Text>
+                <Text>{this.props.video.title}</Text>
+                <Text note>{this.props.video.description}</Text>
                 </Body>
               </CardItem>
 
