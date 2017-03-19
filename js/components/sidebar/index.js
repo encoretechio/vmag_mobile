@@ -55,7 +55,7 @@ const datas = [
     },
     {
         name: 'All Videos',
-        route: 'videolist',
+        route: 'allVideosList',
         icon: 'search',
         bg: '#29783B',
     },
