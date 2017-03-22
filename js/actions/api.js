@@ -53,7 +53,6 @@ export function getPhotos() {
       .then(res => res.json())
       .then(
         data => {
-          console.log(data);
           dispatch(setPhotosData(data))
         },
         //error => dispatch(errorHandlingFunction())

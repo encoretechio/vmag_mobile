@@ -37,26 +37,24 @@ class Home extends Component { // eslint-disable-line
             {/*<View style={{ marginTop: 8 }} />*/}
             {/*<H3 style={styles.text}>Login</H3>*/}
             <Button
-              style={{ backgroundColor: '#000099', alignSelf: 'center' }}
+              style={{ backgroundColor: '#FF0000', alignSelf: 'center' }}
               onPress={this.props.openDrawer}
             >
-              <Text>Open Drover</Text>
+              <Text> --Open Drawer--</Text>
             </Button>
           </View>
           <View style={{ marginBottom: 80 }}>
 
 
-            <TextInput style={{height: 40, width:200, borderColor: 'gray', borderWidth: 1, alignSelf: 'center'}}
+            <TextInput style={{height: 40, width:200, borderColor: '#036B87', borderWidth: 1, alignSelf: 'center',  marginBottom: 10}}
                        onChangeText={(username) => this.setState({username})}
                        value={this.state.username}/>
-            <TextInput secureTextEntry={true} style={{height: 40, width:200, borderColor: 'gray', borderWidth: 1, alignSelf: 'center'}}
+            <TextInput secureTextEntry={true} style={{height: 40, width:200, borderColor: '#036B87', borderWidth: 1, alignSelf: 'center',  marginBottom: 10}}
                        onChangeText={(password) => this.setState({password})}
                        value={this.state.password}/>
-            <Button
-              style={{ backgroundColor: '#000099', alignSelf: 'center' }}
-              onPress={()=>this.props.login(this.state.username, this.state.password)}
-            >
-              <Text>Login</Text>
+            <Button style={{ backgroundColor: '#036B87', alignSelf: 'center' }}
+                    onPress={()=>this.props.login(this.state.username, this.state.password)} >
+                <Text>Login</Text>
             </Button>
 
 

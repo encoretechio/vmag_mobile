@@ -2,44 +2,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input } from 'native-base';
+import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { Image, View } from 'react-native';
+import { openDrawer } from '../../actions/drawer';
 
 import styles from './styles';
-
-const sankhadeep = require('../../../img/contacts/sankhadeep.png');
-const supriya = require('../../../img/contacts/supriya.png');
-const himanshu = require('../../../img/contacts/himanshu.png');
-const shweta = require('../../../img/contacts/shweta.png');
-const shruti = require('../../../img/contacts/shruti.png');
-
-const datas = [
-    {
-        img: sankhadeep,
-        text: 'Sankhadeep',
-        note: 'Its time to build a difference . .',
-    },
-    {
-        img: supriya,
-        text: 'Supriya',
-        note: 'One needs courage to be happy and smiling all time . . ',
-    },
-    {
-        img: himanshu,
-        text: 'Himanshu',
-        note: 'Live a life style that matchs your vision',
-    },
-    {
-        img: shweta,
-        text: 'Shweta',
-        note: 'Failure is temporary, giving up makes it permanent',
-    },
-    {
-        img: shruti,
-        text: 'Shruti',
-        note: 'The biggest risk is a missed opportunity !!',
-    },
-];
+//import VideoListElement from './element'
+import VideoElementList from './elementList'
 
 const {
     popRoute,
@@ -52,6 +22,7 @@ class NHListThumbnail extends Component {
         navigation: React.PropTypes.shape({
             key: React.PropTypes.string,
         }),
+        playlist: React.PropTypes.object,
     }
 
     popRoute() {
@@ -67,11 +38,12 @@ class NHListThumbnail extends Component {
                             <Icon name="arrow-back" />
                         </Button>
                     </Left>
-
                     <Body>
-                    <Title>List of Video</Title>
+                            <Title>{this.props.playlist.title}</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                            <Thumbnail circular size={30} source={{ uri: this.props.playlist.thumbnail}} />
+                    </Right>
                 </Header>
                 <Header searchBar rounded>
                     <Item>
@@ -83,26 +55,8 @@ class NHListThumbnail extends Component {
                         <Text>Search</Text>
                     </Button>
                 </Header>
-
                 <Content>
-                    <List
-                        dataArray={datas} renderRow={data =>
-              <ListItem thumbnail>
-                <Left>
-                  <Thumbnail square size={55} source={data.img} />
-                </Left>
-                <Body>
-                  <Text>{data.text}</Text>
-                  <Text numberOfLines={1} note>{data.note}</Text>
-                </Body>
-                <Right>
-                  <Button transparent>
-                    <Text>View</Text>
-                  </Button>
-                </Right>
-              </ListItem>
-          }
-                    />
+                    <VideoElementList playlist={this.props.playlist} />
                 </Content>
             </Container>
         );
@@ -112,12 +66,22 @@ class NHListThumbnail extends Component {
 function bindAction(dispatch) {
     return {
         popRoute: key => dispatch(popRoute(key)),
+        openDrawer: () => dispatch(openDrawer())
     };
 }
 
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
+    //playlist: state.data.playlists[0] //Sample Playlist
 });
 
 export default connect(mapStateToProps, bindAction)(NHListThumbnail);
+
+// <Content>
+//    {this.props.playlist.videos.map( (video,i) =>{
+//      return (
+//        <VideoListElement video={video} key={i} />
+//      );
+//    })}
+// </Content>

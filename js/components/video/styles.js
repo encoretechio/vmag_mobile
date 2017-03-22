@@ -27,4 +27,12 @@ export default {
     color: '#000099',
     bottom: 6,
   },
+  backgroundVideo: {
+    flex: 1,
+    height: 300,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 };

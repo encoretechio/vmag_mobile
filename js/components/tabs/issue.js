@@ -9,91 +9,51 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 
+import VideoPlayerElement from '../video/player';
 
-
-const logo = require('../../../img/logo.png');
-const cardImage = require('../../../img/drawer-cover.png');
-
-const {
-    pushRoute,
-} = actions;
-const datas = [
-    {
-        route: 'basicFab',
-        text: 'Basic FAB',
-    },
-    {
-        route: 'multipleFab',
-        text: 'Multiple FABs',
-    },
-];
 class Home extends Component {
 
     static propTypes = {
         openDrawer: React.PropTypes.func,
-        pushRoute: React.PropTypes.func,
         navigation: React.PropTypes.shape({
             key: React.PropTypes.string,
         }),
+        cover: React.PropTypes.object,
     }
-
-    pushRoute(route) {
-        this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
-    }
-
 
     render() {
         return (
             <Container style={styles.container}>
 
               <Content>
-
-                <Card style={styles.mb}>
-                  {/*<CardItem>*/}
-                    {/*<Left>*/}
-                      {/*<Thumbnail source={logo} />*/}
-                      {/*<Body>*/}
-                      {/*<Text>NativeBase</Text>*/}
-                      {/*<Text note>GeekyAnts</Text>*/}
-                      {/*</Body>*/}
-                    {/*</Left>*/}
-                  {/*</CardItem>*/}
-
-                  <CardItem cardBody>
-                    <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
-                  </CardItem>
-
-                  <CardItem style={{ paddingVertical: 0 }}>
+                <Card>
+                  <CardItem>
                     <Left>
-                      <Button iconLeft transparent>
-                        <Icon active name="thumbs-up" />
-                        <Text>12 Likes</Text>
-                      </Button>
+                      <Thumbnail source={{uri: this.props.cover.thumbnail}} />
+                      <Body>
+                        <Text>Cover</Text>
+                        <Text>Story</Text>
+                      </Body>
                     </Left>
-                    <Body>
-                    <Button iconLeft transparent>
-                      <Icon active name="chatbubbles" />
-                      <Text>4 Comments</Text>
-                    </Button>
-                    </Body>
-                    <Right>
-                      <Text>11h ago</Text>
-                    </Right>
                   </CardItem>
+
+                  <VideoPlayerElement video={this.props.cover.video}/>
                 </Card>
 
-                <List
-                    dataArray={datas} renderRow={data =>
-              <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
-                <Text>{data.text}</Text>
-                <Right>
-                  <Icon name="arrow-forward" style={{ color: '#999' }} />
-                </Right>
-              </ListItem>
-          }
+                <List style ={{marginBottom: 100}}
+                    dataArray={this.props.playlists} renderRow={playlist =>
+                    <ListItem button onPress={() => { Actions.videolist({playlist:playlist}); this.props.closeDrawer() }} >
+                        <Left>
+                          <Thumbnail circular size={30} source={{ uri: playlist.thumbnail}} />
+                          <Text>{playlist.title}</Text>
+                        </Left>
+                      <Right>
+                        <Icon name="arrow-forward" style={{ color: '#999' }} />
+                      </Right>
+                    </ListItem>
+                    }
                 />
               </Content>
-
 
             </Container>
         );
@@ -103,14 +63,15 @@ class Home extends Component {
 function bindAction(dispatch) {
     return {
         openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: () => dispatch(closeDrawer()),
-        pushRoute: (route, key) => dispatch(pushRoute(route, key)),
+        closeDrawer: () => dispatch(closeDrawer())
     };
 }
 
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
+    cover: state.data.cover,
+    playlists: state.data.playlists,
 });
 
 export default connect(mapStateToProps, bindAction)(Home);

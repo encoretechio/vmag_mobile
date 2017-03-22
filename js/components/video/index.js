@@ -5,9 +5,13 @@ import { actions } from 'react-native-navigation-redux-helpers';
 import {Image, View} from 'react-native';
 import { Container, Header, Title, Button, Left, Right, Body, Icon, List, ListItem, Content, Text , Card, CardItem, Thumbnail} from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
+
+import VideoPlayerElement from './player';
 
 
 
@@ -17,17 +21,8 @@ const cardImage = require('../../../img/drawer-cover.png');
 const {
     pushRoute,
 } = actions;
-const datas = [
-    {
-        route: 'basicFab',
-        text: 'Basic FAB',
-    },
-    {
-        route: 'multipleFab',
-        text: 'Multiple FABs',
-    },
-];
-class Home extends Component {
+
+class VideoView extends Component {
 
     static propTypes = {
         openDrawer: React.PropTypes.func,
@@ -53,47 +48,12 @@ class Home extends Component {
                     </Left>
 
                     <Body>
-                    <Title>Single Video View Page</Title>
+                    <Title>{this.props.video.title}</Title>
                     </Body>
                     <Right />
                 </Header>
                 <Content>
-
-                    <Card style={styles.mb}>
-
-                        <CardItem cardBody>
-                            <Image style={{ resizeMode: 'cover', width: null, height: 200, flex: 1 }} source={cardImage} />
-                        </CardItem>
-
-                        <CardItem style={{ paddingVertical: 0 }}>
-                            <Left>
-                                <Button iconLeft transparent>
-                                    <Icon active name="thumbs-up" />
-                                    <Text>12 Likes</Text>
-                                </Button>
-                            </Left>
-                            <Body>
-                            <Button iconLeft transparent>
-                                <Icon active name="chatbubbles" />
-                                <Text>4 Comments</Text>
-                            </Button>
-                            </Body>
-                            <Right>
-                                <Text>11h ago</Text>
-                            </Right>
-                        </CardItem>
-                    </Card>
-
-                    <List
-                        dataArray={datas} renderRow={data =>
-              <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
-                <Text>{data.text}</Text>
-                <Right>
-                  <Icon name="arrow-forward" style={{ color: '#999' }} />
-                </Right>
-              </ListItem>
-          }
-                    />
+                  <VideoPlayerElement video={this.props.video}/>
                 </Content>
 
 
@@ -113,6 +73,7 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
+    //sampleVideo: state.data.company.video
 });
 
-export default connect(mapStateToProps, bindAction)(Home);
+export default connect(mapStateToProps, bindAction)(VideoView);

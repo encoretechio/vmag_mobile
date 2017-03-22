@@ -1,0 +1,36 @@
+{
+  "company" : {
+          "name" : "Zero Gravity Creatives",
+          "website" : "www.zerogravitycreatives.com",
+          "contact": "+94777333098",
+          "email": "info@zerogravitycreatives.com",
+          "video":  {
+                      "title":"Company Video", "description":"Loop Here", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Apricot.png", "likes": 1000, "comments": 10, "hours": 23
+                    }
+            },
+  "cover" : {
+                "thumbnail" : "https://s3-us-west-2.amazonaws.com/vmag-images/cover.jpg",
+                "video":  {
+                            "src": "http://techslides.com/demos/sample-videos/small.mp4",
+                            "likes": 30,
+                            "comments": 2,
+                            "hours": 2
+                          }
+            },
+
+  "playlists" : [
+        { "title":"AngularJS", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/angular.png",
+            "videos":[
+                        {"title":"Angular 1", "description":"Part 1", "src": "https://s3-us-west-2.amazonaws.com/playlist-angular/1.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/angular-1.png", "likes": 10, "comments": 1, "hours": 2},
+                        {"title":"Angular 2", "description":"Part 2", "src": "https://s3-us-west-2.amazonaws.com/playlist-angular/2.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/angular-2.png", "likes": 22, "comments": 4, "hours": 2},
+                        {"title":"Angular 3", "description":"Part 3", "src": "https://s3-us-west-2.amazonaws.com/playlist-angular/3.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/angular-3.png", "likes": 33, "comments": 5, "hours": 2}
+                     ]
+        },
+        { "title":"ReactJS", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/react.png",
+            "videos":[
+                        {"title":"React 1", "description":"Part 1", "src": "https://s3-us-west-2.amazonaws.com/playlist-react/1.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/react-1.png", "likes": 31, "comments": 12, "hours": 2},
+                        {"title":"React 2", "description":"Part 2", "src": "https://s3-us-west-2.amazonaws.com/playlist-react/2.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/react-3.png", "likes": 34, "comments": 22, "hours": 2}
+                     ]
+        }
+    ]
+}
