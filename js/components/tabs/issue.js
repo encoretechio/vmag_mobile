@@ -22,6 +22,7 @@ class Home extends Component {
     }
 
     render() {
+      if(!this.props.cover || !this.props.playlists ) return null;
         return (
             <Container style={styles.container}>
 
@@ -37,7 +38,7 @@ class Home extends Component {
                     </Left>
                   </CardItem>
 
-                  <VideoPlayerElement video={this.props.cover.video}/>
+                  {/*<VideoPlayerElement video={this.props.cover}/>*/}
                 </Card>
 
                 <List style ={{marginBottom: 100}}
