@@ -42,7 +42,7 @@ class NHThumbnail extends Component { // eslint-disable-line
 
             <Text style={styles.mb10}>Circular Thumbnail</Text>
             <Thumbnail source={cover} style={{ marginBottom: 8 }} />
-            <Thumbnail size={500} source={cover} />
+            <Thumbnail size={100} source={cover} />
           </View>
         </Content>
       </Container>

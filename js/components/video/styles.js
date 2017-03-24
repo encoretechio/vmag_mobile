@@ -35,4 +35,7 @@ export default {
     bottom: 0,
     right: 0,
   },
+  mb5: {
+    marginBottom:0.1,
+  },
 };

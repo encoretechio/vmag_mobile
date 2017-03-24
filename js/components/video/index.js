@@ -56,7 +56,6 @@ class VideoView extends Component {
                   <VideoPlayerElement video={this.props.video}/>
                 </Content>
 
-
             </Container>
         );
     }
@@ -73,7 +72,7 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
-    //sampleVideo: state.data.company.video
+    video: state.data.company.video
 });
 
 export default connect(mapStateToProps, bindAction)(VideoView);

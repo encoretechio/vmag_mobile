@@ -9,6 +9,7 @@ import promise from './promise';
 
 import { getPosts, getPhotos} from './actions/api'
 
+//noinspection JSAnnotator
 export default function configureStore(onCompletion:()=>void):any {
   // const enhancer = compose(
   //   applyMiddleware(thunk, promise),

@@ -8,6 +8,7 @@ import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
+import Comment from './comment';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 
 export default class VideoPlayerElement extends Component {
@@ -51,15 +52,20 @@ export default class VideoPlayerElement extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Button iconLeft transparent>
-                        <Icon active name="chatbubbles" />
-                        <Text> {this.props.video.comments} Comments</Text>
-                    </Button>
+                        <Button iconLeft transparent>
+                            <Icon active name="chatbubbles" />
+                            <Text> {this.props.video.comments} Comments</Text>
+                        </Button>
                     </Body>
                     <Right>
                         <Text> {this.props.video.hours}h ago</Text>
                     </Right>
                 </CardItem>
+
+                <CardItem>
+                    <Comment/>
+                </CardItem>
+
             </Card>
 
         );
