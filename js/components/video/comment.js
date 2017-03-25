@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Body, Left, Right, ListView, Thumbnail, H3 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { Image, View } from 'react-native';
 
 import styles from './styles';
 
@@ -31,40 +32,35 @@ class Comment extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
+                <View>
+                  <Card>
+                      <CardItem>
+                            <Left>
+                              <Image style={{width:40, height: 40}} source={logo} />
+                              <Text numberOfLines={1}> Wathsala Ruberu </Text>
+                            </Left>
+                      </CardItem>
+                      <CardItem>
+                          <Text numberOfLines={4} note>
+                              This video is really awesome, NativeBase builds a layer on top of React Native that provides you with
+                          </Text>
+                      </CardItem>
+                  </Card>
 
-                <Content padder>
-                    <Card>
-                        <CardItem>
-                            <Thumbnail square size={50} source={logo} style={styles.mb5} />
-                            <Text>   </Text>
-                            <Text>Wathsala Ruberu</Text>
-                        </CardItem>
-                        <CardItem>
-                            <Text>
-                                This video is really awesome, NativeBase builds a layer on top of React Native that provides you with
-                                basic set of components for mobile application development.
-                                basic set of components for mobile application development.
-                            </Text>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem header>
-                            <Thumbnail square source={logo} style={styles.mb5} />
-                            <Text>   </Text>
-                            <Text>Ravindu Hasantha</Text>
-                        </CardItem>
-                        <CardItem>
-                            <Text>
-                                This is really informative and motivative. NativeBase builds a layer on top of React Native that provides you with
-                                basic set of components for mobile application development.
-                                basic set of components for mobile application development.
-                            </Text>
-                        </CardItem>
-                    </Card>
-
-                </Content>
-            </Container>
+                  <Card>
+                      <CardItem>
+                            <Left>
+                              <Image style={{width:40, height: 40}} source={logo} />
+                              <Text numberOfLines={1}> Wathsala Ruberu </Text>
+                            </Left>
+                      </CardItem>
+                      <CardItem>
+                          <Text numberOfLines={4} note>
+                              This video is really awesome, NativeBase builds a layer on top of React Native that provides you with
+                          </Text>
+                      </CardItem>
+                  </Card>
+                </View>
         );
     }
 }

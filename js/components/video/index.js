@@ -72,7 +72,7 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
-    video: state.data.company.video
+    //video: state.data.company.video
 });
 
 export default connect(mapStateToProps, bindAction)(VideoView);
