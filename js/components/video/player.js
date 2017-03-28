@@ -9,8 +9,13 @@ import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
+import { stopSpinner} from '../../actions/loading';
 
 class VideoPlayerElement extends Component {
+
+  componentDidMount(){
+    this.props.stopSpinner();
+  }
 
     /*
     constructor(props){
@@ -53,7 +58,6 @@ class VideoPlayerElement extends Component {
                           style={styles.backgroundVideo}
                           resizeMode={ 'contain' }
                           seekColor={ '#FFF' }
-                          paused={ true }
                       />
                 </CardItem>
 
@@ -94,4 +98,10 @@ const mapStateToProps = state => ({
   //liked: state.data.liked
 });
 
-export default connect(mapStateToProps)(VideoPlayerElement);
+function bindActions(dispatch) {
+  return {
+    stopSpinner:()=>dispatch(stopSpinner()),
+  };
+}
+
+export default connect(mapStateToProps,bindActions)(VideoPlayerElement);

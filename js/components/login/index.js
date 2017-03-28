@@ -30,7 +30,7 @@ class Home extends Component { // eslint-disable-line
   render() {
     return (
       <Container>
-       <Spinner visible={this.props.isLoading} />
+
         <StatusBar barStyle='light-content'/>
         <Image source={launchscreenBg} style={styles.imageContainer}>
           <View style={styles.logoContainer}>
