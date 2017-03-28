@@ -8,10 +8,34 @@ import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
-import Comment from './comment';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 
-export default class VideoPlayerElement extends Component {
+class VideoPlayerElement extends Component {
+
+    /*
+    constructor(props){
+      super(props);
+      this.state = {  isLiked: false };
+
+      console.log(this.props.liked);
+      // Loop through liked videos to check whether this videdo is watched.
+      if(this.props.liked.find( (id) => id == this.props.video.id ) != undefined){
+        this.state = {  isLiked: true };
+      }
+    }
+
+    clickLike(){
+      if(this.state.isLiked){
+        console.log('Unlike Now');
+        this.props.video.likes -= 1;
+      }
+      else{
+        console.log('Like Now');
+        this.props.video.likes += 1;
+      }
+      this.state.isLiked = ~this.state.isLiked;
+    }
+    */
 
     render(){
         return (
@@ -23,14 +47,14 @@ export default class VideoPlayerElement extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <VideoPlayer
-                    source={{uri:this.props.video.src }}
-                    navigator={ this.props.navigator }
-                    style={styles.backgroundVideo}
-                    resizeMode={ 'contain' }
-                    seekColor={ '#FFF' }
-                    paused={ true }
-                />
+                      <VideoPlayer
+                          source={{uri:this.props.video.src }}
+                          navigator={ this.props.navigator }
+                          style={styles.backgroundVideo}
+                          resizeMode={ 'contain' }
+                          seekColor={ '#FFF' }
+                          paused={ true }
+                      />
                 </CardItem>
 
                 <CardItem>
@@ -42,7 +66,6 @@ export default class VideoPlayerElement extends Component {
                     <Text note>12.5k views</Text>
                   </Right>
                 </CardItem>
-
 
                 <CardItem style={{ paddingVertical: 0 }}>
                     <Left>
@@ -61,13 +84,14 @@ export default class VideoPlayerElement extends Component {
                         <Text> {this.props.video.hours}h ago</Text>
                     </Right>
                 </CardItem>
-
-                <CardItem>
-                    <Comment/>
-                </CardItem>
-
             </Card>
 
         );
     }
 }
+
+const mapStateToProps = state => ({
+  //liked: state.data.liked
+});
+
+export default connect(mapStateToProps)(VideoPlayerElement);

@@ -12,8 +12,7 @@ import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 
 import VideoPlayerElement from './player';
-
-
+import Comment from './comment';
 
 const logo = require('../../../img/logo.png');
 const cardImage = require('../../../img/drawer-cover.png');
@@ -54,6 +53,9 @@ class VideoView extends Component {
                 </Header>
                 <Content>
                   <VideoPlayerElement video={this.props.video}/>
+                  <CardItem>
+                      <Comment/>
+                  </CardItem>
                 </Content>
 
             </Container>
