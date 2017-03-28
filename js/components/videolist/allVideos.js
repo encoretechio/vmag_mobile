@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
+import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, View, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Image} from 'react-native';
 import { openDrawer } from '../../actions/drawer';
+
+import SearchBar from 'react-native-searchbar';
 
 import styles from './styles';
 import VideoElementList from './elementList'
@@ -15,6 +17,15 @@ const {
 } = actions;
 
 class AllVideosComponent extends Component {
+
+    constructor(props) {
+    super(props);
+    this.state = {
+      items,
+      results: []
+    };
+    this._handleResults = this._handleResults.bind(this);
+  }
 
     static propTypes = {
         popRoute: React.PropTypes.func,
@@ -28,6 +39,9 @@ class AllVideosComponent extends Component {
         this.props.popRoute(this.props.navigation.key);
     }
 
+    _handleResults(results) {
+      this.setState({ results });
+    }
     render() {
         return (
             <Container style={styles.container}>
@@ -41,10 +55,18 @@ class AllVideosComponent extends Component {
                             <Title>All Videos</Title>
                     </Body>
                 </Header>
+<View>
+                <SearchBar
+                  ref={(ref) => this.searchBar = ref}
+                  data={items}
+                  handleResults={this._handleResults}
+                  showOnLoad
+                />
+</View>
                 <Header searchBar rounded>
                     <Item>
                         <Icon active name="search" />
-                        <Input placeholder="Search" />
+                        <Input placeholder="Search.." />
                         <Icon active name="people" />
                     </Item>
                     <Button transparent>
@@ -53,7 +75,12 @@ class AllVideosComponent extends Component {
                 </Header>
 
                 <Content>
-
+<SearchBar
+                  ref={(ref) => this.searchBar = ref}
+                  data={items}
+                  handleResults={this._handleResults}
+                  showOnLoad
+                />
                 {this.props.playlists.map( (playlist,i) =>{
                     return (
                         <Card style={styles.mb} key={i}>
@@ -74,6 +101,30 @@ class AllVideosComponent extends Component {
         );
     }
 }
+
+const items = [
+  1337,
+  'janeway',
+  {
+    lots: 'of',
+    different: {
+      types: 0,
+      data: false,
+      that: {
+        can: {
+          be: {
+            quite: {
+              complex: {
+                hidden: [ 'gold!' ],
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  [ 4, 2, 'tree' ],
+];
 
 function bindAction(dispatch) {
     return {
