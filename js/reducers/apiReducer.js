@@ -42,7 +42,7 @@ export default function apiReducer(state: State = initialState, action) {
       connectionError:false,
       loginError:false,
       user: action.data.user,
-      token: action.data.token
+      token: action.data.token,
     }
   }
   if (action.type === LOGIN_FAIL) {
