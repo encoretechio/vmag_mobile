@@ -3,9 +3,11 @@ import {Actions} from 'react-native-router-flux';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_PHOTOS = 'GET_PHOTOS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const SET_USER_DATA = 'SET_USER_DATA'
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const SET_FINAL_ISSUE = 'SET_FINAL_ISSUE'
+export const CONNECTION_ERROR = 'CONNECTION_ERROR'
 
-const base_url = "http://52.36.197.150/";
+const base_url = "http://52.36.197.150:1337/";
 
 export function setPostsData(data) {
   return {
@@ -28,10 +30,22 @@ export const loginSuccess = (data) => {
   }
 }
 
+export const loginFail = () => {
+  return {
+    type: LOGIN_FAIL
+  }
+}
+
 export const setUserData = (data) => {
   return {
-    type: SET_USER_DATA,
+    type: SET_FINAL_ISSUE,
     data
+  }
+}
+
+export const connectionError = () => {
+  return {
+    type: CONNECTION_ERROR
   }
 }
 
@@ -61,7 +75,7 @@ export function getPhotos() {
 }
 
 export const login = (username, password) => {
-  console.log("Login "+username+" "+ password)
+  console.log("Login " + username + " " + password)
   return (dispatch) => {
     return fetch(
       base_url + "login",
@@ -81,20 +95,27 @@ export const login = (username, password) => {
     ).then(res => res.json())
       .then(
         data => {
-          console.log("login success");
-          dispatch(loginSuccess(data))
-          dispatch(loadUserData())
-          // dispatch(navigateTo('button', 'home'))
-          Actions['home']();
-        }
+          if(data.token)
+          {
+            console.log("login success");
+            console.log(data);
+            dispatch(loginSuccess(data));
+            dispatch(loadFinalIssue());
+            Actions['home']();
+          }
+          else {
+            dispatch(loginFail());
+          }
+        },
+        error => dispatch(connectionError())
       );
   }
 }
 
-export const loadUserData = () => {
+export const loadFinalIssue = () => {
   return (dispatch, getState) => {
     const state = getState();
-    return fetch(base_url + "userprofile/" + state.data.user.id,
+    return fetch(base_url + "finalIssue/",
       {
         method: 'GET',
         headers: {
@@ -106,11 +127,11 @@ export const loadUserData = () => {
     )
       .then(res => res.json())
       .then(
-        data => {
-          console.log(data);
-          dispatch(setUserData(data))
+        issue => {
+          console.log(issue);
+          dispatch(setUserData(issue))
         },
-        //error => dispatch(errorHandlingFunction())
+        error => dispatch(connectionError())
       );
   }
 }

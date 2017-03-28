@@ -6,14 +6,15 @@
           "email": "info@zerogravitycreatives.com",
           "video":  {
                       "title":"Company Video", "description":"Loop Here", "src": "http://techslides.com/demos/sample-videos/small.mp4", "thumbnail":"https://s3-us-west-2.amazonaws.com/vmag-images/Apricot.png", "likes": 1000, "comments": 10, "hours": 23
-                    }
+                    },
+          "comments":  ["This is good", "Nicely explained"]
             },
   "cover" : {
                 "thumbnail" : "https://s3-us-west-2.amazonaws.com/vmag-images/cover.jpg",
                 "video":  {
                             "src": "http://techslides.com/demos/sample-videos/small.mp4",
                             "likes": 30,
-                            "comments": 2,
+                            "comments": 45,
                             "hours": 2
                           }
             },
