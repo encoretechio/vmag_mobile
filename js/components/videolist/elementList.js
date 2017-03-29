@@ -10,7 +10,7 @@ export default class VideoElementList extends Component {
     render(){
         return (
             <List
-                dataArray={this.props.playlist.videos} renderRow={video =>
+                dataArray={this.props.videos} renderRow={video =>
                   <ListItem thumbnail style={{height:120}} button onPress={() => { Actions.video({video:video});}}>
                     <Left>
                       <Image style={{width:150, height: 80}} source={{uri : video.thumbnail}} />

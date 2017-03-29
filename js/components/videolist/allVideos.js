@@ -2,12 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, View, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
+import { Container, Header, Title, Content, Button, Icon, List, ListItem,H1, Text, View, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Image} from 'react-native';
 import { openDrawer } from '../../actions/drawer';
-
-import SearchBar from 'react-native-searchbar';
 
 import styles from './styles';
 import VideoElementList from './elementList'
@@ -19,13 +17,13 @@ const {
 class AllVideosComponent extends Component {
 
     constructor(props) {
-    super(props);
-    this.state = {
-      items,
-      results: []
-    };
-    this._handleResults = this._handleResults.bind(this);
-  }
+      super(props);
+      this.state = {
+        items,
+        results: [],
+        searchText:"", // keep the search text typed in the Input box
+      };
+    }
 
     static propTypes = {
         popRoute: React.PropTypes.func,
@@ -39,9 +37,6 @@ class AllVideosComponent extends Component {
         this.props.popRoute(this.props.navigation.key);
     }
 
-    _handleResults(results) {
-      this.setState({ results });
-    }
     render() {
         return (
             <Container style={styles.container}>
@@ -55,33 +50,40 @@ class AllVideosComponent extends Component {
                             <Title>All Videos</Title>
                     </Body>
                 </Header>
-<View>
-                <SearchBar
-                  ref={(ref) => this.searchBar = ref}
-                  data={items}
-                  handleResults={this._handleResults}
-                  showOnLoad
-                />
-</View>
+
+   
+
                 <Header searchBar rounded>
-                    <Item>
-                        <Icon active name="search" />
-                        <Input placeholder="Search.." />
-                        <Icon active name="people" />
-                    </Item>
-                    <Button transparent>
-                        <Text>Search</Text>
-                    </Button>
+                  <Item>
+                {/* Input box for search */}
+                    <Input 
+                      placeholder="Search"
+                      ref= {(el) => { this.searchText = el; }}
+                      onChangeText={(searchText) => this.setState({searchText})} 
+                      value={this.state.searchText} />
+                    <Icon active name="search" onPress={() => {
+
+                    }} />
+                  </Item>
+
+                  <Button transparent>
+                    <Text>Search</Text>
+                  </Button>
                 </Header>
 
                 <Content>
-<SearchBar
-                  ref={(ref) => this.searchBar = ref}
-                  data={items}
-                  handleResults={this._handleResults}
-                  showOnLoad
-                />
+
                 {this.props.playlists.map( (playlist,i) =>{
+                    {/* filtered videos list for search */}
+                    const filteredVideos = playlist.videos.filter((video)=>{
+                        {/* return all videos if search text is empty */}
+                        if(this.state.searchText==="") return true;
+                        else if (video.title.toLowerCase().indexOf(this.state.searchText.toLowerCase()) >= 0) {
+                          return video;
+                        };  
+                    });
+                    {/* if no match return null to avoid showing category */}
+                    if(filteredVideos.length===0) return null;
                     return (
                         <Card style={styles.mb} key={i}>
                             <CardItem style={{ paddingVertical: 3 }}>
@@ -91,7 +93,7 @@ class AllVideosComponent extends Component {
                                 </Left>
                             </CardItem>
 
-                            <VideoElementList playlist={playlist} />
+                            <VideoElementList videos={filteredVideos} />
                         </Card>
                     );
                   })}
