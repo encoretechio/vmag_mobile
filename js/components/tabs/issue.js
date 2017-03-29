@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
+import {startSpinner, stopSpinner} from '../../actions/loading';
 import {Image, View} from 'react-native';
 import { Container, Header, Title, Button, Left, Right, Body, Icon, List, ListItem, Content, Text , Card, CardItem, Thumbnail} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -19,6 +20,10 @@ class Home extends Component {
             key: React.PropTypes.string,
         }),
         cover: React.PropTypes.object,
+    }
+
+    componentDidMount(){
+      this.props.stopSpinner();
     }
 
     render() {
@@ -64,7 +69,9 @@ class Home extends Component {
 function bindAction(dispatch) {
     return {
         openDrawer: () => dispatch(openDrawer()),
-        closeDrawer: () => dispatch(closeDrawer())
+        closeDrawer: () => dispatch(closeDrawer()),
+        stopSpinner:()=>dispatch(stopSpinner()),
+        startSpinner:()=>dispatch(startSpinner()),
     };
 }
 

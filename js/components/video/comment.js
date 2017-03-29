@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Body, Left, Right, ListView, Thumbnail, H3 } from 'native-base';
+import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Body, Left, Right, ListView, Thumbnail, H3, Item, Input} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Image, View } from 'react-native';
 
@@ -33,6 +33,15 @@ class Comment extends Component {
     render() {
         return (
                 <View>
+                  <Card>
+                    <Item regular>
+                      <Input placeholder="Comment Here" />
+                      <Button style={styles.mb5}>
+                          <Text>Comment</Text>
+                      </Button>
+                    </Item>
+                  </Card>
+
                   <Card>
                       <CardItem>
                             <Left>

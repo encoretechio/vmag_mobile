@@ -6,6 +6,7 @@ import { StyleProvider, getTheme, variables, Drawer } from 'native-base';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Router, Scene } from 'react-native-router-flux';
 
+import Spinner from 'react-native-loading-spinner-overlay';
 import material from '../native-base-theme/variables/material';
 import { closeDrawer } from './actions/drawer';
 
@@ -173,6 +174,8 @@ class AppNavigator extends Component {
             hidden={(this.props.drawerState === 'opened' && Platform.OS === 'ios') ? true : false}
             backgroundColor={statusBarColor.statusBarColor}
           />
+
+          <Spinner visible={this.props.isLoading} />
           <RouterWithRedux>
             <Scene key="root">
               <Scene key="home" component={MainTabs} hideNavBar />
@@ -279,6 +282,7 @@ const mapStateToProps = state => ({
   drawerState: state.drawer.drawerState,
   themeState: state.drawer.themeState,
   navigation: state.cardNavigation,
+  isLoading: state.loading.isLoading
 });
 
 export default connect(mapStateToProps, bindAction)(AppNavigator);

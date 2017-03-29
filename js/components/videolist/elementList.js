@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { Content, List, ListItem, Text, Thumbnail, Left, Body, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Image } from 'react-native';
+import { connect } from 'react-redux';
+import { startSpinner } from '../../actions/loading';
 
 import styles from './styles';
 
-export default class VideoElementList extends Component {
+class VideoElementList extends Component {
 
     render(){
         return (
             <List
                 dataArray={this.props.videos} renderRow={video =>
-                  <ListItem thumbnail style={{height:120}} button onPress={() => { Actions.video({video:video});}}>
+                  <ListItem thumbnail style={{height:120}} button onPress={() => { 
+                    this.props.startSpinner();
+                    setTimeout(()=>Actions.video({video:video}),100);}}>
                     <Left>
                       <Image style={{width:150, height: 80}} source={{uri : video.thumbnail}} />
                     </Left>
@@ -25,3 +29,11 @@ export default class VideoElementList extends Component {
           );
     }
 }
+
+function bindActions(dispatch) {
+  return {
+    startSpinner:()=>dispatch(startSpinner())
+  };
+}
+
+export default connect(null,bindActions)(VideoElementList);

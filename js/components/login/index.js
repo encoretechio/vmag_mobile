@@ -5,7 +5,9 @@ import {Container, Button, H3, Text} from 'native-base';
 
 import {openDrawer} from '../../actions/drawer';
 import {login} from '../../actions/api';
+import {startSpinner} from '../../actions/loading';
 import styles from './styles';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const launchscreenBg = require('../../../img/background.jpg');
 const launchscreenLogo = require('../../../img/logo-kitchen-sink.png');
@@ -24,9 +26,11 @@ class Home extends Component { // eslint-disable-line
     openDrawer: React.PropTypes.func,
   }
 
+
   render() {
     return (
       <Container>
+
         <StatusBar barStyle='light-content'/>
         <Image source={launchscreenBg} style={styles.imageContainer}>
           <View style={styles.logoContainer}>
@@ -53,7 +57,7 @@ class Home extends Component { // eslint-disable-line
                        onChangeText={(password) => this.setState({password})}
                        value={this.state.password}/>
             <Button style={{ backgroundColor: '#036B87', alignSelf: 'center' }}
-                    onPress={()=>this.props.login(this.state.username, this.state.password)} >
+                    onPress={()=>{this.props.login(this.state.username, this.state.password);this.props.startSpinner()}} >
                 <Text>Login</Text>
             </Button>
 
@@ -72,6 +76,7 @@ function bindActions(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
     login: (username, password) => dispatch(login(username, password)),
+    startSpinner:()=>dispatch(startSpinner()),
   };
 }
 
@@ -80,7 +85,8 @@ const mapStateToProps = state => ({
   themeState: state.drawer.themeState,
   routes: state.drawer.routes,
   token: state.data.token,
-  playlistCount: state.data.userData ? state.data.userData.playlists.length : 0
+  playlistCount: state.data.userData ? state.data.userData.playlists.length : 0,
+  isLoading:state.loading.isLoading
 });
 
 export default connect(mapStateToProps, bindActions)(Home);
