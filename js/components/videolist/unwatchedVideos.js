@@ -14,9 +14,6 @@ const {
     popRoute,
 } = actions;
 
-// hardcoded watched videos array - remove after getting data from BE
-const watchedVideos = ["58ce8bb8e8e7278a45e2aec0"];
-
 class UnwatchedVideosComponent extends Component {
 
     constructor(props) {
@@ -24,7 +21,6 @@ class UnwatchedVideosComponent extends Component {
       this.state = {
         searchText:"", // keep the search text typed in the Input box
       };
-      console.log(this.props.user);
     }
 
     static propTypes = {
@@ -78,7 +74,7 @@ class UnwatchedVideosComponent extends Component {
                 {this.props.playlists.map( (playlist,i) =>{
                     {/* filter watched videos */}
                     const filteredUnwatchedVideos = playlist.videos.filter((video)=>{
-                        return watchedVideos.indexOf(video.id) < 0;
+                        return this.props.watchedVideos.indexOf(video.id) < 0;
                     });
 
                     {/* filtered videos list for search */}
@@ -124,7 +120,7 @@ const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
     playlists: state.data.playlists, //Sample Playlist
-    user: state.data.user
+    watchedVideos: state.data.user.watchedVideos
 });
 
 export default connect(mapStateToProps, bindAction)(UnwatchedVideosComponent);

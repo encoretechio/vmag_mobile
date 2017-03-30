@@ -14,9 +14,6 @@ const {
     popRoute,
 } = actions;
 
-// hardcoded watched videos array - remove after getting data from BE
-const favouriteVideos = ["58ce8bb8e8e7278a45e2aec0"];
-
 class FavouriteVideosComponent extends Component {
 
     constructor(props) {
@@ -77,7 +74,7 @@ class FavouriteVideosComponent extends Component {
                 {this.props.playlists.map( (playlist,i) =>{
                     {/* filter watched videos */}
                     const filteredFavouriteVideos = playlist.videos.filter((video)=>{
-                        return favouriteVideos.indexOf(video.id) >= 0;
+                        return this.props.favouriteVideos.indexOf(video.id) >= 0;
                     });
 
                     {/* filtered videos list for search */}
@@ -123,7 +120,7 @@ const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
     playlists: state.data.playlists, //Sample Playlist
-    // favouriteVideos: state.data.user.favouriteVideos
+    favouriteVideos: state.data.user.favoriteVideos
 });
 
 export default connect(mapStateToProps, bindAction)(FavouriteVideosComponent);
