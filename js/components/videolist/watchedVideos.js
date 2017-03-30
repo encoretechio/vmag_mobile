@@ -14,7 +14,10 @@ const {
     popRoute,
 } = actions;
 
-class AllVideosComponent extends Component {
+// hardcoded watched videos array - remove after getting data from BE
+const watchedVideos = ["58ce8bb8e8e7278a45e2aec0"];
+
+class WatchedVideosComponent extends Component {
 
     constructor(props) {
       super(props);
@@ -45,7 +48,7 @@ class AllVideosComponent extends Component {
                         </Button>
                     </Left>
                     <Body>
-                            <Title>All Videos</Title>
+                            <Title>Watched Videos</Title>
                     </Body>
                 </Header>
 
@@ -72,16 +75,23 @@ class AllVideosComponent extends Component {
                 <Content>
 
                 {this.props.playlists.map( (playlist,i) =>{
+                    {/* filter watched videos */}
+                    const filteredWatchedVideos = playlist.videos.filter((video)=>{
+                        return watchedVideos.indexOf(video.id) >= 0;
+                    });
+
                     {/* filtered videos list for search */}
-                    const filteredVideos = playlist.videos.filter((video)=>{
+                    const filteredSearchVideos = filteredWatchedVideos.filter((video)=>{
                         {/* return all videos if search text is empty */}
                         if(this.state.searchText==="") return true;
                         else if (video.title.toLowerCase().indexOf(this.state.searchText.toLowerCase()) >= 0) {
                           return video;
                         };  
                     });
+
                     {/* if no match return null to avoid showing category */}
-                    if(filteredVideos.length===0) return null;
+                    if(filteredSearchVideos.length===0) return null;
+                    
                     return (
                         <Card style={styles.mb} key={i}>
                             <CardItem style={{ paddingVertical: 3 }}>
@@ -91,7 +101,7 @@ class AllVideosComponent extends Component {
                                 </Left>
                             </CardItem>
 
-                            <VideoElementList videos={filteredVideos} />
+                            <VideoElementList videos={filteredSearchVideos} />
                         </Card>
                     );
                   })}
@@ -112,7 +122,8 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
-    playlists: state.data.playlists //Sample Playlist
+    playlists: state.data.playlists, //Sample Playlist
+    // watchedVideos: state.data.user.watchedVideos
 });
 
-export default connect(mapStateToProps, bindAction)(AllVideosComponent);
+export default connect(mapStateToProps, bindAction)(WatchedVideosComponent);

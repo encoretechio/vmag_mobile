@@ -101,6 +101,7 @@ import Login from './components/login'
 import VideoView from './components/video'
 import VideoList from './components/videolist'
 import AllVideosComponent from './components/videolist/allVideos'
+import WatchedVideosComponent from './components/videolist/watchedVideos'
 
 const {
   popRoute,
@@ -183,6 +184,7 @@ class AppNavigator extends Component {
               <Scene key="video" component={VideoView}  />
               <Scene key="videolist" component={VideoList}  />
               <Scene key="allVideosList" component={AllVideosComponent}  />
+              <Scene key="watchedVideosList" component={WatchedVideosComponent}  />
               {/*<Scene key="home" component={Home}/>*/}
               {/*<Scene key="welcome" component={Welcome} />*/}
               <Scene key="header" component={Header} />

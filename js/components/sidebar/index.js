@@ -50,7 +50,7 @@ const datas = [
     },
     {
         name: 'Watched',
-        route: 'videolist',
+        route: 'watchedVideosList',
         icon: 'film',
         bg: '#29783B',
         types: '5',
