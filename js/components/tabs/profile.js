@@ -9,6 +9,8 @@ import {openDrawer} from '../../actions/drawer';
 
 import styles from './styles';
 
+import {Actions} from 'react-native-router-flux';
+
 const profilePic = require('../../../img/profilepic.jpg');
 
 const Title = ({name}) => {
@@ -21,12 +23,16 @@ const Title = ({name}) => {
 
 const datas = [
   {
-    route: 'default',
-    text: 'Favourite Videos',
+      text: 'Favourite Videos',
+      route: 'favouriteVideosList',
   },
   {
-    route: 'outline',
-    text: 'Watched Videos',
+      text: 'Unwatched Videos',
+      route: 'unwatchedVideosList',
+  },
+  {
+      text: 'Watched Videos',
+      route: 'watchedVideosList',
   },
 ];
 
@@ -73,7 +79,7 @@ class Profile extends Component { // eslint-disable-line
         <Card style={{ flex: 0 }}>
             <List
               dataArray={datas} renderRow={data =>
-                <ListItem button onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
+                <ListItem button onPress={() => { Actions[data.route](); }} >
                   <Text>{data.text}</Text>
                   <Right>
                     <Icon name="arrow-forward" style={{ color: '#999' }} />
