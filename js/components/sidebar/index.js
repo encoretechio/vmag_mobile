@@ -42,8 +42,15 @@ const datas = [
         bg: '#29783B',
     },
     {
+        name: 'Favourites',
+        route: 'favouriteVideosList',
+        icon: 'film',
+        bg: '#DA4437',
+        types: '7',
+    },
+    {
         name: 'Unwatched',
-        route: 'videolist',
+        route: 'unwatchedVideosList',
         icon: 'film',
         bg: '#DA4437',
         types: '7',
