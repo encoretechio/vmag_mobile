@@ -60,7 +60,7 @@ export const loginFail = () => {
 // dispatched when user click login button.
 // send backend call to login. If succeed it will dispatch loginSuccess() or loginFail()
 export const login = (username, password) => {
-  console.log("Login " + username + " " + password)
+  //console.log("Login " + username + " " + password)
   return (dispatch) => {
     return fetch(
       BASE_URL + "login",
@@ -76,8 +76,8 @@ export const login = (username, password) => {
       .then(
         data => {
           if (data.token) {
-            console.log("login success");
-            console.log(data);
+            //console.log("login success");
+            //console.log(data);
             dispatch(loginSuccess(data));
             dispatch(loadFinalIssue());
             Actions['home']();
@@ -107,10 +107,10 @@ export const loadFinalIssue = () => {
       .then(res => res.json())
       .then(
         issue => {
-          console.log("loaded final issue success");
-          console.log(issue);
+          //console.log("loaded final issue success");
+          //console.log(issue);
           dispatch(setUserData(issue));
-          console.log(getState());
+          //console.log(getState());
         },
         error => dispatch(connectionError())
       );
@@ -134,8 +134,8 @@ export const fetchComments = (videoId) => {
       .then(res => res.json())
       .then(
         video => {
-          console.log("Fetched comments");
-          console.log(video);
+          //console.log("Fetched comments");
+          //console.log(video);
           dispatch(fetchCommentsSuccess(video.comments))
         },
         error => dispatch(connectionError())
@@ -157,8 +157,8 @@ export const addComment = (userId, videoId, text) => {
       .then(res => res.json())
       .then(
         comment => {
-          console.log("Added comment");
-          console.log(comment);
+          //console.log("Added comment");
+          //console.log(comment);
           // Todo Fix this here
           dispatch(fetchCommentsSuccess([comment]))
         },
@@ -185,8 +185,8 @@ export const addWatchedVideo = (userId, videoId) => {
       .then(res => res.json())
       .then(
         watched => {
-          console.log("Updated watched videos");
-          console.log(watched);
+          //console.log("Updated watched videos");
+          //console.log(watched);
           dispatch(addWatchedVideoSuccess(watched));
         },
         error => dispatch(connectionError())
@@ -212,8 +212,8 @@ export const addFavoriteVideo = (userId, videoId) => {
       .then(res => res.json())
       .then(
         favorite => {
-          console.log("Favorite watched videos");
-          console.log(favorite);
+          //console.log("Favorite watched videos");
+          //console.log(favorite);
           dispatch(addFavoriteVideoSuccess(favorite));
         },
         error => dispatch(connectionError())

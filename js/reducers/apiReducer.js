@@ -24,11 +24,11 @@ const initialState = {
 
 export default function apiReducer(state: State = initialState, action) {
 
-  // console.log(action);
-  // console.log("______________________________________");
-  // console.log(state);
-  // console.log("______________________________________");
-  // console.log("______________________________________");
+  // //console.log(action);
+  // //console.log("______________________________________");
+  // //console.log(state);
+  // //console.log("______________________________________");
+  // //console.log("______________________________________");
   if (action.type === GET_POSTS) {
     return {
       ...state,
@@ -46,7 +46,7 @@ export default function apiReducer(state: State = initialState, action) {
     };
   }
   if (action.type === LOGIN_SUCCESS) {
-    console.log(action.data.token)
+    //console.log(action.data.token)
     return {
       ...state,
       connectionError: false,
@@ -56,14 +56,14 @@ export default function apiReducer(state: State = initialState, action) {
     }
   }
   if (action.type === LOGIN_FAIL) {
-    console.log(action.data.token)
+    //console.log(action.data.token)
     return {
       ...state,
       loginError: true
     }
   }
   if (action.type === CONNECTION_ERROR) {
-    console.log(action.data.token)
+    //console.log(action.data.token)
     return {
       ...state,
       connectionError: true
