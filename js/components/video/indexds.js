@@ -10,7 +10,6 @@ import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
-import { fetchComments } from '../../actions/api';
 
 import VideoPlayerElement from './player';
 import Comment from './comment';
@@ -55,7 +54,7 @@ class VideoView extends Component {
                 <Content>
                   <VideoPlayerElement video={this.props.video}/>
                   <CardItem>
-                      <Comment comments={this.props.comments} videoId={this.props.video.id}/>
+                      <Comment/>
                   </CardItem>
                 </Content>
 
@@ -69,7 +68,6 @@ function bindAction(dispatch) {
         openDrawer: () => dispatch(openDrawer()),
         closeDrawer: () => dispatch(closeDrawer()),
         pushRoute: (route, key) => dispatch(pushRoute(route, key)),
-        fetchComments: (videoId) => dispatch(fetchComments(videoId))
     };
 }
 
@@ -77,8 +75,6 @@ const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
     //video: state.data.company.video
-        comments: []
-
 });
 
 export default connect(mapStateToProps, bindAction)(VideoView);
