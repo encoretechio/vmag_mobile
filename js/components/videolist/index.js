@@ -32,7 +32,7 @@ class NHListThumbnail extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header>
+                <Header style={{ backgroundColor: '#ffeb38' }}>
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />
@@ -45,7 +45,7 @@ class NHListThumbnail extends Component {
                             <Thumbnail circular size={30} source={{ uri: this.props.playlist.thumbnail}} />
                     </Right>
                 </Header>
-                <Header searchBar rounded>
+                <Header searchBar rounded style={{ backgroundColor: '#ffca0c', textDecorationColor:"#fff" }}> 
                     <Item>
                         <Icon active name="search" />
                         <Input placeholder="Search" />

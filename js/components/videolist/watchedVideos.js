@@ -38,7 +38,7 @@ class WatchedVideosComponent extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header>
+                <Header style={{ backgroundColor: '#ffeb38' }}>
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />
@@ -49,15 +49,15 @@ class WatchedVideosComponent extends Component {
                     </Body>
                 </Header>
 
-   
 
-                <Header searchBar rounded>
+
+                <Header searchBar rounded style={{ backgroundColor: '#ffca0c', textDecorationColor:"#fff" }}>
                   <Item>
                 {/* Input box for search */}
-                    <Input 
+                    <Input
                       placeholder="Search"
                       ref= {(el) => { this.searchText = el; }}
-                      onChangeText={(searchText) => this.setState({searchText})} 
+                      onChangeText={(searchText) => this.setState({searchText})}
                       value={this.state.searchText} />
                     <Icon active name="search" onPress={() => {
 
@@ -83,12 +83,12 @@ class WatchedVideosComponent extends Component {
                         if(this.state.searchText==="") return true;
                         else if (video.title.toLowerCase().indexOf(this.state.searchText.toLowerCase()) >= 0) {
                           return video;
-                        };  
+                        };
                     });
 
                     {/* if no match return null to avoid showing category */}
                     if(filteredSearchVideos.length===0) return null;
-                    
+
                     return (
                         <Card style={styles.mb} key={i}>
                             <CardItem style={{ paddingVertical: 3 }}>
