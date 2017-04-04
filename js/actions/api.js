@@ -109,7 +109,8 @@ export const loadFinalIssue = () => {
         issue => {
           console.log("loaded final issue success");
           console.log(issue);
-          dispatch(setUserData(issue))
+          dispatch(setUserData(issue));
+          console.log(getState());
         },
         error => dispatch(connectionError())
       );

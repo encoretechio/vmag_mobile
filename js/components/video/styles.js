@@ -4,6 +4,7 @@ const React = require('react-native');
 const { StyleSheet, Dimensions, Platform } = React;
 
 const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 export default {
   imageContainer: {
@@ -29,13 +30,31 @@ export default {
   },
   backgroundVideo: {
     flex: 1,
-    height: 300,
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
+    height: 220,
   },
   mb5: {
     marginBottom:0.1,
+  },
+  container: {
+    flex: 1,
+    height: 300,
+  },
+  toolbar: {
+    backgroundColor: 'blue',
+    height: 20,
+    width: 20,
+  },
+  mediaPlayer: {
+    flex: 1,
+    top: 0,
+    left: 0,
+    height: 300,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'black',
   },
 };

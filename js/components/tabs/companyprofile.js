@@ -24,19 +24,19 @@ const Title = ({company}) => {
         <CardItem>
           <Text>Website</Text>
           <Right>
-            <Text>{company.website}</Text>
+            <Text>www.zerogravity.lk</Text>
           </Right>
         </CardItem>
         <CardItem>
           <Text>Contact</Text>
           <Right>
-            <Text>{company.contact}</Text>
+            <Text>+947123456786</Text>
           </Right>
         </CardItem>
         <CardItem>
           <Text>Email</Text>
           <Right>
-            <Text>{company.email}</Text>
+            <Text>zerogravity@gmail.com</Text>
           </Right>
         </CardItem>
       </Card>
@@ -47,14 +47,12 @@ const Title = ({company}) => {
 class CompanyProfile extends Component { // eslint-disable-line
 
   render() { // eslint-disable-line
-    const user_props = this.props.user;
+    const company = this.props.user.company;
     return (
       <Content padder style={{ marginTop: 0 }}>
 
-        <Title company={this.props.company} />
-        <VideoPlayerElement video={this.props.company.video} />
-
-        <VideoListElement video={this.props.company.video}/>
+        <Title company={company} />
+        <VideoPlayerElement video={company.video} />
       </Content>
     );
   }
@@ -68,7 +66,6 @@ function bindActions(dispatch) {
 
 const mapStateToProps = state => ({
   user: state.data.user,
-  company: state.data.company
 });
 
 export default connect(mapStateToProps, bindActions)(CompanyProfile);

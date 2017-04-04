@@ -36,16 +36,18 @@ class Home extends Component { // eslint-disable-line
           <View style={styles.logoContainer}>
             <Image source={launchscreenLogo} style={styles.logo}/>
           </View>
+
           <View style={{ alignItems: 'center', marginBottom: 50, backgroundColor: 'transparent'}}>
             {/*<H3 style={styles.text}>Welcome to</H3>*/}
             {/*<View style={{ marginTop: 8 }} />*/}
             {/*<H3 style={styles.text}>Login</H3>*/}
+            {/*
             <Button
               style={{ backgroundColor: '#FF0000', alignSelf: 'center' }}
               onPress={this.props.openDrawer}
             >
               <Text> --Open Drawer--</Text>
-            </Button>
+            </Button>*/}
           </View>
           <View style={{ marginBottom: 80 }}>
 

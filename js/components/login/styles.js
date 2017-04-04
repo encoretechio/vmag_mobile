@@ -18,10 +18,10 @@ export default {
   },
   logo: {
     position: 'absolute',
-    left: (Platform.OS === 'android') ? 40 : 50,
-    top: (Platform.OS === 'android') ? 35 : 60,
+    left: (Platform.OS === 'android') ? 75 : 50,
+    top: (Platform.OS === 'android') ? deviceHeight/6 : 60,
     width: 280,
-    height: 100,
+    height: 120,
   },
   text: {
     color: '#000099',
