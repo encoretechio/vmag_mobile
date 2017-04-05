@@ -145,7 +145,11 @@ export const addComment = (userId, videoId, text) => {
   return (dispatch, getState) => {
     const state = getState();
     return fetch(BASE_URL + "comment", {
-      ...POST_CONFIGS(state),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
       body: JSON.stringify({
         video: videoId,
         author: userId,
@@ -158,7 +162,7 @@ export const addComment = (userId, videoId, text) => {
           //console.log("Added comment");
           //console.log(comment);
           // Todo Fix this here
-          dispatch(fetchCommentsSuccess([comment]))
+          dispatch(fetchComments(videoId))
         },
         error => dispatch(connectionError())
       );

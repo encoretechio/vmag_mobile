@@ -33,6 +33,7 @@ class Comment extends Component {
 
     handleChange(text) {
       this.setState({commentText: text});
+      console.log(this.props.comments);
     }
 
     comment(comment){
@@ -63,7 +64,7 @@ class Comment extends Component {
                               <CardItem>
                                     <Left>
                                       <Image style={{width:40, height: 40}} source={logo} />
-                                      <Text numberOfLines={1}> Wathsala Ruberu </Text>
+                                      <Text numberOfLines={1}> {comment.author.firstName} {comment.author.lastName} </Text>
                                     </Left>
                               </CardItem>
                               <CardItem>
