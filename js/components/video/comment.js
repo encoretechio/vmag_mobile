@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Body, Left, Right, ListView, Thumbnail, H3, Item, Input} from 'native-base';
+import { Container, Header, Title, Content, Button, Icon, Card, CardItem, Text, Body, Left, Right, ListView, Thumbnail, H3, Item, Input, ListItem, List } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Image, View } from 'react-native';
 import { addComment } from '../../actions/api';
@@ -19,9 +19,8 @@ class Comment extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {commentText: 'abcd'};
-      console.log(this.props.userId);
-      console.log(this.props.comments);
+      this.state = {commentText: ''};
+      this.handleChange = this.handleChange.bind(this)
     }
 
     static propTypes = {
@@ -32,44 +31,53 @@ class Comment extends Component {
         }),
     }
 
-    handleChange(event) {
-      this.setState({commentText: event.target.value});
+    handleChange(text) {
+      this.setState({commentText: text});
     }
 
     comment(comment){
       this.props.addComment( this.props.userId, this.props.videoId , comment);
+      this.setState({commentText: ''});
     }
 
     pushRoute(route) {
         this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
     }
 
-
     render() {
         return (
                 <View>
                   <Card>
                     <Item regular>
-                      <Input placeholder="Comment Here" value={this.state.commentText}  />
+                      <Input placeholder="Comment Here" value={this.state.commentText} onChangeText={this.handleChange} />
                       <Button style={styles.mb5} onPress= { () => {this.comment(this.state.commentText);} }>
                           <Text>Comment</Text>
                       </Button>
                     </Item>
                   </Card>
 
-                  <Card>
-                      <CardItem>
-                            <Left>
-                              <Image style={{width:40, height: 40}} source={logo} />
-                              <Text numberOfLines={1}> Wathsala Ruberu </Text>
-                            </Left>
-                      </CardItem>
-                      <CardItem>
-                          <Text numberOfLines={4} note>
-                              This video is really awesome, NativeBase builds a layer on top of React Native that provides you with
-                          </Text>
-                      </CardItem>
-                  </Card>
+                  <List
+                      dataArray={this.props.comments} renderRow={comment =>
+                        <ListItem >
+                          <Card>
+                              <CardItem>
+                                    <Left>
+                                      <Image style={{width:40, height: 40}} source={logo} />
+                                      <Text numberOfLines={1}> Wathsala Ruberu </Text>
+                                    </Left>
+                              </CardItem>
+                              <CardItem>
+                                  <Text numberOfLines={4} note>
+                                      {comment.text}
+                                  </Text>
+                              </CardItem>
+                          </Card>
+                        </ListItem>
+                    }
+                    />
+
+
+
 
                   <Card>
                       <CardItem>
@@ -99,7 +107,7 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
     navigation: state.cardNavigation,
     themeState: state.drawer.themeState,
-    userId: state.data.user.id
+    comments : state.data.currentVideo.comments
 });
 
 export default connect(mapStateToProps, bindAction)(Comment);

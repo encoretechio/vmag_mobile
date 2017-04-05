@@ -36,6 +36,9 @@ class VideoView extends Component {
         this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
     }
 
+    componentDidMount(){
+      this.props.fetchComments(this.props.video.id);
+    }
 
     render() {
         return (
@@ -55,7 +58,7 @@ class VideoView extends Component {
                 <Content>
                   <VideoPlayerElement video={this.props.video}/>
                   <CardItem>
-                      <Comment comments={this.props.comments} videoId={this.props.video.id}/>
+                      <Comment videoId={this.props.video.id} userId={this.props.userId}/>
                   </CardItem>
                 </Content>
 
@@ -73,12 +76,13 @@ function bindAction(dispatch) {
     };
 }
 
-const mapStateToProps = state => ({
-    navigation: state.cardNavigation,
-    themeState: state.drawer.themeState,
-    //video: state.data.company.video
-        comments: []
-
-});
+function mapStateToProps(state) {
+    return{
+      navigation: state.cardNavigation,
+      themeState: state.drawer.themeState,
+      //video: state.data.company.video
+      userId: state.data.user.id
+    }
+};
 
 export default connect(mapStateToProps, bindAction)(VideoView);
