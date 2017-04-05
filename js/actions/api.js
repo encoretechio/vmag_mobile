@@ -130,13 +130,11 @@ export const fetchCommentsSuccess = (comments) => {
 export const fetchComments = (videoId) => {
   return (dispatch, getState) => {
     const state = getState();
-    return fetch(BASE_URL + "video/" + videoId, GET_CONFIGS(state))
+    return fetch(BASE_URL + "comment/video/" + videoId, GET_CONFIGS(state))
       .then(res => res.json())
       .then(
-        video => {
-          //console.log("Fetched comments");
-          //console.log(video);
-          dispatch(fetchCommentsSuccess(video.comments))
+        comments => {
+          dispatch(fetchCommentsSuccess(comments))
         },
         error => dispatch(connectionError())
       );
