@@ -175,6 +175,7 @@ export const addWatchedVideoSuccess = (watchedVideos) => {
     watchedVideos
   }
 };
+
 export const addWatchedVideo = (userId, videoId) => {
   return (dispatch, getState) => {
     const state = getState();
@@ -202,6 +203,7 @@ export const addFavoriteVideoSuccess = (favoriteVideos) => {
     favoriteVideos
   }
 };
+
 export const addFavoriteVideo = (userId, videoId) => {
   return (dispatch, getState) => {
     const state = getState();

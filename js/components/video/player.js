@@ -11,7 +11,7 @@ import {MediaControls, PLAYER_STATE} from 'react-native-media-controls';
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 import { stopSpinner} from '../../actions/loading';
-import { addWatchedVideo} from '../../actions/api';
+import { addWatchedVideo, addFavoriteVideo } from '../../actions/api';
 
 class VideoPlayerElement extends Component {
   constructor(props) {
@@ -188,7 +188,10 @@ class VideoPlayerElement extends Component {
                         </Button>
                     </Body>
                     <Right>
-                        <Text> {this.props.video.hours}h ago</Text>
+                        <Button iconLeft transparent>
+                            <Icon active name="star-half" />
+                            <Text> Add Favorite </Text>
+                        </Button>
                     </Right>
                 </CardItem>
             </Card>
@@ -204,7 +207,8 @@ const mapStateToProps = state => ({
 function bindActions(dispatch) {
   return {
     stopSpinner:()=>dispatch(stopSpinner()),
-    onEnd : (userID,videoID) => dispatch(addWatchedVideo(userID,videoID))
+    onEnd : (userID,videoID) => dispatch(addWatchedVideo(userID,videoID)),
+    addFavorite : () => dispatch(addFavoriteVideo(userID,videoID))
   };
 }
 
