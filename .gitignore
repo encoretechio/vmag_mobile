@@ -23,7 +23,7 @@ DerivedData
 project.xcworkspace
 android/gradle.properties
 android/app/build.gradle
-android/app/src/main/java/com/nativebasekitchensink/MainApplication.java
+#android/app/src/main/java/com/nativebasekitchensink/MainApplication.java
 
 # Android/IJ
 #

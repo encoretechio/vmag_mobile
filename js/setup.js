@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './configureStore';
 
+//noinspection JSAnnotator
 function setup():React.Component {
   class Root extends Component {
 

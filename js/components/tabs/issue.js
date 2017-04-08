@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
@@ -43,8 +42,13 @@ class Home extends Component {
                     </Left>
                   </CardItem>
 
-                  {/*<VideoPlayerElement video={this.props.cover}/>*/}
+
                 </Card>
+                <Card>
+                  <VideoPlayerElement video={this.props.cover}/>
+                </Card>
+
+
 
                 <List style ={{marginBottom: 100}}
                     dataArray={this.props.playlists} renderRow={playlist =>

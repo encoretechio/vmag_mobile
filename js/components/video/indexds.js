@@ -10,7 +10,6 @@ import VideoPlayer from 'react-native-video-controls';
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
-import { fetchComments } from '../../actions/api';
 
 import VideoPlayerElement from './player';
 import Comment from './comment';
@@ -36,14 +35,11 @@ class VideoView extends Component {
         this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
     }
 
-    componentDidMount(){
-      this.props.fetchComments(this.props.video.id);
-    }
 
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ backgroundColor: '#ffeb38' }}>
+                <Header>
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />
@@ -58,7 +54,7 @@ class VideoView extends Component {
                 <Content>
                   <VideoPlayerElement video={this.props.video}/>
                   <CardItem>
-                      <Comment videoId={this.props.video.id} userId={this.props.userId}/>
+                      <Comment/>
                   </CardItem>
                 </Content>
 
@@ -72,17 +68,13 @@ function bindAction(dispatch) {
         openDrawer: () => dispatch(openDrawer()),
         closeDrawer: () => dispatch(closeDrawer()),
         pushRoute: (route, key) => dispatch(pushRoute(route, key)),
-        fetchComments: (videoId) => dispatch(fetchComments(videoId))
     };
 }
 
-function mapStateToProps(state) {
-    return{
-      navigation: state.cardNavigation,
-      themeState: state.drawer.themeState,
-      //video: state.data.company.video
-      userId: state.data.user.id
-    }
-};
+const mapStateToProps = state => ({
+    navigation: state.cardNavigation,
+    themeState: state.drawer.themeState,
+    //video: state.data.company.video
+});
 
 export default connect(mapStateToProps, bindAction)(VideoView);

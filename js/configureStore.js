@@ -23,20 +23,20 @@ export default function configureStore(onCompletion:()=>void):any {
 
   store.dispatch(getPosts())
   .then(() => {
-    console.log('Posts Fetching Done!');
-    //console.log(store.getState().data.posts[0]);
-    //console.log(store.getState().data.posts.length);
+    //console.log('Posts Fetching Done!');
+    ////console.log(store.getState().data.posts[0]);
+    ////console.log(store.getState().data.posts.length);
   });
 
   store.dispatch(getPhotos())
   .then(() => {
-    console.log('Photos Fetching Done!');
+    //console.log('Photos Fetching Done!');
   });
 
   /*
   store.dispatch(selectSubreddit('reactjs'))
   store.dispatch(fetchPosts('reactjs')).then(() =>
-    console.log(store.getState())
+    //console.log(store.getState())
   )
   */
   return store;

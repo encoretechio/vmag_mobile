@@ -70,7 +70,7 @@ class VideoPlayerElement extends Component {
   };
 
   onError() {
-    console.log("error", error);
+    //console.log("error", error);
   };
 
   exitFullScreen() {
@@ -94,7 +94,7 @@ class VideoPlayerElement extends Component {
       super(props);
       this.state = {  isLiked: false };
 
-      console.log(this.props.liked);
+      //console.log(this.props.liked);
       // Loop through liked videos to check whether this videdo is watched.
       if(this.props.liked.find( (id) => id == this.props.video.id ) != undefined){
         this.state = {  isLiked: true };
@@ -103,11 +103,11 @@ class VideoPlayerElement extends Component {
 
     clickLike(){
       if(this.state.isLiked){
-        console.log('Unlike Now');
+        //console.log('Unlike Now');
         this.props.video.likes -= 1;
       }
       else{
-        console.log('Like Now');
+        //console.log('Like Now');
         this.props.video.likes += 1;
       }
       this.state.isLiked = ~this.state.isLiked;
@@ -134,7 +134,7 @@ class VideoPlayerElement extends Component {
                           resizeMode={ 'contain' }
                           seekColor={ '#FFF' }
                           onEnd = { this.props.onEnd(this.props.user.id,this.props.video.id)}
-                          onStart = { () => { console.log("starts");}}
+                          onStart = { () => { //console.log("starts");}}
                       />*/}
                       <Video
                         ref={(ref) => {
