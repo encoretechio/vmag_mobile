@@ -72,9 +72,12 @@ class FavouriteVideosComponent extends Component {
                 <Content>
 
                 {this.props.playlists.map( (playlist,i) =>{
-                    {/* filter watched videos */}
+                    {/* filter favorite videos */}
                     const filteredFavouriteVideos = playlist.videos.filter((video)=>{
-                        return this.props.favouriteVideos.indexOf(video.id) >= 0;
+                        // return this.props.favouriteVideos.indexOf(video.id) >= 0;
+                        if (this.props.favouriteVideos.indexOf(video.id) >= 0) {
+                          return video;
+                        };
                     });
 
                     {/* filtered videos list for search */}

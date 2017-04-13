@@ -72,7 +72,7 @@ class UnwatchedVideosComponent extends Component {
                 <Content>
 
                 {this.props.playlists.map( (playlist,i) =>{
-                    {/* filter watched videos */}
+                    {/* filter unwatched videos */}
                     const filteredUnwatchedVideos = playlist.videos.filter((video)=>{
                         return this.props.watchedVideos.indexOf(video.id) < 0;
                     });

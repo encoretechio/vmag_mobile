@@ -34,6 +34,7 @@ class VideoPlayerElement extends Component {
       currentTime: 0,
       duration: 0,
     }
+    // keep state about favorite - get data
   }
 
   onSeek(seek) {
@@ -87,6 +88,11 @@ class VideoPlayerElement extends Component {
 
   componentDidMount(){
     this.props.stopSpinner();
+  }
+
+  clickFavorite(){
+    this.props.addFavorite(this.props.user.id, this.props.video.id);
+    console.log("click fav", this.props.user.id, this.props.video.id);
   }
 
     /*
@@ -188,7 +194,7 @@ class VideoPlayerElement extends Component {
                         </Button>
                     </Body>
                     <Right>
-                        <Button iconLeft transparent>
+                        <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
                             <Icon active name="star-half" />
                             <Text> Add Favorite </Text>
                         </Button>
@@ -208,7 +214,7 @@ function bindActions(dispatch) {
   return {
     stopSpinner:()=>dispatch(stopSpinner()),
     onEnd : (userID,videoID) => dispatch(addWatchedVideo(userID,videoID)),
-    addFavorite : () => dispatch(addFavoriteVideo(userID,videoID))
+    addFavorite : (userID,videoID) => dispatch(addFavoriteVideo(userID,videoID))
   };
 }
 
