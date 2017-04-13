@@ -182,7 +182,12 @@ export const addWatchedVideo = (userId, videoId) => {
   return (dispatch, getState) => {
     const state = getState();
     return fetch(BASE_URL + "user/"+userId+"/add_watched_videos", {
-      ...POST_CONFIGS(state),
+      // ...POST_CONFIGS(state),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
       body: JSON.stringify([videoId])
     })
       .then(res => res.json())
@@ -209,8 +214,14 @@ export const addFavoriteVideoSuccess = (favoriteVideos) => {
 export const addFavoriteVideo = (userId, videoId) => {
   return (dispatch, getState) => {
     const state = getState();
+    console.log(videoId);
     return fetch(BASE_URL + "user/"+userId+"/add_favorite_videos", {
-      ...POST_CONFIGS(state),
+      // ...POST_CONFIGS(state),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
       body: JSON.stringify([videoId])
     })
       .then(res => res.json())
@@ -224,7 +235,6 @@ export const addFavoriteVideo = (userId, videoId) => {
       );
   }
 };
-
 
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------
