@@ -10,6 +10,7 @@ import { openDrawer, closeDrawer } from '../../actions/drawer';
 import Issue from './issue';
 import CompanyProfile from './companyprofile';
 import Profile from './profile';
+import SideBar from './sideBar';
 
 const {
   popRoute,
@@ -31,11 +32,11 @@ class MainTabs extends Component {  // eslint-disable-line
     return (
       <Container>
       <Header  style={{ backgroundColor: '#ffeb38' }} androidStatusBarColor="#ffeb38" iosBarStyle="light-content" hasTabs>
-        <Left>
+     {/*   <Left>
           <Button transparent onPress={this.props.openDrawer}>
             <Icon name="menu" />
           </Button>
-        </Left>
+        </Left> */}
         <Body>
           <Title>V_Mag</Title>
         </Body>
@@ -50,6 +51,9 @@ class MainTabs extends Component {  // eslint-disable-line
           </Tab>
           <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="person" style={{ color: '#ffe896' }} /></TabHeading>}>
             <Profile />
+          </Tab>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="menu" style={{ color: '#ffe896' }} /></TabHeading>}>
+            <SideBar />
           </Tab>
         </Tabs>
       </Container>
