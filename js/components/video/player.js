@@ -11,7 +11,7 @@ import {MediaControls, PLAYER_STATE} from 'react-native-media-controls';
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 import { stopSpinner} from '../../actions/loading';
-import { addWatchedVideo, addFavoriteVideo } from '../../actions/api';
+import { addWatchedVideo, addFavoriteVideo, removeFavoriteVideo, addLike, removeLike } from '../../actions/api';
 
 class VideoPlayerElement extends Component {
   constructor(props) {
@@ -91,8 +91,20 @@ class VideoPlayerElement extends Component {
   }
 
   clickFavorite(){
-    this.props.addFavorite(this.props.user.id, this.props.video.id);
-    console.log("click fav", this.props.user.id, this.props.video.id);
+    if (this.props.video.isFavorite){
+      this.props.removeFavorite(this.props.user.id, this.props.video.id);  
+    }else{
+      this.props.addFavorite(this.props.user.id, this.props.video.id);
+      console.log("click fav", this.props.user.id, this.props.video.id);
+    }
+  }
+
+  clickLike(){
+    if (this.props.video.isLiked){
+      this.props.removeLike(this.props.user.id, this.props.video.id);  
+    }else{
+      this.props.addLike(this.props.user.id, this.props.video.id);
+    }
   }
 
     /*
@@ -182,7 +194,7 @@ class VideoPlayerElement extends Component {
 
                 <CardItem style={{ paddingVertical: 0 }}>
                     <Left>
-                        <Button iconLeft transparent>
+                        <Button iconLeft transparent onPress={() => {this.clickLike();} }>
                             <Icon active name="thumbs-up" />
                             <Text> {this.props.video.likes} Likes</Text>
                         </Button>
@@ -214,7 +226,10 @@ function bindActions(dispatch) {
   return {
     stopSpinner:()=>dispatch(stopSpinner()),
     onEnd : (userID,videoID) => dispatch(addWatchedVideo(userID,videoID)),
-    addFavorite : (userID,videoID) => dispatch(addFavoriteVideo(userID,videoID))
+    addFavorite : (userID,videoID) => dispatch(addFavoriteVideo(userID,videoID)),
+    removeFavorite : (userID,videoID) => dispatch(removeFavoriteVideo(userID,videoID)),
+    addLike : (userID,videoID) => dispatch(addLike(userID,videoID)),
+    removeLike : (userID,videoID) => dispatch(removeLike(userID,videoID))
   };
 }
 

@@ -35,6 +35,10 @@ export const ADD_WATCHED_VIDEO_SUCCESS = "ADD_WATCHED_VIDEO_SUCCESS";
 export const ADD_FAVORITE_VIDEO_SUCCESS = "ADD_FAVORITE_VIDEO_SUCCESS";
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
 
+export const ADD_LIKE_SUCCESS = "ADD_LIKE_SUCCESS";
+export const REMOVE_LIKE_SUCCESS = "REMOVE_LIKE_SUCCESS";
+export const REMOVE_FAVORITE_VIDEO_SUCCESS = "REMOVE_FAVORITE_VIDEO_SUCCESS";
+
 // To be use to indicate connection failure.
 export const connectionError = () => {
   return {
@@ -234,6 +238,99 @@ export const addFavoriteVideo = (userId, videoId) => {
         error => dispatch(connectionError())
       );
   }
+};
+
+
+// Success removing video from favorite list
+export const removeFavoriteVideoSuccess = (favoriteVideos) => {
+  return {
+    type: REMOVE_FAVORITE_VIDEO_SUCCESS,
+    favoriteVideos
+  }
+};
+
+export const removeFavoriteVideo = (userId, videoId) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    console.log(videoId);
+    return fetch(BASE_URL + "user/"+userId+"/remove_favorite_videos", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
+      body: JSON.stringify([videoId])
+    })
+      .then(res => res.json())
+      .then(
+        favorite => {
+          dispatch(removeFavoriteVideoSuccess(favorite));
+        },
+        error => dispatch(connectionError())
+      );
+  }
+};
+
+
+// Success liking a video
+export const addLikeSuccess = () => {
+  return {
+    type: ADD_LIKE_SUCCESS,
+    // favoriteVideos
+  }
+};
+
+export const addLike = (userId, videoId) => {
+  // return (dispatch, getState) => {
+  //   const state = getState();
+  //   console.log(videoId);
+  //   return fetch(BASE_URL + "user/"+userId+"/add_favorite_videos", {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'authorization': 'Bearer ' + state.data.token
+  //     },
+  //     body: JSON.stringify([videoId])
+  //   })
+  //     .then(res => res.json())
+  //     .then(
+  //       favorite => {
+  //         dispatch(addLikeSuccess(favorite));
+  //       },
+  //       error => dispatch(connectionError())
+  //     );
+  // }
+};
+
+
+// Success removing like
+export const removeLikeSuccess = () => {
+  return {
+    type: REMOVE_LIKE_SUCCESS,
+    // favoriteVideos
+  }
+};
+
+export const removeLike = (userId, videoId) => {
+  // return (dispatch, getState) => {
+  //   const state = getState();
+  //   console.log(videoId);
+  //   return fetch(BASE_URL + "user/"+userId+"/remove_favorite_videos", {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'authorization': 'Bearer ' + state.data.token
+  //     },
+  //     body: JSON.stringify([videoId])
+  //   })
+  //     .then(res => res.json())
+  //     .then(
+  //       favorite => {
+  //         dispatch(removeLikeSuccess(favorite));
+  //       },
+  //       error => dispatch(connectionError())
+  //     );
+  // }
 };
 
 
