@@ -17,6 +17,8 @@ class VideoPlayerElement extends Component {
   constructor(props) {
     super(props);
 
+    this.props.stopSpinner();
+    console.log(this.props.video);
     this.exitFullScreen = this.exitFullScreen.bind(this);
     this.onFullScreen = this.onFullScreen.bind(this);
     this.onSeek = this.onSeek.bind(this);
@@ -27,6 +29,8 @@ class VideoPlayerElement extends Component {
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onEnd = this.onEnd.bind(this);
     this.state = {
+      isLikedd: false,
+      isFav: false,
       isLoading: true,
       isFullScreen: true,
       playerState: PLAYER_STATE.PLAYING,
@@ -86,9 +90,9 @@ class VideoPlayerElement extends Component {
     this.setState({isFullScreen: true});
   };
 
-  componentDidMount(){
-    this.props.stopSpinner();
-  }
+  // componentDidMount(){
+  //   this.props.stopSpinner();
+  // }
 
   clickFavorite(){
     if (this.props.video.isFavorite){
@@ -195,7 +199,7 @@ class VideoPlayerElement extends Component {
                 <CardItem style={{ paddingVertical: 0 }}>
                     <Left>
                         <Button iconLeft transparent onPress={() => {this.clickLike();} }>
-                            <Icon active name="thumbs-up" />
+                            <Icon active name="thumbs-up" style={{ color: this.props.video.isLiked ? 'green' : 'blue' }} />
                             <Text> {this.props.video.likes} Likes</Text>
                         </Button>
                     </Left>
@@ -207,7 +211,7 @@ class VideoPlayerElement extends Component {
                     </Body>
                     <Right>
                         <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
-                            <Icon active name="star-half" />
+                            <Icon active name="star-half" style={{ color: this.state.isFav ? 'green' : 'blue' }} />
                             <Text> Add Favorite </Text>
                         </Button>
                     </Right>

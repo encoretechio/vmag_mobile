@@ -273,64 +273,69 @@ export const removeFavoriteVideo = (userId, videoId) => {
 
 
 // Success liking a video
-export const addLikeSuccess = () => {
+export const addLikeSuccess = (video) => {
   return {
     type: ADD_LIKE_SUCCESS,
-    // favoriteVideos
+    video: video
   }
 };
 
 export const addLike = (userId, videoId) => {
-  // return (dispatch, getState) => {
-  //   const state = getState();
-  //   console.log(videoId);
-  //   return fetch(BASE_URL + "user/"+userId+"/add_favorite_videos", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'authorization': 'Bearer ' + state.data.token
-  //     },
-  //     body: JSON.stringify([videoId])
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       favorite => {
-  //         dispatch(addLikeSuccess(favorite));
-  //       },
-  //       error => dispatch(connectionError())
-  //     );
-  // }
+  return (dispatch, getState) => {
+    const state = getState();
+    console.log("videoId in api.js action", videoId);
+    dispatch(addLikeSuccess({id:videoId}));
+    return fetch(BASE_URL + "video/"+videoId+"/like", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
+      body: JSON.stringify([videoId])
+    })
+      .then(res => res.json())
+      .then(
+        video => {
+          console.log('response',video);
+        },
+        error => 
+        {
+          dispatch(connectionError())
+        }
+      );
+  }
 };
 
 
 // Success removing like
-export const removeLikeSuccess = () => {
+export const removeLikeSuccess = (video) => {
   return {
     type: REMOVE_LIKE_SUCCESS,
-    // favoriteVideos
+    video: video
   }
 };
 
 export const removeLike = (userId, videoId) => {
-  // return (dispatch, getState) => {
-  //   const state = getState();
-  //   console.log(videoId);
-  //   return fetch(BASE_URL + "user/"+userId+"/remove_favorite_videos", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'authorization': 'Bearer ' + state.data.token
-  //     },
-  //     body: JSON.stringify([videoId])
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       favorite => {
-  //         dispatch(removeLikeSuccess(favorite));
-  //       },
-  //       error => dispatch(connectionError())
-  //     );
-  // }
+  return (dispatch, getState) => {
+    const state = getState();
+    console.log(videoId);
+    dispatch(removeLikeSuccess({id:videoId}));
+    return fetch(BASE_URL + "video/"+videoId+"/unlike", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
+      body: JSON.stringify([videoId])
+    })
+      .then(res => res.json())
+      .then(
+        video => {
+          dispatch(removeLikeSuccess(video));
+        },
+        error => dispatch(connectionError())
+      );
+  }
 };
 
 

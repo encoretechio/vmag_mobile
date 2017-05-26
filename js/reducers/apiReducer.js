@@ -7,6 +7,8 @@ import {
   SET_FINAL_ISSUE,
   ADD_FAVORITE_VIDEO_SUCCESS,
   ADD_WATCHED_VIDEO_SUCCESS,
+  ADD_LIKE_SUCCESS,
+  REMOVE_LIKE_SUCCESS,
   FETCH_COMMENTS_SUCCESS
 } from '../actions/api';
 
@@ -92,6 +94,31 @@ export default function apiReducer(state: State = initialState, action) {
       user: {...state.user, favoriteVideos:action.favoriteVideos}
     }
   }
+  if (action.type === ADD_LIKE_SUCCESS) {
+    console.log('LIKE$$:',state);
+    return {
+      ...state,
+      playlists:state.playlists.map(
+        (p)=>
+        ({...p,videos:p.videos.map(
+          (v)=>
+          ({...v,isLiked:v.id==action.video.id?true:v.isLiked, title:"Lol"})) // 
+      }))
+    }
+  }
+  if (action.type === REMOVE_LIKE_SUCCESS) {
+    console.log('Remove$$:',state);
+    return {
+      ...state,
+      playlists:state.playlists.map(
+        (p)=>
+        ({...p,videos:p.videos.map(
+          (v)=>
+          ({...v,isLiked:v.id==action.video.id?false:v.isLiked, title:"Lol"})) //v.id==action.video.id?action.video.isLiked:v.isLiked
+      }))
+    }
+  }
+
   if (action.type === FETCH_COMMENTS_SUCCESS) {
     return {
       ...state,
