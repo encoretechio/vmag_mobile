@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { startSpinner } from '../../actions/loading';
+import {navigateToVideo} from '../../actions/local'
 
 import styles from './styles';
 
@@ -15,7 +16,7 @@ class VideoElementList extends Component {
                 dataArray={this.props.videos} renderRow={video =>
                   <ListItem thumbnail style={{height:120}} button onPress={() => { 
                     this.props.startSpinner();
-                    setTimeout(()=>Actions.video({video:video}),100);}}>
+                    setTimeout(()=>this.props.navigateToVideo(video),100);}}>
                     <Left>
                       <Image style={{width:150, height: 80}} source={{uri : video.thumbnail}} />
                     </Left>
@@ -32,7 +33,8 @@ class VideoElementList extends Component {
 
 function bindActions(dispatch) {
   return {
-    startSpinner:()=>dispatch(startSpinner())
+    startSpinner:()=>dispatch(startSpinner()),
+    navigateToVideo:(video)=>dispatch(navigateToVideo(video))
   };
 }
 

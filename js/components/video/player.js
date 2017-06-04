@@ -11,12 +11,14 @@ import {MediaControls, PLAYER_STATE} from 'react-native-media-controls';
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
 import { stopSpinner} from '../../actions/loading';
-import { addWatchedVideo, addFavoriteVideo } from '../../actions/api';
+import { addWatchedVideo, addFavoriteVideo, removeFavoriteVideo, addLike, removeLike } from '../../actions/api';
 
 class VideoPlayerElement extends Component {
   constructor(props) {
     super(props);
 
+    this.props.stopSpinner();
+    console.log(this.props.video);
     this.exitFullScreen = this.exitFullScreen.bind(this);
     this.onFullScreen = this.onFullScreen.bind(this);
     this.onSeek = this.onSeek.bind(this);
@@ -27,6 +29,8 @@ class VideoPlayerElement extends Component {
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onEnd = this.onEnd.bind(this);
     this.state = {
+      isLikedd: false,
+      isFav: false,
       isLoading: true,
       isFullScreen: true,
       playerState: PLAYER_STATE.PLAYING,
@@ -86,124 +90,135 @@ class VideoPlayerElement extends Component {
     this.setState({isFullScreen: true});
   };
 
-  componentDidMount(){
-    this.props.stopSpinner();
-  }
+  // componentDidMount(){
+  //   this.props.stopSpinner();
+  // }
 
   clickFavorite(){
-    this.props.addFavorite(this.props.user.id, this.props.video.id);
-    console.log("click fav", this.props.user.id, this.props.video.id);
+    if (this.props.video.isFavorite){
+      this.props.removeFavorite(this.props.user.id, this.props.video.id);
+    }else{
+      this.props.addFavorite(this.props.user.id, this.props.video.id);
+      console.log("click fav", this.props.user.id, this.props.video.id);
+    }
   }
 
-    /*
-    constructor(props){
-      super(props);
-      this.state = {  isLiked: false };
-
-      //console.log(this.props.liked);
-      // Loop through liked videos to check whether this videdo is watched.
-      if(this.props.liked.find( (id) => id == this.props.video.id ) != undefined){
-        this.state = {  isLiked: true };
-      }
+  clickLike(){
+    if (this.props.video.isLiked){
+      console.log("Remove Like");
+      this.props.removeLike(this.props.user.id, this.props.video);
+    }else{
+      console.log("Add Like");
+      this.props.addLike(this.props.user.id, this.props.video);
     }
+  }
 
-    clickLike(){
-      if(this.state.isLiked){
-        //console.log('Unlike Now');
-        this.props.video.likes -= 1;
-      }
-      else{
-        //console.log('Like Now');
-        this.props.video.likes += 1;
-      }
-      this.state.isLiked = ~this.state.isLiked;
-    }
-    */
-    renderToolbar() {
+  /*
+   constructor(props){
+   super(props);
+   this.state = {  isLiked: false };
+   //console.log(this.props.liked);
+   // Loop through liked videos to check whether this videdo is watched.
+   if(this.props.liked.find( (id) => id == this.props.video.id ) != undefined){
+   this.state = {  isLiked: true };
+   }
+   }
+   clickLike(){
+   if(this.state.isLiked){
+   //console.log('Unlike Now');
+   this.props.video.likes -= 1;
+   }
+   else{
+   //console.log('Like Now');
+   this.props.video.likes += 1;
+   }
+   this.state.isLiked = ~this.state.isLiked;
+   }
+   */
+  renderToolbar() {
     return (
       <View style={styles.toolbar}></View>
     );
-    }
+  }
 
-    render(){
-        return (
+  render(){
+    return (
 
-          <Card>
-                <CardItem cardBody style={{
+      <Card>
+        <CardItem cardBody style={{
                   flex: 1,
                   height: 300,
                 }}>
-                      {/*<VideoPlayer
-                          source={{uri:this.props.video.src }}
-                          navigator={ this.props.navigator }
-                          style={styles.backgroundVideo}
-                          resizeMode={ 'contain' }
-                          seekColor={ '#FFF' }
-                          onEnd = { this.props.onEnd(this.props.user.id,this.props.video.id)}
-                          onStart = { () => { //console.log("starts");}}
-                      />*/}
-                      <Video
-                        ref={(ref) => {
+          {/*<VideoPlayer
+           source={{uri:this.props.video.src }}
+           navigator={ this.props.navigator }
+           style={styles.backgroundVideo}
+           resizeMode={ 'contain' }
+           seekColor={ '#FFF' }
+           onEnd = { this.props.onEnd(this.props.user.id,this.props.video.id)}
+           onStart = { () => { //console.log("starts");}}
+           />*/}
+          <Video
+            ref={(ref) => {
                            this.player = ref
                          }}
-                        style={styles.backgroundVideo}
-                        resizeMode="cover"
-                        source={{uri:this.props.video.src}}
-                        volume={1.0}
-                        paused={this.state.paused}
-                        onEnd={this.onEnd}
-                        onLoad={this.onLoad}
-                        onLoadStart={this.onLoadStart}
-                        onProgress={this.onProgress}
-                      />
-                      <MediaControls
-                        mainColor="orange"
-                        toolbar={this.renderToolbar()}
-                        playerState={this.state.playerState}
-                        isLoading={this.state.isLoading}
-                        isFullScreen={this.state.isFullScreen}
-                        progress={this.state.currentTime}
-                        duration={this.state.duration}
-                        onPaused={this.onPaused}
-                        onSeek={this.onSeek}
-                        onReplay={this.onReplay}
-                      />
-                </CardItem>
+            style={styles.backgroundVideo}
+            resizeMode="cover"
+            source={{uri:this.props.video.src}}
+            volume={1.0}
+            paused={this.state.paused}
+            onEnd={this.onEnd}
+            onLoad={this.onLoad}
+            onLoadStart={this.onLoadStart}
+            onProgress={this.onProgress}
+          />
+          <MediaControls
+            mainColor="orange"
+            toolbar={this.renderToolbar()}
+            playerState={this.state.playerState}
+            isLoading={this.state.isLoading}
+            isFullScreen={this.state.isFullScreen}
+            progress={this.state.currentTime}
+            duration={this.state.duration}
+            onPaused={this.onPaused}
+            onSeek={this.onSeek}
+            onReplay={this.onReplay}
+          />
+        </CardItem>
 
-                <CardItem>
-                  <Body>
-                  <Text>{this.props.video.title}</Text>
-                  <Text note>{this.props.video.description}</Text>
-                  </Body>
-                  <Right>
-                    <Text note>12.5k views</Text>
-                  </Right>
-                </CardItem>
+        <CardItem>
+          <Body>
+          <Text>{this.props.video.title}</Text>
+          <Text note>{this.props.video.description}</Text>
+          </Body>
+          <Right>
+            <Text note>12.5k views</Text>
+          </Right>
+        </CardItem>
+        <CardItem style={{ paddingVertical: 10 }}>
+          <Left>
+            <Button iconLeft transparent onPress={() => {this.clickLike();} }>
+              <Icon active name="thumbs-up" style={{ color: this.props.video.isLiked ? 'green' : 'blue' }} />
+              <Text> {this.props.video.likes.length} Likes</Text>
+            </Button>
+          </Left>
+          <Body>
+          <Button iconLeft transparent>
+            <Icon active name="chatbubbles" />
+            <Text> {this.props.video.comments?this.props.video.comments.length:""} Comments</Text>
+          </Button>
+          </Body>
+          <Right>
+            <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
+              <Icon active name="star-half" style={{ color: this.state.isFav ? 'green' : 'blue' }} />
+              <Text> Add Favorite </Text>
+            </Button>
+          </Right>
+        </CardItem>
+      </Card>
 
-                <CardItem style={{ paddingVertical: 0 }}>
-                    <Left>
-                        <Button iconLeft transparent>
-                            <Icon active name="thumbs-up" />
-                            <Text> {this.props.video.likes} Likes</Text>
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Button iconLeft transparent>
-                            <Icon active name="chatbubbles" />
-                            <Text> {this.props.video.comments} Comments</Text>
-                        </Button>
-                    </Body>
-                    <Right>
-                        <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
-                            <Icon active name="star-half" />
-                            <Text> Add Favorite </Text>
-                        </Button>
-                    </Right>
-                </CardItem>
-            </Card>
-
-        );
-    }
+    );
+  }
 }
 
 const mapStateToProps = state => ({
@@ -214,7 +229,10 @@ function bindActions(dispatch) {
   return {
     stopSpinner:()=>dispatch(stopSpinner()),
     onEnd : (userID,videoID) => dispatch(addWatchedVideo(userID,videoID)),
-    addFavorite : (userID,videoID) => dispatch(addFavoriteVideo(userID,videoID))
+    addFavorite : (userID,videoID) => dispatch(addFavoriteVideo(userID,videoID)),
+    removeFavorite : (userID,videoID) => dispatch(removeFavoriteVideo(userID,videoID)),
+    addLike : (userID,videoID) => dispatch(addLike(userID,videoID)),
+    removeLike : (userID,videoID) => dispatch(removeLike(userID,videoID))
   };
 }
 
