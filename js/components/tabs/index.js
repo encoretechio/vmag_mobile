@@ -31,28 +31,28 @@ class MainTabs extends Component {  // eslint-disable-line
   render() {
     return (
       <Container>
-      <Header  style={{ backgroundColor: '#ffeb38' }} androidStatusBarColor="#ffeb38" iosBarStyle="light-content" hasTabs>
+      <Header  style={{ backgroundColor: '#aa0000' }} androidStatusBarColor="#000000" iosBarStyle="light-content" hasTabs>
      {/*   <Left>
           <Button transparent onPress={this.props.openDrawer}>
             <Icon name="menu" />
           </Button>
         </Left> */}
         <Body>
-          <Title>V_Mag</Title>
+          <Title>V Mag</Title>
         </Body>
         <Right />
       </Header>
         <Tabs>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c'}}><Icon name="home" style={{ color: '#ffe896', textDecorationColor:"#fff" }} /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24'}}><Icon name="home" style={{ color: '#FFFFFF', textDecorationColor:"#fff" }} /></TabHeading>}>
             <Issue />
           </Tab>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="ios-book" style={{ color: '#ffe896' }}  /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24' }}><Icon name="ios-book" style={{ color: '#FFFFFF' }}  /></TabHeading>}>
             <CompanyProfile />
           </Tab>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="person" style={{ color: '#ffe896' }} /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24' }}><Icon name="person" style={{ color: '#FFFFFF' }} /></TabHeading>}>
             <Profile />
           </Tab>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="menu" style={{ color: '#ffe896' }} /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24' }}><Icon name="menu" style={{ color: '#FFFFFF' }} /></TabHeading>}>
             <SideBar />
           </Tab>
         </Tabs>

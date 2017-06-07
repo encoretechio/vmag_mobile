@@ -10,7 +10,7 @@ import styles from './styles';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const launchscreenBg = require('../../../img/background.jpg');
-const launchscreenLogo = require('../../../img/logo-kitchen-sink.png');
+const launchscreenLogo = require('../../../img/zerogravity.jpg');
 
 class Home extends Component { // eslint-disable-line
 
@@ -31,7 +31,7 @@ class Home extends Component { // eslint-disable-line
     return (
       <Container>
 
-        <StatusBar barStyle='light-content'/>
+        <StatusBar barStyle='light-content' androidStatusBarColor="#000000"/>
         <Image source={launchscreenBg} style={styles.imageContainer}>
           <View style={styles.logoContainer}>
             <Image source={launchscreenLogo} style={styles.logo}/>
@@ -52,13 +52,13 @@ class Home extends Component { // eslint-disable-line
           <View style={{ marginBottom: 80 }}>
 
 
-            <TextInput style={{height: 40, width:200, borderColor: '#036B87', borderWidth: 1, alignSelf: 'center',  marginBottom: 10}}
+            <TextInput style={{height: 40, width:200, borderColor: '#DFDFDF', borderWidth: 1, alignSelf: 'center',  marginBottom: 10}}
                        onChangeText={(username) => this.setState({username})}
-                       value={this.state.username}/>
-            <TextInput secureTextEntry={true} style={{height: 40, width:200, borderColor: '#036B87', borderWidth: 1, alignSelf: 'center',  marginBottom: 10}}
+                       value={this.state.username} placeholder = "usename or email"/>
+            <TextInput secureTextEntry={true} style={{height: 40, width:200, borderColor: '#DFDFDF', borderWidth: 1, alignSelf: 'center',  marginBottom: 10}}
                        onChangeText={(password) => this.setState({password})}
-                       value={this.state.password}/>
-            <Button style={{ backgroundColor: '#036B87', alignSelf: 'center' }}
+                       value={this.state.password} placeholder = "password" />
+            <Button style={{ backgroundColor: '#ED1B24', alignSelf: 'center' }}
                     onPress={()=>{this.props.login(this.state.username, this.state.password);this.props.startSpinner()}} >
                 <Text>Login</Text>
             </Button>

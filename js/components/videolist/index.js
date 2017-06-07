@@ -17,6 +17,14 @@ const {
 
 class NHListThumbnail extends Component {
 
+    constructor(props) {
+      super(props);
+      this.state = {
+        searchText:"", // keep the search text typed in the Input box
+      };
+    }
+
+
     static propTypes = {
         popRoute: React.PropTypes.func,
         navigation: React.PropTypes.shape({
@@ -32,7 +40,7 @@ class NHListThumbnail extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ backgroundColor: '#ffeb38' }}>
+                <Header style={{ backgroundColor: '#aa0000' }}>
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />
@@ -45,18 +53,27 @@ class NHListThumbnail extends Component {
                             <Thumbnail circular size={30} source={{ uri: this.props.playlist.thumbnail}} />
                     </Right>
                 </Header>
-                <Header searchBar rounded style={{ backgroundColor: '#ffca0c', textDecorationColor:"#fff" }}> 
+            {/*
+                <Header searchBar rounded style={{ backgroundColor: '#ED1B24', textDecorationColor:"#fff" }}> 
                     <Item>
-                        <Icon active name="search" />
-                        <Input placeholder="Search" />
-                        <Icon active name="people" />
-                    </Item>
+
+                    <Input
+                      placeholder="Search"
+                      ref= {(el) => { this.searchText = el; }}
+                      onChangeText={(searchText) => this.setState({searchText})}
+                      value={this.state.searchText} />
+                    <Icon active name="search" onPress={() => {
+
+                    }} />
+
+                    </Item> 
                     <Button transparent>
                         <Text>Search</Text>
                     </Button>
                 </Header>
+            */}
                 <Content>
-                    <VideoElementList videos={this.props.playlist.videos} />
+                        <VideoElementList videos={this.props.playlist.videos}/> 
                 </Content>
             </Container>
         );

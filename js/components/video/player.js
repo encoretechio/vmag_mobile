@@ -173,8 +173,7 @@ class VideoPlayerElement extends Component {
             onProgress={this.onProgress}
           />
           <MediaControls
-            mainColor="orange"
-            toolbar={this.renderToolbar()}
+            mainColor="#ED1B24"
             playerState={this.state.playerState}
             isLoading={this.state.isLoading}
             isFullScreen={this.state.isFullScreen}

@@ -38,7 +38,7 @@ class UnwatchedVideosComponent extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ backgroundColor: '#ffeb38' }}>
+                <Header style={{ backgroundColor: '#aa0000' }}>
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />
@@ -51,7 +51,7 @@ class UnwatchedVideosComponent extends Component {
 
 
 
-                <Header searchBar rounded style={{ backgroundColor: '#ffca0c', textDecorationColor:"#fff" }}>
+                <Header searchBar rounded style={{ backgroundColor: '#ED1B24', textDecorationColor:"#fff" }}>
                   <Item>
                 {/* Input box for search */}
                     <Input
