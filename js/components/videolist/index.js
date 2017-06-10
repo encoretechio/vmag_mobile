@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Header, Title, Content, Button, Icon, List, ListItem, Text, Thumbnail, Left, Body, Right, Item, Input, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Image, View } from 'react-native';
+import { Image, View, StatusBar } from 'react-native';
 import { openDrawer } from '../../actions/drawer';
 
 import styles from './styles';
@@ -40,7 +40,8 @@ class NHListThumbnail extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ backgroundColor: '#aa0000' }}>
+            <StatusBar backgroundColor="black"/>
+                <Header style={{ backgroundColor: '#aa0000' }} androidStatusBarColor="#000000">
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />

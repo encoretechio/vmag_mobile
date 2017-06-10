@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, View, StatusBar, TextInput} from 'react-native';
 import {connect} from 'react-redux';
-import {Container, Button, H3, Text} from 'native-base';
+import {Header,Container, Button, H3, Text} from 'native-base';
 
 import {openDrawer} from '../../actions/drawer';
 import {login} from '../../actions/api';
@@ -30,8 +30,7 @@ class Home extends Component { // eslint-disable-line
   render() {
     return (
       <Container>
-
-        <StatusBar barStyle='light-content' androidStatusBarColor="#000000"/>
+      <StatusBar backgroundColor="black"/>
         <Image source={launchscreenBg} style={styles.imageContainer}>
           <View style={styles.logoContainer}>
             <Image source={launchscreenLogo} style={styles.logo}/>

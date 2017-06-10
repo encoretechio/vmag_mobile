@@ -18,7 +18,7 @@ class Home extends Component { // eslint-disable-line
   render() {
     return (
       <Container>
-        <StatusBar barStyle='light-content'/>
+        <StatusBar backgroundColor = "black"/>
         <Image source={launchscreenBg} style={styles.imageContainer}>
           <View style={styles.logoContainer}>
             <Image source={launchscreenLogo} style={styles.logo} />
