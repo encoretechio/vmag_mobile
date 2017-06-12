@@ -57,9 +57,11 @@ class VideoView extends Component {
                 </Header>
                 <Content>
                   <VideoPlayerElement video={this.props.video}/>
+                {/*}
                   <CardItem>
                       <Comment videoId={this.props.video.id} userId={this.props.userId}/>
                   </CardItem>
+                */}
                 </Content>
 
             </Container>
@@ -76,11 +78,12 @@ function bindAction(dispatch) {
     };
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownProps) {
+   const data = state.data;
     return{
       navigation: state.cardNavigation,
       themeState: state.drawer.themeState,
-      //video: state.data.company.video
+      video: state.data.currentVideo,
       userId: state.data.user.id
     }
 };

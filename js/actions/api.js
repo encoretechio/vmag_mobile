@@ -208,10 +208,10 @@ export const addWatchedVideo = (userId, videoId) => {
 
 
 // Success adding vidoe for favorite list
-export const addFavoriteVideoSuccess = (favoriteVideos) => {
+export const addFavoriteVideoSuccess = (video) => {
   return {
     type: ADD_FAVORITE_VIDEO_SUCCESS,
-    favoriteVideos
+    video: video
   }
 };
 
@@ -231,8 +231,6 @@ export const addFavoriteVideo = (userId, videoId) => {
       .then(res => res.json())
       .then(
         favorite => {
-          //console.log("Favorite watched videos");
-          //console.log(favorite);
           dispatch(addFavoriteVideoSuccess(favorite));
         },
         error => dispatch(connectionError())
@@ -242,10 +240,10 @@ export const addFavoriteVideo = (userId, videoId) => {
 
 
 // Success removing video from favorite list
-export const removeFavoriteVideoSuccess = (favoriteVideos) => {
+export const removeFavoriteVideoSuccess = (video) => {
   return {
     type: REMOVE_FAVORITE_VIDEO_SUCCESS,
-    favoriteVideos
+    video: video
   }
 };
 
@@ -273,64 +271,78 @@ export const removeFavoriteVideo = (userId, videoId) => {
 
 
 // Success liking a video
-export const addLikeSuccess = () => {
+export const addLikeSuccess = (video) => {
   return {
     type: ADD_LIKE_SUCCESS,
-    // favoriteVideos
+    video: video
   }
 };
 
-export const addLike = (userId, videoId) => {
-  // return (dispatch, getState) => {
-  //   const state = getState();
-  //   console.log(videoId);
-  //   return fetch(BASE_URL + "user/"+userId+"/add_favorite_videos", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'authorization': 'Bearer ' + state.data.token
-  //     },
-  //     body: JSON.stringify([videoId])
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       favorite => {
-  //         dispatch(addLikeSuccess(favorite));
-  //       },
-  //       error => dispatch(connectionError())
-  //     );
-  // }
-};
+export const addLike = (userId, video) => {
+  const videoId = video.id;
+  return (dispatch, getState) => {
+    dispatch(addLikeSuccess({...video,isLiked:true}));
 
+    const state = getState();
+    console.log("addLike action: ", videoId);
+    //dispatch(addLikeSuccess({id:videoId}));
+    return fetch(BASE_URL + "video/"+videoId+"/like", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
+      body: JSON.stringify([videoId])
+    })
+      .then(res => res.json())
+      .then(
+        videoNew => {
+          dispatch(addLikeSuccess(videoNew));
+        },
+        error =>
+        {
+          dispatch(connectionError())
+          dispatch(removeLikeSuccess(video));
+        }
+      );
+  }
+};
 
 // Success removing like
-export const removeLikeSuccess = () => {
+export const removeLikeSuccess = (video) => {
   return {
     type: REMOVE_LIKE_SUCCESS,
-    // favoriteVideos
+    video: video
   }
 };
 
-export const removeLike = (userId, videoId) => {
-  // return (dispatch, getState) => {
-  //   const state = getState();
-  //   console.log(videoId);
-  //   return fetch(BASE_URL + "user/"+userId+"/remove_favorite_videos", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'authorization': 'Bearer ' + state.data.token
-  //     },
-  //     body: JSON.stringify([videoId])
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       favorite => {
-  //         dispatch(removeLikeSuccess(favorite));
-  //       },
-  //       error => dispatch(connectionError())
-  //     );
-  // }
+export const removeLike = (userId, video) => {
+  return (dispatch, getState) => {
+    const videoId = video.id;
+    dispatch(removeLikeSuccess({...video,isLiked:false}));
+    const state = getState();
+    console.log("removeLike action: ", videoId);
+    //dispatch(removeLikeSuccess({id:videoId}));
+    return fetch(BASE_URL + "video/"+videoId+"/unlike", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + state.data.token
+      },
+      body: JSON.stringify([videoId])
+    })
+      .then(res => res.json())
+      .then(
+        videoNew => {
+          dispatch(removeLikeSuccess(videoNew));
+        },
+        error =>
+        {
+          dispatch(connectionError());
+          dispatch(addLikeSuccess(video));
+        }
+      );
+  }
 };
 
 
@@ -376,68 +388,3 @@ export function getPhotos() {
       );
   };
 }
-
-/*
- export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-
- export function increment() {
- return {
- type: INCREMENT_COUNTER
- };
- }
-
- export function incrementAsync() {
- return dispatch => {
- setTimeout(() => {
- // Yay! Can invoke sync or async actions with `dispatch`
- dispatch(increment());
- }, 2000);
- };
- }
-
-
- export function loadData() { // needs to dispatch, so it is first argument
- return fetch(`https://jsonplaceholder.typicode.com/posts`)
- .then(res => res.json())
- .then(
- data => dispatch(increment()),
- err => dispatch(increment())
- );
- }
-
-
- function fetchSecretSauce() {
- return fetch('https://jsonplaceholder.typicode.com/posts');
- }
- */
-
-/*
- import fetch from 'isomorphic-fetch'
-
- export const REQUEST_POSTS = 'REQUEST_POSTS'
- function requestPosts(subreddit) {
- return {
- type: REQUEST_POSTS,
- subreddit
- }
- }
-
- export const RECEIVE_POSTS = 'RECEIVE_POSTS'
- function receivePosts(subreddit, json) {
- return {
- type: RECEIVE_POSTS,
- subreddit,
- posts: json.data.children.map(child => child.data),
- receivedAt: Date.now()
- }
- }
-
- function fetchPosts(subreddit) {
- return dispatch => {
- dispatch(requestPosts(subreddit))
- return fetch(`https://www.reddit.com/r/${subreddit}.json`)
- .then(response => response.json())
- .then(json => dispatch(receivePosts(subreddit, json)))
- }
- }
- */
