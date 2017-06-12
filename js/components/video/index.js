@@ -43,7 +43,7 @@ class VideoView extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ backgroundColor: '#ffeb38' }}>
+                <Header style={{ backgroundColor: '#ED1B24' }}>
                     <Left>
                         <Button transparent onPress={() => Actions.pop()}>
                             <Icon name="arrow-back" />

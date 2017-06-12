@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Title, Button, Icon, Tabs, Tab, Text, Right, Left, Body, TabHeading } from 'native-base';
+import { Container, Header, Title, Button, Icon, Tabs, Tab, Text, Right, Left, Body, TabHeading, Thumbnail } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { actions } from 'react-native-navigation-redux-helpers';
 import myTheme from '../../themes/base-theme';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
+import {Image} from 'react-native';
+import styles from './styles';
 
 import Issue from './issue';
 import CompanyProfile from './companyprofile';
 import Profile from './profile';
 import SideBar from './sideBar';
+
+const zeroGravityWhiteLogo = require('../../../img/zero_gravity_logo_white.png');
 
 const {
   popRoute,
@@ -31,28 +35,28 @@ class MainTabs extends Component {  // eslint-disable-line
   render() {
     return (
       <Container>
-      <Header  style={{ backgroundColor: '#ffeb38' }} androidStatusBarColor="#ffeb38" iosBarStyle="light-content" hasTabs>
+      <Header  style={{ backgroundColor: '#aa0000' }} androidStatusBarColor="#000000" iosBarStyle="light-content" hasTabs>
      {/*   <Left>
           <Button transparent onPress={this.props.openDrawer}>
             <Icon name="menu" />
           </Button>
         </Left> */}
-        <Body>
-          <Title>V_Mag</Title>
-        </Body>
+        <Left>
+          <Image style ={styles.logo} source={zeroGravityWhiteLogo} />
+        </Left>
         <Right />
       </Header>
         <Tabs>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c'}}><Icon name="home" style={{ color: '#ffe896', textDecorationColor:"#fff" }} /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24'}}><Icon name="home" style={{ color: '#FFFFFF', textDecorationColor:"#fff" }} /></TabHeading>}>
             <Issue />
           </Tab>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="ios-book" style={{ color: '#ffe896' }}  /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24' }}><Icon name="ios-book" style={{ color: '#FFFFFF' }}  /></TabHeading>}>
             <CompanyProfile />
           </Tab>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="person" style={{ color: '#ffe896' }} /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24' }}><Icon name="person" style={{ color: '#FFFFFF' }} /></TabHeading>}>
             <Profile />
           </Tab>
-          <Tab heading={<TabHeading style={{ backgroundColor: '#ffca0c' }}><Icon name="menu" style={{ color: '#ffe896' }} /></TabHeading>}>
+          <Tab heading={<TabHeading style={{ backgroundColor: '#ED1B24' }}><Icon name="menu" style={{ color: '#FFFFFF' }} /></TabHeading>}>
             <SideBar />
           </Tab>
         </Tabs>

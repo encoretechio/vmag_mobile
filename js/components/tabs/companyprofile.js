@@ -7,6 +7,7 @@ import {openDrawer} from '../../actions/drawer';
 import styles from './styles';
 import VideoPlayerElement from '../video/player';
 import VideoListElement from '../videolist/element';
+import {Image} from 'react-native';
 
 const companyLogo = require('../../../img/zero_gravity_logo.png');
 
@@ -17,7 +18,7 @@ const Title = ({company}) => {
       <Card style={styles.mb15}>
         <CardItem style={{ paddingVertical: 3 }}>
           <Left>
-            <Thumbnail square size={30} source={companyLogo} />
+            <Image style={styles.logo} source={companyLogo} />
             <Text>{company.name}</Text>
           </Left>
         </CardItem>
