@@ -61,7 +61,7 @@ class Comment extends Component {
                           <Card>
                               <CardItem>
                                     <Left>
-                                      <Image style={{width:40, height: 40}} source={logo} />
+                                      <Image style={{width:40, height: 40}} source={{uri:comment.author.thumbnail}}/>
                                       <Text numberOfLines={1}> {comment.author.firstName} {comment.author.lastName} </Text>
                                     </Left>
                               </CardItem>
