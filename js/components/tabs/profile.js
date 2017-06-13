@@ -63,7 +63,7 @@ class Profile extends Component { // eslint-disable-line
         <View style={styles.centerContent}>
           <Image
             style={styles.profileImage}
-            source={profilePic}/>
+            source={{uri:user_props.thumbnail}}/>
         </View>
 
         <Card style={styles.mb15}>
@@ -81,7 +81,7 @@ class Profile extends Component { // eslint-disable-line
           <CardItem>
             <Text>Employee ID</Text>
             <Right>
-              <Text>{user_props.id}</Text>
+              <Text>{user_props.employeeID}</Text>
             </Right>
           </CardItem>
           <CardItem>
