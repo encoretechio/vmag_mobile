@@ -140,6 +140,11 @@ class VideoPlayerElement extends Component {
       <View style={styles.toolbar}></View>
     );
   }
+  componentWillUnmount()
+  {
+    this.state.paused = true;
+    console.log("----Unmount is called------------")
+  }
 
   render(){
     return (
@@ -196,6 +201,7 @@ class VideoPlayerElement extends Component {
         </CardItem>
         <CardItem style={{ paddingVertical: 10 }}>
           <Left>
+
             <Button iconLeft transparent onPress={() => {this.clickLike();} }>
               <Icon active name="thumbs-up" style={{ color: this.props.video.isLiked ? 'green' : 'blue' }} />
               <Text> {this.props.video.likes.length} Likes</Text>
