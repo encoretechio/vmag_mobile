@@ -90,14 +90,14 @@ class Profile extends Component { // eslint-disable-line
               <Text>{user_props.email}</Text>
             </Right>
           </CardItem>
-          <CardItem>
-            <Right>
-              <Button style={{ backgroundColor: '#ED1B24', alignSelf: 'center' }}
-                      onPress={()=>{this.props.logout();}}>
-                <Text>Logout</Text>
-              </Button>
-            </Right>
-          </CardItem>
+          {/*<CardItem>*/}
+            {/*<Right>*/}
+              {/*<Button style={{ backgroundColor: '#ED1B24', alignSelf: 'center' }}*/}
+                      {/*onPress={()=>{this.props.logout();}}>*/}
+                {/*<Text>Logout</Text>*/}
+              {/*</Button>*/}
+            {/*</Right>*/}
+          {/*</CardItem>*/}
           <CardItem>
           </CardItem>
         </Card>
