@@ -12,7 +12,7 @@ import {
   FETCH_COMMENTS_SUCCESS
 } from '../actions/api';
 
-import {SET_CURRENT_VIDEO} from '../actions/local'
+import {SET_CURRENT_VIDEO, LOAD_LOCAL_DATA_SUCCESS} from '../actions/local'
 
 import sampleData from './sampleData.json';
 
@@ -51,6 +51,13 @@ export default function dataReducer(state: State = initialState, action) {
       // photos: action.data,
     };
   }
+
+
+  // starts from here
+  if(action.type === LOAD_LOCAL_DATA_SUCCESS){
+    return {...state,...action.data}
+  }
+
   if (action.type === LOGIN_SUCCESS) {
     ////console.log(action.data.token)
     return {

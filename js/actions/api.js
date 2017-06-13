@@ -84,7 +84,6 @@ export const login = (username, password) => {
             //console.log(data);
             dispatch(loginSuccess(data));
             dispatch(loadFinalIssue());
-            Actions['home']();
           }
           else {
             dispatch(loginFail());
@@ -114,6 +113,7 @@ export const loadFinalIssue = () => {
           //console.log("loaded final issue success");
           //console.log(issue);
           dispatch(setUserData(issue));
+          Actions['home']();
           //console.log(getState());
         },
         error => dispatch(connectionError())

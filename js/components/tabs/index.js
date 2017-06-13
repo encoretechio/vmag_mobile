@@ -32,6 +32,7 @@ class MainTabs extends Component {  // eslint-disable-line
     this.props.popRoute(this.props.navigation.key);
   }
 
+
   render() {
     return (
       <Container>
