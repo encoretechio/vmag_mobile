@@ -206,19 +206,20 @@ export const addWatchedVideo = (userId, videoId) => {
   }
 };
 
-
 // Success adding vidoe for favorite list
-export const addFavoriteVideoSuccess = (favoriteVideos) => {
+export const addFavoriteVideoSuccess = (video) => {
   return {
     type: ADD_FAVORITE_VIDEO_SUCCESS,
-    favoriteVideos
+    video: video
   }
 };
 
-export const addFavoriteVideo = (userId, videoId) => {
+export const addFavoriteVideo = (userId, video) => {
+  const videoId = video.id;
   return (dispatch, getState) => {
     const state = getState();
     console.log(videoId);
+    dispatch(addFavoriteVideoSuccess({...video,isFavourite:true}));
     return fetch(BASE_URL + "user/"+userId+"/add_favorite_videos", {
       // ...POST_CONFIGS(state),
       method: 'POST',
@@ -240,17 +241,19 @@ export const addFavoriteVideo = (userId, videoId) => {
 
 
 // Success removing video from favorite list
-export const removeFavoriteVideoSuccess = (favoriteVideos) => {
+export const removeFavoriteVideoSuccess = (video) => {
   return {
     type: REMOVE_FAVORITE_VIDEO_SUCCESS,
-    favoriteVideos
+    video: video
   }
 };
 
-export const removeFavoriteVideo = (userId, videoId) => {
+export const removeFavoriteVideo = (userId, video) => {
+  const videoId = video.id
   return (dispatch, getState) => {
     const state = getState();
     console.log(videoId);
+    dispatch(removeFavoriteVideoSuccess({...video,isFavourite:false}));
     return fetch(BASE_URL + "user/"+userId+"/remove_favorite_videos", {
       method: 'POST',
       headers: {

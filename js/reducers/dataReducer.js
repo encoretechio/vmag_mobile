@@ -6,6 +6,7 @@ import {
   CONNECTION_ERROR,
   SET_FINAL_ISSUE,
   ADD_FAVORITE_VIDEO_SUCCESS,
+  REMOVE_FAVORITE_VIDEO_SUCCESS,
   ADD_WATCHED_VIDEO_SUCCESS,
   ADD_LIKE_SUCCESS,
   REMOVE_LIKE_SUCCESS,
@@ -98,9 +99,29 @@ export default function dataReducer(state: State = initialState, action) {
     }
   }
   if (action.type === ADD_FAVORITE_VIDEO_SUCCESS) {
+    console.log('AddFavSuccess Reducer: ',action.video);
     return {
       ...state,
-      user: {...state.user, favoriteVideos:action.favoriteVideos}
+      currentVideo:action.video,
+      playlists:state.playlists.map(
+        (p)=>
+          ({...p,videos:p.videos.map(
+            (v)=>
+              ({...v,isFavourite:v.id===action.video.id?action.video.isFavourite:v.isFavourite})) //
+          }))
+    }
+  }
+  if (action.type === REMOVE_FAVORITE_VIDEO_SUCCESS) {
+    console.log('RemoveFavSuccess Reducer: ',action.video);
+    return {
+      ...state,
+      currentVideo:action.video,
+      playlists:state.playlists.map(
+        (p)=>
+          ({...p,videos:p.videos.map(
+            (v)=>
+              ({...v,isFavourite:v.id===action.video.id?action.video.isFavourite:v.isFavourite})) //v.id==action.video.id?action.video.isLiked:v.isLiked
+          }))
     }
   }
   if (action.type === ADD_LIKE_SUCCESS) {

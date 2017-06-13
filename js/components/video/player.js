@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 import {MediaControls, PLAYER_STATE} from 'react-native-media-controls';
+import Toast from '@remobile/react-native-toast'
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
@@ -29,12 +30,10 @@ class VideoPlayerElement extends Component {
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onEnd = this.onEnd.bind(this);
     this.state = {
-      isLikedd: false,
-      isFav: false,
       isLoading: true,
       isFullScreen: true,
       playerState: PLAYER_STATE.PLAYING,
-      paused: false,
+      paused: true,
       currentTime: 0,
       duration: 0,
     }
@@ -90,25 +89,28 @@ class VideoPlayerElement extends Component {
     this.setState({isFullScreen: true});
   };
 
-  // componentDidMount(){
-  //   this.props.stopSpinner();
-  // }
+  componentDidMount(){
+    this.onPaused();
+  }
 
   clickFavorite(){
-    if (this.props.video.isFavorite){
-      this.props.removeFavorite(this.props.user.id, this.props.video.id);
+    console.log("video:", this.props.video);
+    if (this.props.video.isFavourite){
+      Toast.showShortBottom("Remove Fav");
+      this.props.removeFavorite(this.props.user.id, this.props.video);
     }else{
-      this.props.addFavorite(this.props.user.id, this.props.video.id);
-      console.log("click fav", this.props.user.id, this.props.video.id);
+      Toast.showShortBottom("Add Fav");
+      this.props.addFavorite(this.props.user.id, this.props.video);
     }
   }
 
+
   clickLike(){
     if (this.props.video.isLiked){
-      console.log("Remove Like");
+      Toast.showShortBottom("Remove Like");
       this.props.removeLike(this.props.user.id, this.props.video);
     }else{
-      console.log("Add Like");
+      Toast.showShortBottom("Add Like");
       this.props.addLike(this.props.user.id, this.props.video);
     }
   }
@@ -199,9 +201,10 @@ class VideoPlayerElement extends Component {
             <Text note>12.5k views</Text>
           </Right>
         </CardItem>
+
+
         <CardItem style={{ paddingVertical: 10 }}>
           <Left>
-
             <Button iconLeft transparent onPress={() => {this.clickLike();} }>
               <Icon active name="thumbs-up" style={{ color: this.props.video.isLiked ? 'green' : 'blue' }} />
               <Text> {this.props.video.likes.length} Likes</Text>
@@ -215,11 +218,13 @@ class VideoPlayerElement extends Component {
           </Body>
           <Right>
             <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
-              <Icon active name="star-half" style={{ color: this.state.isFav ? 'green' : 'blue' }} />
+              <Icon active name="star-half" style={{ color: this.props.video.isFavourite ? 'green' : 'blue' }} />
               <Text> Add Favorite </Text>
             </Button>
           </Right>
         </CardItem>
+
+
       </Card>
 
     );
