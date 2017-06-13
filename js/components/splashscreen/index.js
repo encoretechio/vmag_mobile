@@ -1,10 +1,17 @@
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image , StatusBar, View} from 'react-native';
+import {Header,Container, Button, H3, Text} from 'native-base';
+import {Actions} from 'react-native-router-flux';
+import {loadLocalData} from '../../actions/local';
+import {connect} from 'react-redux';
 
-const splashscreen = require('../../../img/splashscreen.png');
+import styles from './styles';
 
-export default class SplashPage extends Component {
+const launchscreenBg = require('../../../img/background.jpg');
+const launchscreenLogo = require('../../../img/zerogravity.jpg');
+
+class SplashPage extends Component {
 
   static propTypes = {
     navigator: React.PropTypes.shape({}),
@@ -13,15 +20,33 @@ export default class SplashPage extends Component {
   componentWillMount() {
     const navigator = this.props.navigator;
     setTimeout(() => {
-      navigator.replace({
-        id: 'home',
-      });
-    }, 1500);
+      this.props.loadData()
+    }, 500);
   }
 
   render() { // eslint-disable-line class-methods-use-this
     return (
-      <Image source={splashscreen} style={{ flex: 1, height: null, width: null }} />
+      <Container>
+        <StatusBar backgroundColor="black"/>
+        <Image source={launchscreenBg} style={styles.imageContainer}>
+          <View style={styles.logoContainer}>
+            <Image source={launchscreenLogo} style={styles.logo}/>
+          </View>
+        </Image>
+      </Container>
     );
   }
 }
+
+
+function bindActions(dispatch) {
+  return {
+    loadData:()=>dispatch(loadLocalData())
+  };
+}
+
+const mapStateToProps = state => ({
+
+});
+
+export default connect(mapStateToProps, bindActions)(SplashPage);

@@ -5,7 +5,6 @@ import {Header,Container, Button, H3, Text} from 'native-base';
 
 import {openDrawer} from '../../actions/drawer';
 import {login} from '../../actions/api';
-import {loadLocalData} from '../../actions/local';
 import {startSpinner} from '../../actions/loading';
 import styles from './styles';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -26,11 +25,6 @@ class Home extends Component { // eslint-disable-line
 
   static propTypes = {
     openDrawer: React.PropTypes.func,
-  }
-
-  componentDidMount(){
-    Toast.showShortBottom("Calling load Data");
-    this.props.loadData()
   }
 
 
@@ -85,7 +79,6 @@ function bindActions(dispatch) {
     openDrawer: () => dispatch(openDrawer()),
     login: (username, password) => dispatch(login(username, password)),
     startSpinner:()=>dispatch(startSpinner()),
-    loadData:()=>dispatch(loadLocalData())
   };
 }
 

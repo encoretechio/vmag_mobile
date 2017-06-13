@@ -26,9 +26,9 @@ export function  navigateToVideo(video):Action {
 
 export function saveLocalData(data):Action {
   return (dispatch) => {
-    Toast.showShortBottom("Saving Data", JSON.stringify(data));
+    // Toast.showShortBottom("Saving Data", JSON.stringify(data));
     AsyncStorage.setItem(STORAGE_KEY,JSON.stringify(data)).then(()=>{
-      Toast.showShortBottom("Save Success");
+      // Toast.showShortBottom("Save Success");
     }).catch((err)=>{
       Toast.showShortBottom("Save Failed");
     })
@@ -47,12 +47,21 @@ export function loadLocalData():Action {
     AsyncStorage.getItem(STORAGE_KEY).then((data)=>{
       if(data){
         dispatch(loadLocalDataSuccess(JSON.parse(data)));
-        Toast.showShortBottom("Load Success:", data);
+        // Toast.showShortBottom("Load Success:", data);
         Actions['home']();
       }
       else{
-        Toast.showShortBottom("Load Failed");
+        // Toast.showShortBottom("Load Failed");
+        Actions['login']();
       }
     })
+  }
+}
+
+
+export function logout():Action {
+  return (dispatch) => {
+    AsyncStorage.removeItem(STORAGE_KEY).then(()=>Toast.showShortBottom("Deleted Local Data."));
+    Actions['login']();
   }
 }
