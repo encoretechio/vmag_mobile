@@ -11,14 +11,15 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const launchscreenBg = require('../../../img/background.jpg');
 const launchscreenLogo = require('../../../img/zerogravity.jpg');
+import Toast from '@remobile/react-native-toast'
 
 class Home extends Component { // eslint-disable-line
 
   constructor(props) {
     super(props);
     this.state = {
-      username: 'wathsalaruberu@gmail.com',
-      password: "123456"
+      username: '',
+      password: ""
     };
   }
 

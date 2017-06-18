@@ -13,7 +13,7 @@ import {
   FETCH_COMMENTS_SUCCESS
 } from '../actions/api';
 
-import {SET_CURRENT_VIDEO} from '../actions/local'
+import {SET_CURRENT_VIDEO, LOAD_LOCAL_DATA_SUCCESS} from '../actions/local'
 
 import sampleData from './sampleData.json';
 
@@ -52,6 +52,13 @@ export default function dataReducer(state: State = initialState, action) {
       // photos: action.data,
     };
   }
+
+
+  // starts from here
+  if(action.type === LOAD_LOCAL_DATA_SUCCESS){
+    return {...state,...action.data}
+  }
+
   if (action.type === LOGIN_SUCCESS) {
     ////console.log(action.data.token)
     return {
@@ -98,10 +105,10 @@ export default function dataReducer(state: State = initialState, action) {
       currentVideo:action.video,
       playlists:state.playlists.map(
         (p)=>
-        ({...p,videos:p.videos.map(
-          (v)=>
-          ({...v,isFavourite:v.id===action.video.id?action.video.isFavourite:v.isFavourite})) //
-      }))
+          ({...p,videos:p.videos.map(
+            (v)=>
+              ({...v,isFavourite:v.id===action.video.id?action.video.isFavourite:v.isFavourite})) //
+          }))
     }
   }
   if (action.type === REMOVE_FAVORITE_VIDEO_SUCCESS) {
@@ -111,10 +118,10 @@ export default function dataReducer(state: State = initialState, action) {
       currentVideo:action.video,
       playlists:state.playlists.map(
         (p)=>
-        ({...p,videos:p.videos.map(
-          (v)=>
-          ({...v,isFavourite:v.id===action.video.id?action.video.isFavourite:v.isFavourite})) //v.id==action.video.id?action.video.isLiked:v.isLiked
-      }))
+          ({...p,videos:p.videos.map(
+            (v)=>
+              ({...v,isFavourite:v.id===action.video.id?action.video.isFavourite:v.isFavourite})) //v.id==action.video.id?action.video.isLiked:v.isLiked
+          }))
     }
   }
   if (action.type === ADD_LIKE_SUCCESS) {

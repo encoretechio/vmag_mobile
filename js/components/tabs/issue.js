@@ -8,6 +8,7 @@ import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
+import { saveLocalData } from '../../actions/local';
 
 import VideoPlayerElement from '../video/player';
 
@@ -23,6 +24,8 @@ class Home extends Component {
 
     componentDidMount(){
       this.props.stopSpinner();
+      this.props.saveData(this.props.data);
+
     }
 
     render() {
@@ -76,6 +79,7 @@ function bindAction(dispatch) {
         closeDrawer: () => dispatch(closeDrawer()),
         stopSpinner:()=>dispatch(stopSpinner()),
         startSpinner:()=>dispatch(startSpinner()),
+        saveData:(data)=>dispatch(saveLocalData(data))
     };
 }
 
@@ -84,6 +88,7 @@ const mapStateToProps = state => ({
     themeState: state.drawer.themeState,
     cover: state.data.cover,
     playlists: state.data.playlists,
+    data:state.data
 });
 
 export default connect(mapStateToProps, bindAction)(Home);

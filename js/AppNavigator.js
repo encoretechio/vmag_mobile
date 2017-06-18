@@ -181,8 +181,9 @@ class AppNavigator extends Component {
           <Spinner visible={this.props.isLoading} />
           <RouterWithRedux>
             <Scene key="root">
+              <Scene key="splash" component={SplashPage} hideNavBar  initial={true} />
+              <Scene key="login" component={Login} hideNavBar/>
               <Scene key="home" component={MainTabs} hideNavBar />
-              <Scene key="login" component={Login} hideNavBar  initial={true} />
               <Scene key="video" component={VideoView}  />
               <Scene key="videolist" component={VideoList}  />
               <Scene key="allVideosList" component={AllVideosComponent}  />

@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 import {MediaControls, PLAYER_STATE} from 'react-native-media-controls';
+import Toast from '@remobile/react-native-toast'
 
 import styles from './styles';
 import { openDrawer, closeDrawer } from '../../actions/drawer';
@@ -29,12 +30,10 @@ class VideoPlayerElement extends Component {
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onEnd = this.onEnd.bind(this);
     this.state = {
-      isLikedd: false,
-      isFavv: false,
       isLoading: true,
       isFullScreen: true,
       playerState: PLAYER_STATE.PLAYING,
-      paused: false,
+      paused: true,
       currentTime: 0,
       duration: 0,
     }
@@ -90,27 +89,29 @@ class VideoPlayerElement extends Component {
     this.setState({isFullScreen: true});
   };
 
-  // componentDidMount(){
-  //   this.props.stopSpinner();
-  // }
+  componentDidMount(){
+    this.onPaused();
+  }
 
   clickFavorite(){
     console.log("video:", this.props.video);
     if (this.props.video.isFavourite){
-      this.props.removeFavorite(this.props.user.id, this.props.video.id);  
+      Toast.showShortBottom("Remove Fav");
+      this.props.removeFavorite(this.props.user.id, this.props.video);
     }else{
-      this.props.addFavorite(this.props.user.id, this.props.video.id);
-      console.log("click fav", this.props.user.id, this.props.video.id);
+      Toast.showShortBottom("Add Fav");
+      this.props.addFavorite(this.props.user.id, this.props.video);
     }
   }
 
+
   clickLike(){
     if (this.props.video.isLiked){
-      console.log("Remove Like");
-      this.props.removeLike(this.props.user.id, this.props.video.id);
+      Toast.showShortBottom("Remove Like");
+      this.props.removeLike(this.props.user.id, this.props.video);
     }else{
-      console.log("Add Like");
-      this.props.addLike(this.props.user.id, this.props.video.id);
+      Toast.showShortBottom("Add Like");
+      this.props.addLike(this.props.user.id, this.props.video);
     }
   }
 
@@ -141,6 +142,11 @@ class VideoPlayerElement extends Component {
       <View style={styles.toolbar}></View>
     );
   }
+  componentWillUnmount()
+  {
+    this.state.paused = true;
+    console.log("----Unmount is called------------")
+  }
 
   render(){
     return (
@@ -163,60 +169,62 @@ class VideoPlayerElement extends Component {
             ref={(ref) => {
                            this.player = ref
                          }}
-                        style={styles.backgroundVideo}
-                        resizeMode="cover"
-                        source={{uri:this.props.video.src}}
-                        volume={1.0}
-                        paused={this.state.paused}
-                        onEnd={this.onEnd}
-                        onLoad={this.onLoad}
-                        onLoadStart={this.onLoadStart}
-                        onProgress={this.onProgress}
-                      />
-                      <MediaControls
-                        mainColor="orange"
-                        toolbar={this.renderToolbar()}
-                        playerState={this.state.playerState}
-                        isLoading={this.state.isLoading}
-                        isFullScreen={this.state.isFullScreen}
-                        progress={this.state.currentTime}
-                        duration={this.state.duration}
-                        onPaused={this.onPaused}
-                        onSeek={this.onSeek}
-                        onReplay={this.onReplay}
-                      />
-                </CardItem>
+            style={styles.backgroundVideo}
+            resizeMode="cover"
+            source={{uri:this.props.video.src}}
+            volume={1.0}
+            paused={this.state.paused}
+            onEnd={this.onEnd}
+            onLoad={this.onLoad}
+            onLoadStart={this.onLoadStart}
+            onProgress={this.onProgress}
+          />
+          <MediaControls
+            mainColor="#ED1B24"
+            playerState={this.state.playerState}
+            isLoading={this.state.isLoading}
+            isFullScreen={this.state.isFullScreen}
+            progress={this.state.currentTime}
+            duration={this.state.duration}
+            onPaused={this.onPaused}
+            onSeek={this.onSeek}
+            onReplay={this.onReplay}
+          />
+        </CardItem>
 
-                <CardItem>
-                  <Body>
-                  <Text>{this.props.video.title}</Text>
-                  <Text note>{this.props.video.description}</Text>
-                  </Body>
-                  <Right>
-                    <Text note>12.5k views</Text>
-                  </Right>
-                </CardItem>
+        <CardItem>
+          <Body>
+          <Text>{this.props.video.title}</Text>
+          <Text note>{this.props.video.description}</Text>
+          </Body>
+          <Right>
+            <Text note>12.5k views</Text>
+          </Right>
+        </CardItem>
 
-                <CardItem style={{ paddingVertical: 10 }}>
-                  <Left>
-                    <Button iconLeft transparent onPress={() => {this.clickLike();} }>
-                      <Icon active name="thumbs-up" style={{ color: this.props.video.isLiked ? 'green' : 'blue' }} />
-                      <Text> {this.props.video.likes.length} Likes</Text>
-                    </Button>
-                  </Left>
-                  <Body>
-                  <Button iconLeft transparent>
-                    <Icon active name="chatbubbles" />
-                    <Text> {this.props.video.comments?this.props.video.comments.length:""} Comments</Text>
-                  </Button>
-                  </Body>
-                  <Right>
-                    <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
-                      <Icon active name="star-half" style={{ color: this.props.video.isFavourite ? 'green' : 'blue' }} />
-                      <Text> Add Favorite </Text>
-                    </Button>
-                  </Right>
-                </CardItem>
+
+        <CardItem style={{ paddingVertical: 10 }}>
+          <Left>
+            <Button iconLeft transparent onPress={() => {this.clickLike();} }>
+              <Icon active name="thumbs-up" style={{ color: this.props.video.isLiked ? 'green' : 'blue' }} />
+              <Text> {this.props.video.likes.length} Likes</Text>
+            </Button>
+          </Left>
+          <Body>
+          <Button iconLeft transparent>
+            <Icon active name="chatbubbles" />
+            <Text> {this.props.video.comments?this.props.video.comments.length:""} Comments</Text>
+          </Button>
+          </Body>
+          <Right>
+            <Button iconLeft transparent onPress={() => {this.clickFavorite();} }>
+              <Icon active name="star-half" style={{ color: this.props.video.isFavourite ? 'green' : 'blue' }} />
+              <Text> Add Favorite </Text>
+            </Button>
+          </Right>
+        </CardItem>
+
+
       </Card>
 
     );

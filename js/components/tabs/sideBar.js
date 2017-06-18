@@ -18,7 +18,7 @@ import {
     variables
 } from 'native-base';
 import {Actions} from 'react-native-router-flux';
-
+import {logout} from '../../actions/local';
 import material from '../../../native-base-theme/variables/material';
 import {changePlatform, changeMaterial, closeDrawer} from '../../actions/drawer';
 import navigateTo from '../../actions/sideBarNav';
@@ -262,8 +262,8 @@ class SideBar extends Component {
                         </StyleProvider>
                     </View>
                     }
-                    <List
-                        dataArray={datas} renderRow={data =>
+                    <List>
+                      { datas.map( data =>
               <ListItem button noBorder onPress={() => { Actions[data.route](); this.props.closeDrawer() }} >
                 <Left>
                   <Icon active name={data.icon} style={{ color: '#777' , fontSize: 26, width: 30 }} />
@@ -278,8 +278,19 @@ class SideBar extends Component {
                   </Badge>
                 </Right>
                 }
-              </ListItem>}
-                    />
+              </ListItem>)
+                      }
+
+                        <ListItem button noBorder onPress={() => { this.props.logout(); this.props.closeDrawer() }} >
+                            <Left>
+                                <Icon active name={'lock'} style={{ color: '#777' , fontSize: 26, width: 30 }} />
+                                <Text style={styles.text}>Logout</Text>
+                            </Left>
+
+                        </ListItem>
+
+
+                      </List>
 
                 </Content>
             </Container>
@@ -293,6 +304,7 @@ function bindAction(dispatch) {
         closeDrawer: () => dispatch(closeDrawer()),
         changePlatform: () => dispatch(changePlatform()),
         changeMaterial: () => dispatch(changeMaterial()),
+        logout: () => dispatch(logout())
     };
 }
 

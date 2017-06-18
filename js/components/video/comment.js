@@ -47,23 +47,21 @@ class Comment extends Component {
 
     render() {
         return (
-                <View>
-                  <Card>
+                <View  style={{flex: 1}}>
+                  <Card style={{flex: 1}}>
                     <Item regular>
-                      <Input placeholder="Comment Here" value={this.state.commentText} onChangeText={this.handleChange} />
+                      <Input style={{flex: 1}} placeholder="Comment Here" value={this.state.commentText} onChangeText={this.handleChange} />
                       <Button style={styles.mb5} onPress= { () => {this.comment(this.state.commentText);} }>
                           <Text>Comment</Text>
                       </Button>
                     </Item>
                   </Card>
 
-                  <List
-                      dataArray={this.props.comments} renderRow={comment =>
-                        <ListItem >
+                 {this.props.comments?this.props.comments.map(comment =>
                           <Card>
                               <CardItem>
                                     <Left>
-                                      <Image style={{width:40, height: 40}} source={logo} />
+                                      <Image style={{width:40, height: 40}} source={{uri:comment.author.thumbnail}}/>
                                       <Text numberOfLines={1}> {comment.author.firstName} {comment.author.lastName} </Text>
                                     </Left>
                               </CardItem>
@@ -72,27 +70,18 @@ class Comment extends Component {
                                       {comment.text}
                                   </Text>
                               </CardItem>
-                          </Card>
-                        </ListItem>
-                    }
-                    />
+                          </Card>):
+                   <Card>
+                     <CardItem>
+                       <Text numberOfLines={4} note>
+                         No Comments
+                       </Text>
+                     </CardItem>
+                   </Card>
+                 }
 
 
 
-
-                  <Card>
-                      <CardItem>
-                            <Left>
-                              <Image style={{width:40, height: 40}} source={logo} />
-                              <Text numberOfLines={1}> Wathsala Ruberu </Text>
-                            </Left>
-                      </CardItem>
-                      <CardItem>
-                          <Text numberOfLines={4} note>
-                              This video is really awesome, NativeBase builds a layer on top of React Native that provides you with
-                          </Text>
-                      </CardItem>
-                  </Card>
                 </View>
         );
     }

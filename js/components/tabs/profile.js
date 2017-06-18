@@ -1,11 +1,27 @@
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
-import { Container, Content, Card, CardItem, Text, Body, Button, Icon, IconNB, Left, Right, H1, H2, List, ListItem } from 'native-base';
- 
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Text,
+  Body,
+  Button,
+  Icon,
+  IconNB,
+  Left,
+  Right,
+  H1,
+  H2,
+  List,
+  ListItem
+} from 'native-base';
+
 import {Image, View} from 'react-native';
 import {openDrawer} from '../../actions/drawer';
+import {logout} from '../../actions/local';
 
 import styles from './styles';
 
@@ -23,16 +39,16 @@ const Title = ({name}) => {
 
 const datas = [
   {
-      text: 'Favourite Videos',
-      route: 'favouriteVideosList',
+    text: 'Favourite Videos',
+    route: 'favouriteVideosList',
   },
   {
-      text: 'Unwatched Videos',
-      route: 'unwatchedVideosList',
+    text: 'Unwatched Videos',
+    route: 'unwatchedVideosList',
   },
   {
-      text: 'Watched Videos',
-      route: 'watchedVideosList',
+    text: 'Watched Videos',
+    route: 'watchedVideosList',
   },
 ];
 
@@ -42,12 +58,12 @@ class Profile extends Component { // eslint-disable-line
     const user_props = this.props.user;
     return (
       <Content padder style={{ marginTop: 0 }}>
-        
+
         <Title name={user_props.firstName+" "+user_props.lastName}/>
         <View style={styles.centerContent}>
-          <Image 
-            style={styles.profileImage} 
-            source={profilePic} />
+          <Image
+            style={styles.profileImage}
+            source={{uri:user_props.thumbnail}}/>
         </View>
 
         <Card style={styles.mb15}>
@@ -65,7 +81,7 @@ class Profile extends Component { // eslint-disable-line
           <CardItem>
             <Text>Employee ID</Text>
             <Right>
-              <Text>{user_props.id}</Text>
+              <Text>{user_props.employeeID}</Text>
             </Right>
           </CardItem>
           <CardItem>
@@ -74,11 +90,21 @@ class Profile extends Component { // eslint-disable-line
               <Text>{user_props.email}</Text>
             </Right>
           </CardItem>
+          {/*<CardItem>*/}
+            {/*<Right>*/}
+              {/*<Button style={{ backgroundColor: '#ED1B24', alignSelf: 'center' }}*/}
+                      {/*onPress={()=>{this.props.logout();}}>*/}
+                {/*<Text>Logout</Text>*/}
+              {/*</Button>*/}
+            {/*</Right>*/}
+          {/*</CardItem>*/}
+          <CardItem>
+          </CardItem>
         </Card>
 
         <Card style={{ flex: 0 }}>
-            <List
-              dataArray={datas} renderRow={data =>
+          <List
+            dataArray={datas} renderRow={data =>
                 <ListItem button onPress={() => { Actions[data.route](); }} >
                   <Text>{data.text}</Text>
                   <Right>
@@ -86,7 +112,7 @@ class Profile extends Component { // eslint-disable-line
                   </Right>
                 </ListItem>
               }
-            />
+          />
 
         </Card>
       </Content>
@@ -97,6 +123,7 @@ class Profile extends Component { // eslint-disable-line
 function bindActions(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
+    logout: () => dispatch(logout())
   };
 }
 

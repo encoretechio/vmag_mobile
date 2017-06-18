@@ -84,7 +84,6 @@ export const login = (username, password) => {
             //console.log(data);
             dispatch(loginSuccess(data));
             dispatch(loadFinalIssue());
-            Actions['home']();
           }
           else {
             dispatch(loginFail());
@@ -114,6 +113,7 @@ export const loadFinalIssue = () => {
           //console.log("loaded final issue success");
           //console.log(issue);
           dispatch(setUserData(issue));
+          Actions['home']();
           //console.log(getState());
         },
         error => dispatch(connectionError())
@@ -206,7 +206,6 @@ export const addWatchedVideo = (userId, videoId) => {
   }
 };
 
-
 // Success adding vidoe for favorite list
 export const addFavoriteVideoSuccess = (video) => {
   return {
@@ -215,10 +214,12 @@ export const addFavoriteVideoSuccess = (video) => {
   }
 };
 
-export const addFavoriteVideo = (userId, videoId) => {
+export const addFavoriteVideo = (userId, video) => {
+  const videoId = video.id;
   return (dispatch, getState) => {
     const state = getState();
     console.log(videoId);
+    dispatch(addFavoriteVideoSuccess({...video,isFavourite:true}));
     return fetch(BASE_URL + "user/"+userId+"/add_favorite_videos", {
       // ...POST_CONFIGS(state),
       method: 'POST',
@@ -247,10 +248,12 @@ export const removeFavoriteVideoSuccess = (video) => {
   }
 };
 
-export const removeFavoriteVideo = (userId, videoId) => {
+export const removeFavoriteVideo = (userId, video) => {
+  const videoId = video.id
   return (dispatch, getState) => {
     const state = getState();
     console.log(videoId);
+    dispatch(removeFavoriteVideoSuccess({...video,isFavourite:false}));
     return fetch(BASE_URL + "user/"+userId+"/remove_favorite_videos", {
       method: 'POST',
       headers: {
